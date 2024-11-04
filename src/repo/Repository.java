@@ -13,12 +13,13 @@ public class Repository implements IRepository{
 
     public Repository(){
         this.prgStateList = new ArrayList<>();
-        this.currentStatePosition = 0;
+        this.currentStatePosition = -1;
     }
 
     @Override
     public void addPrgState(PrgState prgState) {
         this.prgStateList.add(prgState);
+        this.currentStatePosition++;
     }
 
     @Override

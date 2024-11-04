@@ -3,6 +3,7 @@ package view;
 import controller.Controller;
 import controller.IController;
 import exceptions.*;
+import model.adts.MyIList;
 import model.adts.MyList;
 import model.adts.MyMap;
 import model.adts.MyStack;
@@ -63,41 +64,20 @@ public class View implements IView{
 
 
     private void prg1() throws EmptyStackException, StatementException, ControllerException, KeyNotFoundException, ExpressionException {
-        IStatement st = new CompStatement(new VarDeclStatement("v", new IntType()),
-                new CompStatement(new AssignStatement("v",
-                        new ValueExpression(new IntValue(2))), new PrintStatement(new VariableExpression("v"))) );
-
-        PrgState initPrgState = new PrgState(st, new MyStack<IStatement>(), new MyMap<String, IValue>(), new MyList<String>());
-        this.controller.add(initPrgState);
-        this.controller.allSteps();
+        MyIList<String> list = this.controller.prg1();
+        System.out.println(list.toString());
     }
 
     private void prg2() throws EmptyStackException, StatementException, ControllerException, KeyNotFoundException, ExpressionException {
 
-
-        IStatement st = new CompStatement(new VarDeclStatement("a", new IntType()),
-                new CompStatement(new VarDeclStatement("b", new IntType()), new CompStatement(new AssignStatement("a",
-                        new ArithmeticalExpression(new ValueExpression(new IntValue(2)), new ArithmeticalExpression(new ValueExpression(new IntValue(3)), new ValueExpression(new IntValue(5)), ArithmeticalOperator.MULTIPLY), ArithmeticalOperator.ADD)
-                ),new CompStatement(new AssignStatement("b", new ArithmeticalExpression(new VariableExpression("a"), new ValueExpression(new IntValue(1)), ArithmeticalOperator.ADD)),
-                        new PrintStatement(new VariableExpression("b"))))
-                ));
-
-        PrgState initPrgState = new PrgState(st, new MyStack<IStatement>(), new MyMap<String, IValue>(), new MyList<String>());
-        this.controller.add(initPrgState);
-        this.controller.allSteps();
+        MyIList<String> list = this.controller.prg2();
+        System.out.println(list.toString());
     }
 
     private void prg3() throws EmptyStackException, StatementException, ControllerException, KeyNotFoundException, ExpressionException {
 
-        PrintStatement pr = new PrintStatement(new VariableExpression("v"));
-        CompStatement cm4 = new CompStatement(new IfStatement(new VariableExpression("a"), new AssignStatement("v", new ValueExpression(new IntValue(2))), new AssignStatement("v", new ValueExpression(new IntValue(3)))), pr);
-        CompStatement cm3 = new CompStatement(new AssignStatement("a", new ValueExpression(new BoolValue(true))), cm4);
-        CompStatement cm2 = new CompStatement(new VarDeclStatement("v", new IntType()), cm3);
-        CompStatement cm1 = new CompStatement(new VarDeclStatement("a", new BoolType()), cm2);
-
-        PrgState initPrgState = new PrgState(cm1, new MyStack<IStatement>(), new MyMap<String, IValue>(), new MyList<String>());
-        this.controller.add(initPrgState);
-        this.controller.allSteps();
+        MyIList<String> list = this.controller.prg3();
+        System.out.println(list.toString());
     }
 
 }
