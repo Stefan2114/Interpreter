@@ -1,3 +1,3 @@
 package model.expressions;
 
-public enum LogicalOperator { AND, OR}
+public enum LogicalOperator {AND, OR}

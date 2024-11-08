@@ -8,11 +8,11 @@ import model.values.IValue;
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-public class ValueExpression implements IExpression{
+public class ValueExpression implements IExpression {
 
     private IValue value;
 
-    public ValueExpression(IValue value){
+    public ValueExpression(IValue value) {
         this.value = value;
     }
 

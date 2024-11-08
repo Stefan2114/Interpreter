@@ -1,5 +1,7 @@
 package model.adts;
+
 import exceptions.EmptyStackException;
+
 import java.util.Stack;
 
 public class MyStack<T> implements MyIStack<T> {
@@ -30,8 +32,8 @@ public class MyStack<T> implements MyIStack<T> {
     @Override
     public String toString() {
         StringBuilder str = new StringBuilder();
-        for (T elem : this.stack)
-            str.append(elem).append("\n\n");
+        for (int i = this.stack.size() - 1; i >= 0; i--)
+            str.append(this.stack.get(i)).append("\n");
 
         return "MyStack contains:\n" + str;
     }

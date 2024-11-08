@@ -7,7 +7,7 @@ import model.types.BoolType;
 import model.values.IValue;
 import model.values.BoolValue;
 
-public class LogicalExpression implements IExpression{
+public class LogicalExpression implements IExpression {
 
     private IExpression leftExpression;
     private IExpression rightExpression;
@@ -26,22 +26,22 @@ public class LogicalExpression implements IExpression{
         IValue value1 = this.leftExpression.evaluate(symTable);
         IValue value2 = this.rightExpression.evaluate(symTable);
 
-        if(!value1.getType().equals(new BoolType()))
+        if (!value1.getType().equals(new BoolType()))
             throw new ExpressionException("First value must be boolean");
-        if(!value2.getType().equals(new BoolType()))
+        if (!value2.getType().equals(new BoolType()))
             throw new ExpressionException("Second value must be boolean");
 
-        boolean boolValue1 = ((BoolValue)value1).getValue();
-        boolean boolValue2 = ((BoolValue)value2).getValue();
+        boolean boolValue1 = ((BoolValue) value1).getValue();
+        boolean boolValue2 = ((BoolValue) value2).getValue();
 
-        switch(this.operator){
+        switch (this.operator) {
             case AND -> {
                 return new BoolValue(boolValue1 && boolValue2);
             }
             case OR -> {
                 return new BoolValue(boolValue1 || boolValue2);
             }
-            default ->{
+            default -> {
                 throw new ExpressionException("Invalid operator");
             }
         }

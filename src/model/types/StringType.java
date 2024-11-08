@@ -1,23 +1,21 @@
 package model.types;
 
 import model.values.IValue;
-import model.values.IntValue;
+import model.values.StringValue;
 
-public class IntType implements IType {
-
-
+public class StringType implements IType {
     @Override
     public boolean equals(IType obj) {
-        return obj instanceof IntType;
+        return obj instanceof StringType;
     }
 
     @Override
     public IValue getDefaultValue() {
-        return new IntValue(0);
+        return new StringValue("");
     }
 
     @Override
     public String toString() {
-        return "int";
+        return "string";
     }
 }

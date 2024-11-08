@@ -8,7 +8,7 @@ public class MyList<T> implements MyIList<T> {
 
     private List<T> list;
 
-    public MyList(){
+    public MyList() {
         this.list = new ArrayList<>();
     }
 
@@ -24,9 +24,9 @@ public class MyList<T> implements MyIList<T> {
 
 
     @Override
-    public String toString(){
+    public String toString() {
         StringBuilder str = new StringBuilder();
-        for(T elem : this.list){
+        for (T elem : this.list) {
             str.append(elem).append("\n");
         }
 

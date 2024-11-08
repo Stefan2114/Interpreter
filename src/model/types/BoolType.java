@@ -3,10 +3,10 @@ package model.types;
 import model.values.BoolValue;
 import model.values.IValue;
 
-public class BoolType implements IType{
+public class BoolType implements IType {
 
     @Override
-    public boolean equals(IType obj){
+    public boolean equals(IType obj) {
         return obj instanceof BoolType;
     }
 
@@ -16,7 +16,7 @@ public class BoolType implements IType{
     }
 
     @Override
-    public String toString(){
+    public String toString() {
         return "bool";
     }
 }
