@@ -4,11 +4,11 @@ import model.types.IType;
 import model.types.BoolType;
 
 
-public class BoolValue implements IValue{
+public class BoolValue implements IValue {
 
     private boolean value;
 
-    public BoolValue(boolean value){
+    public BoolValue(boolean value) {
         this.value = value;
     }
 
@@ -20,15 +20,15 @@ public class BoolValue implements IValue{
 
     @Override
     public boolean equals(IValue other) {
-        return (other instanceof BoolValue) && ( ((BoolValue)other).getValue() == this.value);
+        return (other instanceof BoolValue) && (((BoolValue) other).getValue() == this.value);
     }
 
-    public boolean getValue(){
+    public boolean getValue() {
         return this.value;
     }
 
     @Override
-    public String toString(){
+    public String toString() {
         return Boolean.toString(value);
     }
 }

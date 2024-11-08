@@ -4,7 +4,7 @@ import exceptions.KeyNotFoundException;
 import exceptions.StatementException;
 import model.states.PrgState;
 
-public class CompStatement implements IStatement{
+public class CompStatement implements IStatement {
 
     private IStatement statement1;
     private IStatement statement2;
@@ -28,7 +28,7 @@ public class CompStatement implements IStatement{
     }
 
     @Override
-    public String toString(){
+    public String toString() {
         return this.statement1.toString() + "\n" + this.statement2.toString();
     }
 }

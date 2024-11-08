@@ -10,12 +10,12 @@ import model.types.BoolType;
 import model.values.BoolValue;
 import model.values.IValue;
 
-public class IfStatement implements IStatement{
+public class IfStatement implements IStatement {
     private IExpression expression;
     private IStatement thanStatement;
     private IStatement elseStatement;
 
-    public IfStatement(IExpression expression, IStatement thanStatement, IStatement elseIStatement){
+    public IfStatement(IExpression expression, IStatement thanStatement, IStatement elseIStatement) {
         this.expression = expression;
         this.thanStatement = thanStatement;
         this.elseStatement = elseIStatement;
@@ -25,14 +25,13 @@ public class IfStatement implements IStatement{
     @Override
     public PrgState execute(PrgState prgState) throws StatementException, ExpressionException, KeyNotFoundException {
         IValue value = this.expression.evaluate(prgState.getSymTable());
-        if(!value.getType().equals(new BoolType())){
+        if (!value.getType().equals(new BoolType())) {
             throw new StatementException("Expression is not boolean");
         }
 
-        if( ((BoolValue)value).getValue() ){
+        if (((BoolValue) value).getValue()) {
             prgState.getExecStack().push(this.thanStatement);
-        }
-        else{
+        } else {
             prgState.getExecStack().push(this.elseStatement);
         }
 
@@ -47,9 +46,8 @@ public class IfStatement implements IStatement{
     }
 
 
-
     @Override
-    public String toString(){
+    public String toString() {
         return "if(" + this.expression.toString() + "){" + this.thanStatement.toString() + "}else{" + this.elseStatement.toString() + "}";
 
     }

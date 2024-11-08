@@ -5,7 +5,7 @@ import exceptions.StatementException;
 import model.states.PrgState;
 import model.types.IType;
 
-public class VarDeclStatement implements IStatement{
+public class VarDeclStatement implements IStatement {
 
 
     private String variableName;
@@ -20,7 +20,7 @@ public class VarDeclStatement implements IStatement{
     @Override
     public PrgState execute(PrgState prgState) throws StatementException, KeyNotFoundException {
 
-        if(prgState.getSymTable().contains(this.variableName))
+        if (prgState.getSymTable().contains(this.variableName))
             throw new StatementException("A variable with the same name already exists");
         prgState.getSymTable().insert(this.variableName, this.type.getDefaultValue());
         return prgState;
@@ -33,7 +33,7 @@ public class VarDeclStatement implements IStatement{
     }
 
     @Override
-    public String toString(){
+    public String toString() {
         return this.type.toString() + " " + this.variableName + ';';
     }
 

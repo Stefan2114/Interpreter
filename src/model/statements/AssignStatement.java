@@ -8,7 +8,7 @@ import model.states.PrgState;
 import model.values.IValue;
 
 
-public class AssignStatement implements IStatement{
+public class AssignStatement implements IStatement {
 
 
     private String variableName;
@@ -23,12 +23,12 @@ public class AssignStatement implements IStatement{
     @Override
     public PrgState execute(PrgState prgState) throws StatementException, KeyNotFoundException, ExpressionException {
 
-        if(!prgState.getSymTable().contains(this.variableName))
+        if (!prgState.getSymTable().contains(this.variableName))
             throw new StatementException("Variable not found");
 
         IValue prevValue = prgState.getSymTable().getValue(this.variableName);
         IValue newValue = this.expression.evaluate(prgState.getSymTable());
-        if(!prevValue.getType().equals(newValue.getType()))
+        if (!prevValue.getType().equals(newValue.getType()))
             throw new StatementException("Value type does not match");
 
         prgState.getSymTable().insert(this.variableName, newValue);

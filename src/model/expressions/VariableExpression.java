@@ -5,11 +5,11 @@ import exceptions.KeyNotFoundException;
 import model.adts.MyIMap;
 import model.values.IValue;
 
-public class VariableExpression implements IExpression{
+public class VariableExpression implements IExpression {
 
     private String variableName;
 
-    public VariableExpression(String variableName){
+    public VariableExpression(String variableName) {
         this.variableName = variableName;
     }
 
@@ -26,7 +26,7 @@ public class VariableExpression implements IExpression{
     }
 
     @Override
-    public String toString(){
+    public String toString() {
         return this.variableName;
     }
 }

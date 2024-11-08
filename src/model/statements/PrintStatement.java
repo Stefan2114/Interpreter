@@ -7,7 +7,7 @@ import model.expressions.IExpression;
 import model.states.PrgState;
 import model.values.IValue;
 
-public class PrintStatement implements IStatement{
+public class PrintStatement implements IStatement {
 
     private IExpression expression;
 
@@ -29,7 +29,7 @@ public class PrintStatement implements IStatement{
     }
 
     @Override
-    public String toString(){
+    public String toString() {
         return "print(" + this.expression.toString() + ");";
     }
 }

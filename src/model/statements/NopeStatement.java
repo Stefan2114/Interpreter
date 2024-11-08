@@ -2,7 +2,7 @@ package model.statements;
 
 import model.states.PrgState;
 
-public class NopeStatement implements IStatement{
+public class NopeStatement implements IStatement {
 
     @Override
     public PrgState execute(PrgState prgState) {
@@ -16,7 +16,7 @@ public class NopeStatement implements IStatement{
 
 
     @Override
-    public String toString(){
+    public String toString() {
         return "NopeStatement";
     }
 }

@@ -1,0 +1,148 @@
+
+MyStack contains:
+bool a;
+int v;
+a = true;
+if(a){v = 2;}else{v = 3;}
+print(v);
+
+MyMap contains:
+
+MyList contains:
+
+FileTable:
+
+
+MyStack contains:
+bool a;
+int v;
+a = true;
+if(a){v = 2;}else{v = 3;}
+print(v);
+
+MyMap contains:
+
+MyList contains:
+
+FileTable:
+
+
+MyStack contains:
+int v;
+a = true;
+if(a){v = 2;}else{v = 3;}
+print(v);
+
+MyMap contains:
+a -> false
+
+MyList contains:
+
+FileTable:
+
+
+MyStack contains:
+int v;
+a = true;
+if(a){v = 2;}else{v = 3;}
+print(v);
+
+MyMap contains:
+a -> false
+
+MyList contains:
+
+FileTable:
+
+
+MyStack contains:
+a = true;
+if(a){v = 2;}else{v = 3;}
+print(v);
+
+MyMap contains:
+a -> false
+v -> 0
+
+MyList contains:
+
+FileTable:
+
+
+MyStack contains:
+a = true;
+if(a){v = 2;}else{v = 3;}
+print(v);
+
+MyMap contains:
+a -> false
+v -> 0
+
+MyList contains:
+
+FileTable:
+
+
+MyStack contains:
+if(a){v = 2;}else{v = 3;}
+print(v);
+
+MyMap contains:
+a -> true
+v -> 0
+
+MyList contains:
+
+FileTable:
+
+
+MyStack contains:
+if(a){v = 2;}else{v = 3;}
+print(v);
+
+MyMap contains:
+a -> true
+v -> 0
+
+MyList contains:
+
+FileTable:
+
+
+MyStack contains:
+v = 2;
+print(v);
+
+MyMap contains:
+a -> true
+v -> 0
+
+MyList contains:
+
+FileTable:
+
+
+MyStack contains:
+print(v);
+
+MyMap contains:
+a -> true
+v -> 2
+
+MyList contains:
+
+FileTable:
+
+
+MyStack contains:
+
+MyMap contains:
+a -> true
+v -> 2
+
+MyList contains:
+2
+
+FileTable:
+
+
