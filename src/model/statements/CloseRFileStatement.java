@@ -11,11 +11,11 @@ import model.values.StringValue;
 
 import java.io.IOException;
 
-public class CloseRFileStatement implements IStatement{
+public class CloseRFileStatement implements IStatement {
 
     private IExpression expression;
 
-    public CloseRFileStatement(IExpression expression){
+    public CloseRFileStatement(IExpression expression) {
         this.expression = expression;
     }
 
@@ -23,18 +23,18 @@ public class CloseRFileStatement implements IStatement{
     @Override
     public PrgState execute(PrgState prgState) throws StatementException, KeyNotFoundException, ExpressionException {
         IValue value = this.expression.evaluate(prgState.getSymTable());
-        if(!value.getType().equals(new StringType()))
+        if (!value.getType().equals(new StringType()))
             throw new StatementException("The result of the expression is not a StringType");
 
-        StringValue fileName = (StringValue)value;
-        if(!prgState.getFileTable().contains(fileName))
+        StringValue fileName = (StringValue) value;
+        if (!prgState.getFileTable().contains(fileName))
             throw new StatementException("The file was not found");
 
-        try{
+        try {
             prgState.getFileTable().getValue(fileName).close();
             prgState.getFileTable().remove(fileName);
             return prgState;
-        }catch(IOException e){
+        } catch (IOException e) {
             throw new StatementException("Problem at closing the BufferedReader");
         }
 

@@ -36,8 +36,9 @@ public class MyMap<K, V> implements MyIMap<K, V> {
     }
 
     @Override
-    public boolean contains(K key) {
-        return this.map.containsKey(key);
+    public boolean contains(K otherKey) {
+
+        return this.map.containsKey(otherKey);
     }
 
     @Override

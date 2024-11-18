@@ -37,16 +37,18 @@ public class ReadFileStatement implements IStatement {
 
         IValue value = symTable.getValue(this.variableName);
         if (!value.getType().equals(new IntType()))
-            throw new StatementException("The variable is not a String type");
+            throw new StatementException("The variable is not a Int type");
 
         IValue result = this.expression.evaluate(symTable);
         if (!result.getType().equals(new StringType()))
             throw new StatementException("The result of the expression is not a StringType");
 
-        if (!prgState.getFileTable().contains((StringValue) result))
+        StringValue fileName = (StringValue) result;
+
+        if (!prgState.getFileTable().contains(fileName))
             throw new StatementException("There is no BufferedReader for that String in the fileTable");
 
-        BufferedReader reader = prgState.getFileTable().getValue((StringValue) result);
+        BufferedReader reader = prgState.getFileTable().getValue(fileName);
 
         try {
             String line = reader.readLine();

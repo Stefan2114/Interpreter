@@ -26,19 +26,18 @@ public class OpenRFileStatement implements IStatement {
     public PrgState execute(PrgState prgState) throws StatementException, KeyNotFoundException, ExpressionException {
 
         IValue value = this.expression.evaluate(prgState.getSymTable());
-        if(!value.getType().equals(new StringType()))
+        if (!value.getType().equals(new StringType()))
             throw new StatementException("The result of the expression is not a StringType");
 
-        StringValue fileName = (StringValue)value;
-        if(prgState.getFileTable().contains(fileName))
+        StringValue fileName = (StringValue) value;
+        if (prgState.getFileTable().contains(fileName))
             throw new StatementException("The file is already open");
 
-        try{
+        try {
             BufferedReader reader = new BufferedReader(new FileReader(fileName.getValue()));
             prgState.getFileTable().insert(fileName, reader);
             return prgState;
-        }
-        catch(IOException e){
+        } catch (IOException e) {
             throw new StatementException("Problem at opening the file");
         }
 

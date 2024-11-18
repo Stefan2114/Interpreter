@@ -3,6 +3,7 @@ package model.states;
 import model.adts.MyIList;
 import model.adts.MyIMap;
 import model.adts.MyIStack;
+import model.adts.MyMap;
 import model.statements.IStatement;
 import model.values.IValue;
 import model.values.StringValue;
@@ -18,13 +19,13 @@ public class PrgState {
     private MyIMap<StringValue, BufferedReader> fileTable;
 
     public PrgState(IStatement initState, MyIStack<IStatement> execStack, MyIMap<String, IValue> symTable,
-                    MyIList<String> outputList, MyIMap<StringValue, BufferedReader> fileTable) {
+                    MyIList<String> outputList) {
         this.execStack = execStack;
         this.symTable = symTable;
         this.outputList = outputList;
         this.initialState = initState.deepCopy();
         this.execStack.push(this.initialState);
-        this.fileTable = fileTable;
+        this.fileTable = new MyMap<>();
 
     }
 

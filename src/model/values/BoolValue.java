@@ -18,9 +18,16 @@ public class BoolValue implements IValue {
         return new BoolType();
     }
 
+//    @Override
+//    public boolean equals(IValue other) {
+//        return (other instanceof BoolValue) && (((BoolValue) other).getValue() == this.value);
+//    }
+
     @Override
-    public boolean equals(IValue other) {
-        return (other instanceof BoolValue) && (((BoolValue) other).getValue() == this.value);
+    public boolean equals(Object other) {
+        if (!(other instanceof BoolValue))
+            return false;
+        return ((BoolValue) other).getValue() == this.value;
     }
 
     public boolean getValue() {
@@ -30,5 +37,10 @@ public class BoolValue implements IValue {
     @Override
     public String toString() {
         return Boolean.toString(value);
+    }
+
+    @Override
+    public int hashCode() {
+        return Boolean.hashCode(this.value);
     }
 }

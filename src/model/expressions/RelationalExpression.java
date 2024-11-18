@@ -25,16 +25,16 @@ public class RelationalExpression implements IExpression {
 
         IValue value1 = this.leftExpression.evaluate(symTable);
         IValue value2 = this.rightExpression.evaluate(symTable);
-        if(!value1.getType().equals(new IntType()))
+        if (!value1.getType().equals(new IntType()))
             throw new ExpressionException("First value must be int");
-        if(!value2.getType().equals(new IntType()))
+        if (!value2.getType().equals(new IntType()))
             throw new ExpressionException("Second value must be int");
 
-        int intValue1 = ((IntValue)value1).getValue();
-        int intValue2 = ((IntValue)value2).getValue();
+        int intValue1 = ((IntValue) value1).getValue();
+        int intValue2 = ((IntValue) value2).getValue();
 
-        switch(this.operator){
-            case LessOrEqual ->{
+        switch (this.operator) {
+            case LessOrEqual -> {
                 return new BoolValue(intValue1 <= intValue2);
             }
             case LessThan -> {
@@ -49,7 +49,10 @@ public class RelationalExpression implements IExpression {
             case GreaterOrEqual -> {
                 return new BoolValue(intValue1 >= intValue2);
             }
-            default ->{
+            case Different -> {
+                return new BoolValue(intValue1 != intValue2);
+            }
+            default -> {
                 throw new ExpressionException("Invalid operator");
             }
         }
