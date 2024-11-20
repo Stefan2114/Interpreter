@@ -1,0 +1,297 @@
+
+MyStack contains:
+string varf;
+varf = test.in;
+openRFile(test.in);
+int varc;
+readFile(varf, varc);
+print(varc);
+readFile(varf, varc);
+print(varc);
+closeRFile(varf);
+
+MyMap contains:
+
+MyList contains:
+
+FileTable:
+
+
+MyStack contains:
+string varf;
+varf = test.in;
+openRFile(test.in);
+int varc;
+readFile(varf, varc);
+print(varc);
+readFile(varf, varc);
+print(varc);
+closeRFile(varf);
+
+MyMap contains:
+
+MyList contains:
+
+FileTable:
+
+
+MyStack contains:
+varf = test.in;
+openRFile(test.in);
+int varc;
+readFile(varf, varc);
+print(varc);
+readFile(varf, varc);
+print(varc);
+closeRFile(varf);
+
+MyMap contains:
+varf -> 
+
+MyList contains:
+
+FileTable:
+
+
+MyStack contains:
+varf = test.in;
+openRFile(test.in);
+int varc;
+readFile(varf, varc);
+print(varc);
+readFile(varf, varc);
+print(varc);
+closeRFile(varf);
+
+MyMap contains:
+varf -> 
+
+MyList contains:
+
+FileTable:
+
+
+MyStack contains:
+openRFile(test.in);
+int varc;
+readFile(varf, varc);
+print(varc);
+readFile(varf, varc);
+print(varc);
+closeRFile(varf);
+
+MyMap contains:
+varf -> test.in
+
+MyList contains:
+
+FileTable:
+
+
+MyStack contains:
+openRFile(test.in);
+int varc;
+readFile(varf, varc);
+print(varc);
+readFile(varf, varc);
+print(varc);
+closeRFile(varf);
+
+MyMap contains:
+varf -> test.in
+
+MyList contains:
+
+FileTable:
+
+
+MyStack contains:
+int varc;
+readFile(varf, varc);
+print(varc);
+readFile(varf, varc);
+print(varc);
+closeRFile(varf);
+
+MyMap contains:
+varf -> test.in
+
+MyList contains:
+
+FileTable:
+test.in
+
+
+MyStack contains:
+int varc;
+readFile(varf, varc);
+print(varc);
+readFile(varf, varc);
+print(varc);
+closeRFile(varf);
+
+MyMap contains:
+varf -> test.in
+
+MyList contains:
+
+FileTable:
+test.in
+
+
+MyStack contains:
+readFile(varf, varc);
+print(varc);
+readFile(varf, varc);
+print(varc);
+closeRFile(varf);
+
+MyMap contains:
+varf -> test.in
+varc -> 0
+
+MyList contains:
+
+FileTable:
+test.in
+
+
+MyStack contains:
+readFile(varf, varc);
+print(varc);
+readFile(varf, varc);
+print(varc);
+closeRFile(varf);
+
+MyMap contains:
+varf -> test.in
+varc -> 0
+
+MyList contains:
+
+FileTable:
+test.in
+
+
+MyStack contains:
+print(varc);
+readFile(varf, varc);
+print(varc);
+closeRFile(varf);
+
+MyMap contains:
+varf -> test.in
+varc -> 15
+
+MyList contains:
+
+FileTable:
+test.in
+
+
+MyStack contains:
+print(varc);
+readFile(varf, varc);
+print(varc);
+closeRFile(varf);
+
+MyMap contains:
+varf -> test.in
+varc -> 15
+
+MyList contains:
+
+FileTable:
+test.in
+
+
+MyStack contains:
+readFile(varf, varc);
+print(varc);
+closeRFile(varf);
+
+MyMap contains:
+varf -> test.in
+varc -> 15
+
+MyList contains:
+15
+
+FileTable:
+test.in
+
+
+MyStack contains:
+readFile(varf, varc);
+print(varc);
+closeRFile(varf);
+
+MyMap contains:
+varf -> test.in
+varc -> 15
+
+MyList contains:
+15
+
+FileTable:
+test.in
+
+
+MyStack contains:
+print(varc);
+closeRFile(varf);
+
+MyMap contains:
+varf -> test.in
+varc -> 10
+
+MyList contains:
+15
+
+FileTable:
+test.in
+
+
+MyStack contains:
+print(varc);
+closeRFile(varf);
+
+MyMap contains:
+varf -> test.in
+varc -> 10
+
+MyList contains:
+15
+
+FileTable:
+test.in
+
+
+MyStack contains:
+closeRFile(varf);
+
+MyMap contains:
+varf -> test.in
+varc -> 10
+
+MyList contains:
+15
+10
+
+FileTable:
+test.in
+
+
+MyStack contains:
+
+MyMap contains:
+varf -> test.in
+varc -> 10
+
+MyList contains:
+15
+10
+
+FileTable:
+
+
