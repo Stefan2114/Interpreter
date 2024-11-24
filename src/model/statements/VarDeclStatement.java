@@ -21,7 +21,7 @@ public class VarDeclStatement implements IStatement {
     public PrgState execute(PrgState prgState) throws StatementException, KeyNotFoundException {
 
         if (prgState.getSymTable().contains(this.variableName))
-            throw new StatementException("A variable with the same name already exists");
+            throw new StatementException("A variable with the same name: " + this.variableName + " already exists");
         prgState.getSymTable().insert(this.variableName, this.type.getDefaultValue());
         return prgState;
     }
@@ -29,7 +29,7 @@ public class VarDeclStatement implements IStatement {
 
     @Override
     public IStatement deepCopy() {
-        return new VarDeclStatement(new String(this.variableName), this.type);
+        return new VarDeclStatement(new String(this.variableName), this.type.deepCopy());
     }
 
     @Override

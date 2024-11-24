@@ -2,6 +2,7 @@ package model.expressions;
 
 import exceptions.ExpressionException;
 import exceptions.KeyNotFoundException;
+import model.adts.IHeap;
 import model.adts.MyIMap;
 import model.types.IntType;
 import model.values.BoolValue;
@@ -21,14 +22,14 @@ public class RelationalExpression implements IExpression {
     }
 
     @Override
-    public IValue evaluate(MyIMap<String, IValue> symTable) throws ExpressionException, KeyNotFoundException {
+    public IValue evaluate(MyIMap<String, IValue> symTable, IHeap heap) throws ExpressionException, KeyNotFoundException {
 
-        IValue value1 = this.leftExpression.evaluate(symTable);
-        IValue value2 = this.rightExpression.evaluate(symTable);
+        IValue value1 = this.leftExpression.evaluate(symTable, heap);
+        IValue value2 = this.rightExpression.evaluate(symTable, heap);
         if (!value1.getType().equals(new IntType()))
-            throw new ExpressionException("First value must be int");
+            throw new ExpressionException("First value: " + this.leftExpression.toString() + " must be int");
         if (!value2.getType().equals(new IntType()))
-            throw new ExpressionException("Second value must be int");
+            throw new ExpressionException("Second value: " + this.rightExpression.toString() + " must be int");
 
         int intValue1 = ((IntValue) value1).getValue();
         int intValue2 = ((IntValue) value2).getValue();
@@ -53,7 +54,7 @@ public class RelationalExpression implements IExpression {
                 return new BoolValue(intValue1 != intValue2);
             }
             default -> {
-                throw new ExpressionException("Invalid operator");
+                throw new ExpressionException("Invalid operator: " + this.operator);
             }
         }
     }

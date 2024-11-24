@@ -35,6 +35,6 @@ public class MyStack<T> implements MyIStack<T> {
         for (int i = this.stack.size() - 1; i >= 0; i--)
             str.append(this.stack.get(i)).append("\n");
 
-        return "MyStack contains:\n" + str;
+        return str.toString();
     }
 }

@@ -17,8 +17,8 @@ public class PrintStatement implements IStatement {
 
     @Override
     public PrgState execute(PrgState prgState) throws StatementException, ExpressionException, KeyNotFoundException {
-        IValue value = this.expression.evaluate(prgState.getSymTable());
-        prgState.getOutputList().add(value.toString());
+        IValue expressionValue = this.expression.evaluate(prgState.getSymTable(), prgState.getHeap());
+        prgState.getOutputList().add(expressionValue.toString());
         return prgState;
     }
 

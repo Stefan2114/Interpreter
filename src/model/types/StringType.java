@@ -15,6 +15,11 @@ public class StringType implements IType {
     }
 
     @Override
+    public IType deepCopy() {
+        return new StringType();
+    }
+
+    @Override
     public String toString() {
         return "string";
     }

@@ -2,9 +2,11 @@ package model.expressions;
 
 import exceptions.ExpressionException;
 import exceptions.KeyNotFoundException;
+import model.adts.IHeap;
 import model.adts.MyIMap;
 import model.values.IValue;
 
+////////////////////////////////////////////////////////////////////////////////////
 public class VariableExpression implements IExpression {
 
     private String variableName;
@@ -15,9 +17,11 @@ public class VariableExpression implements IExpression {
 
 
     @Override
-    public IValue evaluate(MyIMap<String, IValue> symTable) throws ExpressionException, KeyNotFoundException {
-
-        return symTable.getValue(this.variableName);
+    public IValue evaluate(MyIMap<String, IValue> symTable, IHeap heap) throws ExpressionException, KeyNotFoundException {
+        /////////////////////////////////////////////////////// should be deepcopy?
+        if(!(symTable.contains(this.variableName)))
+            throw new ExpressionException("Variable: " + this.variableName + "was not found in the symTable");
+        return symTable.getValue(this.variableName).deepCopy();
     }
 
     @Override

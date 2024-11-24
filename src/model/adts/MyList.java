@@ -30,6 +30,6 @@ public class MyList<T> implements MyIList<T> {
             str.append(elem).append("\n");
         }
 
-        return "MyList contains:\n" + str;
+        return str.toString();
     }
 }
