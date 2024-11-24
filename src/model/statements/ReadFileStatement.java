@@ -33,20 +33,20 @@ public class ReadFileStatement implements IStatement {
 
         MyIMap<String, IValue> symTable = prgState.getSymTable();
         if (!symTable.contains(this.variableName))
-            throw new StatementException("Variable not found");
+            throw new StatementException("Variable: " + this.variableName + " was not found in the symTable");
 
-        IValue value = symTable.getValue(this.variableName);
-        if (!value.getType().equals(new IntType()))
-            throw new StatementException("The variable is not a Int type");
+        IValue variableValue = symTable.getValue(this.variableName);
+        if (!variableValue.getType().equals(new IntType()))
+            throw new StatementException("The variable: " + variableValue.toString() + " is not of IntType");
 
-        IValue result = this.expression.evaluate(symTable);
-        if (!result.getType().equals(new StringType()))
-            throw new StatementException("The result of the expression is not a StringType");
+        IValue expressionValue = this.expression.evaluate(symTable, prgState.getHeap());
+        if (!expressionValue.getType().equals(new StringType()))
+            throw new StatementException("The result of the expression: " + this.expression.toString() + " is not a StringType");
 
-        StringValue fileName = (StringValue) result;
+        StringValue fileName = (StringValue) expressionValue;
 
         if (!prgState.getFileTable().contains(fileName))
-            throw new StatementException("There is no BufferedReader for that String in the fileTable");
+            throw new StatementException("The file: " + fileName.toString() + "was not found in the fileTable");
 
         BufferedReader reader = prgState.getFileTable().getValue(fileName);
 
@@ -61,7 +61,7 @@ public class ReadFileStatement implements IStatement {
             return prgState;
 
         } catch (IOException e) {
-            throw new StatementException("Problem at reading from the BufferedReader");
+            throw new StatementException("Problem at reading from the file: " + fileName.toString());
         }
 
     }

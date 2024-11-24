@@ -2,6 +2,7 @@ package model.adts;
 
 import exceptions.KeyNotFoundException;
 
+import java.util.Map;
 import java.util.Set;
 
 public interface MyIMap<K, V> {
@@ -13,5 +14,6 @@ public interface MyIMap<K, V> {
 
     boolean contains(K key);
 
-    Set<K> getKeys();
+    Map<K,V> getContent();
+
 }

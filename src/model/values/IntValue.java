@@ -16,14 +16,14 @@ public class IntValue implements IValue {
         return new IntType();
     }
 
-//    @Override
-//    public boolean equals(IValue other) {
-//        return (other instanceof IntValue) && (((IntValue) other).getValue() == this.value);
-//    }
+    @Override
+    public IValue deepCopy() {
+        return new IntValue(this.value);
+    }
 
     @Override
     public boolean equals(Object other) {
-        if(!(other instanceof IntValue))
+        if (!(other instanceof IntValue))
             return false;
         return ((IntValue) other).getValue() == this.value;
     }

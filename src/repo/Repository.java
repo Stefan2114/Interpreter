@@ -11,7 +11,7 @@ import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Repository implements IRepository{
+public class Repository implements IRepository {
 
     private List<PrgState> prgStateList;
     private int currentStatePosition;
@@ -24,11 +24,11 @@ public class Repository implements IRepository{
         this.currentStatePosition = 0;
         this.logFilePath = logFilePath;
 
-        try{
+        try {
             PrintWriter pr = new PrintWriter(new BufferedWriter(new FileWriter(logFilePath)));
             pr.println("");
             pr.close();
-        }catch(IOException e){
+        } catch (IOException e) {
             throw new RepoException("File couldn't be created");
 
         }
@@ -48,12 +48,12 @@ public class Repository implements IRepository{
 
     @Override
     public void logPrgStateExec() throws RepoException {
-        try{
+        try {
 
             this.logFile = new PrintWriter(new BufferedWriter(new FileWriter(logFilePath, true)));
             logFile.println(this.getCurrentPrgState().toString());
             logFile.close();
-        }catch(IOException e){
+        } catch (IOException e) {
             throw new RepoException("File couldn't be created");
 
         }

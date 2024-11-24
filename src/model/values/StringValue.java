@@ -16,11 +16,11 @@ public class StringValue implements IValue {
         return new StringType();
     }
 
-//    @Override
-//    public boolean equals(IValue other) {
-//        return other.getType().equals(new StringType()) && ((StringValue) other).getValue().equals(this.value);
-//    }
-//
+    @Override
+    public IValue deepCopy() {
+        return new StringValue(new String(this.value));
+    }
+
 
     public String getValue() {
         return this.value;

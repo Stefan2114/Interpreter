@@ -6,4 +6,5 @@ public interface IType {
     boolean equals(IType obj);
 
     IValue getDefaultValue();
+    IType deepCopy();
 }

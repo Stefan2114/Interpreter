@@ -2,6 +2,7 @@ package model.expressions;
 
 import exceptions.ExpressionException;
 import exceptions.KeyNotFoundException;
+import model.adts.IHeap;
 import model.adts.MyIMap;
 import model.types.BoolType;
 import model.values.IValue;
@@ -21,15 +22,15 @@ public class LogicalExpression implements IExpression {
 
 
     @Override
-    public IValue evaluate(MyIMap<String, IValue> symTable) throws ExpressionException, KeyNotFoundException {
+    public IValue evaluate(MyIMap<String, IValue> symTable, IHeap heap) throws ExpressionException, KeyNotFoundException {
 
-        IValue value1 = this.leftExpression.evaluate(symTable);
-        IValue value2 = this.rightExpression.evaluate(symTable);
+        IValue value1 = this.leftExpression.evaluate(symTable, heap);
+        IValue value2 = this.rightExpression.evaluate(symTable, heap);
 
         if (!value1.getType().equals(new BoolType()))
-            throw new ExpressionException("First value must be boolean");
+            throw new ExpressionException("First value: " + this.leftExpression.toString() + " must be boolean");
         if (!value2.getType().equals(new BoolType()))
-            throw new ExpressionException("Second value must be boolean");
+            throw new ExpressionException("Second value: " + this.rightExpression.toString() + " must be boolean");
 
         boolean boolValue1 = ((BoolValue) value1).getValue();
         boolean boolValue2 = ((BoolValue) value2).getValue();
@@ -42,7 +43,7 @@ public class LogicalExpression implements IExpression {
                 return new BoolValue(boolValue1 || boolValue2);
             }
             default -> {
-                throw new ExpressionException("Invalid operator");
+                throw new ExpressionException("Invalid operator: " + this.operator);
             }
         }
 

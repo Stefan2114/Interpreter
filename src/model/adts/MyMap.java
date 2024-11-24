@@ -42,8 +42,8 @@ public class MyMap<K, V> implements MyIMap<K, V> {
     }
 
     @Override
-    public Set<K> getKeys() {
-        return this.map.keySet();
+    public Map<K, V> getContent() {
+        return this.map;
     }
 
 
@@ -53,6 +53,6 @@ public class MyMap<K, V> implements MyIMap<K, V> {
         for (K key : this.map.keySet()) {
             str.append(key).append(" -> ").append(this.map.get(key)).append("\n");
         }
-        return "MyMap contains:\n" + str;
+        return str.toString();
     }
 }

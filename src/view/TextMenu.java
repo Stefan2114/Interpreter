@@ -33,7 +33,7 @@ public class TextMenu {
         Scanner scanner = new Scanner(System.in);
         while (true) {
             printMenu();
-            System.out.printf("Input your option: ");
+            System.out.print("Input your option: ");
             String key = scanner.nextLine();
             if (!this.commands.containsKey(key))
                 System.out.println("Invalid option");

@@ -10,6 +10,8 @@ import model.types.BoolType;
 import model.values.BoolValue;
 import model.values.IValue;
 
+
+///////////////////////////////////////////////////////////////////////////
 public class IfStatement implements IStatement {
     private IExpression expression;
     private IStatement thanStatement;
@@ -24,15 +26,16 @@ public class IfStatement implements IStatement {
 
     @Override
     public PrgState execute(PrgState prgState) throws StatementException, ExpressionException, KeyNotFoundException {
-        IValue value = this.expression.evaluate(prgState.getSymTable());
-        if (!value.getType().equals(new BoolType())) {
-            throw new StatementException("Expression is not boolean");
+        IValue expressionValue = this.expression.evaluate(prgState.getSymTable(), prgState.getHeap());
+        if (!expressionValue.getType().equals(new BoolType())) {
+            throw new StatementException("Expression: " + this.expression.toString() + " is not boolean");
         }
 
-        if (((BoolValue) value).getValue()) {
-            prgState.getExecStack().push(this.thanStatement);
+        /////////////////////////////////////////////////////should i push a deepCopy of the statement?
+        if (((BoolValue) expressionValue).getValue()) {
+            prgState.getExecStack().push(this.thanStatement.deepCopy());
         } else {
-            prgState.getExecStack().push(this.elseStatement);
+            prgState.getExecStack().push(this.elseStatement.deepCopy());
         }
 
         return prgState;
@@ -48,7 +51,7 @@ public class IfStatement implements IStatement {
 
     @Override
     public String toString() {
-        return "if(" + this.expression.toString() + "){" + this.thanStatement.toString() + "}else{" + this.elseStatement.toString() + "}";
+        return "if(" + this.expression.toString() + ")\n{" + this.thanStatement.toString() + "}\nelse{" + this.elseStatement.toString() + "}";
 
     }
 }

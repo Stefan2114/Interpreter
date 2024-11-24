@@ -18,10 +18,10 @@ public class BoolValue implements IValue {
         return new BoolType();
     }
 
-//    @Override
-//    public boolean equals(IValue other) {
-//        return (other instanceof BoolValue) && (((BoolValue) other).getValue() == this.value);
-//    }
+    @Override
+    public IValue deepCopy() {
+        return new BoolValue(this.value);
+    }
 
     @Override
     public boolean equals(Object other) {

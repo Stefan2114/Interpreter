@@ -24,12 +24,12 @@ public class AssignStatement implements IStatement {
     public PrgState execute(PrgState prgState) throws StatementException, KeyNotFoundException, ExpressionException {
 
         if (!prgState.getSymTable().contains(this.variableName))
-            throw new StatementException("Variable not found");
+            throw new StatementException("Variable: " + this.variableName + "was not found in the symTable");
 
         IValue prevValue = prgState.getSymTable().getValue(this.variableName);
-        IValue newValue = this.expression.evaluate(prgState.getSymTable());
+        IValue newValue = this.expression.evaluate(prgState.getSymTable(), prgState.getHeap());
         if (!prevValue.getType().equals(newValue.getType()))
-            throw new StatementException("Value type does not match");
+            throw new StatementException("Value type does not match (" + prevValue.toString() + " != " + newValue.toString() + ")");
 
         prgState.getSymTable().insert(this.variableName, newValue);
         return prgState;
