@@ -1,6 +1,7 @@
 package view.commands;
 
 import controller.IController;
+import exceptions.ControllerRuntimeException;
 import model.statements.ReadFileStatement;
 
 public class RunExempleCommand extends Command {
@@ -18,7 +19,7 @@ public class RunExempleCommand extends Command {
     public void execute() {
         try {
             this.controller.allSteps();
-        } catch (Exception e) {
+        } catch (ControllerRuntimeException | InterruptedException e) {
             System.out.println(e);
         }
     }

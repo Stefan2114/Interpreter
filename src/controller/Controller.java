@@ -1,38 +1,46 @@
 package controller;
 
 import exceptions.*;
-import exceptions.EmptyStackException;
 import model.adts.*;
-import model.expressions.ArithmeticalExpression;
-import model.expressions.ArithmeticalOperator;
-import model.expressions.ValueExpression;
-import model.expressions.VariableExpression;
 import model.statements.*;
 import model.states.PrgState;
-import model.types.BoolType;
-import model.types.IntType;
-import model.types.StringType;
 import model.values.*;
 import repo.IRepository;
-
-import java.io.BufferedReader;
 import java.util.*;
+import java.util.concurrent.Callable;
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.ExecutorService;
 import java.util.stream.Collectors;
+import java.util.concurrent.Executors;
 
 public class Controller implements IController {
 
     private IRepository repo;
+    private ExecutorService executor;
 
     public Controller(IRepository repo) {
         this.repo = repo;
     }
 
 
-    private Map<Integer, IValue> unsafeGarbageCollector(List<Integer> usedAddr, Map<Integer, IValue> heap) {
+    //could be a problem for immutable list
+    private List<PrgState> removeCompletedPrg(List<PrgState> inPrgList) {
+        return inPrgList.stream()
+                .filter(PrgState::isNotCompleted)
+                .collect(Collectors.toList());
+    }
 
-        return heap.entrySet().stream()
+    private void garbageCollector(List<PrgState> prgList) {
+
+
+        Map<Integer, IValue> heap = this.repo.getHeap().getContent();
+        Set<Integer> usedAddr = getAllAddresses(prgList, heap);
+
+        Map<Integer, IValue> newHeap =  heap.entrySet().stream()
                 .filter(e -> usedAddr.contains(e.getKey()))
                 .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue));
+
+        this.repo.getHeap().setContent(newHeap);
     }
 
 
@@ -40,12 +48,11 @@ public class Controller implements IController {
         return symTableValues.stream()
                 .filter(v -> v instanceof RefValue)
                 .map(v -> ((RefValue) v).getAddress())
-                .toList();
+                .collect(Collectors.toList());
     }
 
 
-
-    private Integer getMissingUsedAddress(List<Integer> usedAddr, Map<Integer, IValue> heap){
+    private Integer getMissingUsedAddress(Set<Integer> usedAddr, Map<Integer, IValue> heap) {
 
         return heap.entrySet().stream()
                 .filter(e -> {
@@ -58,15 +65,20 @@ public class Controller implements IController {
     }
 
 
-    private List<Integer> getAllAddresses(List<Integer> symTableAddresses, Map<Integer, IValue> heapContent){
+    private Set<Integer> getAllAddresses(List<PrgState> prgList, Map<Integer, IValue> heapContent) {
 
-        List<Integer> addresses = new ArrayList<>(symTableAddresses);
+        Set<Integer> addresses = new HashSet<>();
+        prgList.forEach(prg -> {
+            List<Integer> symAddresses = getAddrFromSymTable(prg.getSymTable().getContent().values());
+            addresses.addAll(symAddresses);
+        });
+
         Integer missingAddress = getMissingUsedAddress(addresses, heapContent);
         if (missingAddress != null) {
             addresses.add(missingAddress);
         }
 
-        while(missingAddress != null) {
+        while (missingAddress != null) {
             missingAddress = getMissingUsedAddress(addresses, heapContent);
             if (missingAddress != null) {
                 addresses.add(missingAddress);
@@ -77,30 +89,49 @@ public class Controller implements IController {
     }
 
 
+    private void oneStepForAllPrg(List<PrgState> prgList) throws ControllerRuntimeException, InterruptedException {
 
-    private PrgState oneStep(PrgState prgState) throws StatementException, KeyNotFoundException, ExpressionException, EmptyStackException, ControllerException {
-        MyIStack<IStatement> execStack = prgState.getExecStack();
-        if (execStack.isEmpty()) throw new ControllerException("prgState stack is empty");
-        IStatement statement = execStack.pop();
-        return statement.execute(prgState);
+        prgList.forEach(prg -> this.repo.logPrgStateExec(prg) );
+
+        List<Callable<PrgState>> callList = prgList.stream()
+                .map((PrgState p) -> (Callable<PrgState>)(p::oneStep))
+                .toList();
+
+
+        List<PrgState> newPrgList = executor.invokeAll(callList).stream()
+                .map(future -> {
+                    try {
+                        return future.get();
+                    } catch (ExecutionException e) {
+                        throw new ControllerRuntimeException(e.getCause());
+                    }catch (InterruptedException e) {
+                        throw new ControllerRuntimeException(e);
+                    }
+
+                })
+                .filter(Objects::nonNull)
+                .toList();
+
+        prgList.addAll(newPrgList);
+        prgList.forEach(prg -> this.repo.logPrgStateExec(prg) );
+        this.repo.setPrgList(prgList);
 
     }
 
 
-    public void allSteps() throws RepoException, EmptyStackException, StatementException, ControllerException, KeyNotFoundException, ExpressionException {
-        PrgState prgState = this.repo.getCurrentPrgState();
-        this.repo.logPrgStateExec();
-        while (!prgState.getExecStack().isEmpty()) {
-            oneStep(prgState);
-            this.repo.logPrgStateExec();
+    public void allSteps() throws InterruptedException {
+        this.executor = Executors.newFixedThreadPool(2);
+        List<PrgState> prgList = removeCompletedPrg(this.repo.getPrgList());
+        while(prgList.size() > 0){
 
-            List<Integer> symTableAddresses = getAddrFromSymTable(prgState.getSymTable().getContent().values());
-            Map<Integer, IValue> heapContent = prgState.getHeap().getContent();
-            List<Integer> addresses = getAllAddresses(symTableAddresses, heapContent);
-            prgState.getHeap().setContent(unsafeGarbageCollector(addresses, heapContent));
-            this.repo.logPrgStateExec();
+            ////// the garbage collector removes the unbounded variables so we could use that space again, but after all the prgStates are finished should it delete the remaining variables?????
+            garbageCollector(prgList);
+            oneStepForAllPrg(prgList);
+            prgList = removeCompletedPrg(this.repo.getPrgList());
 
         }
+        this.executor.shutdownNow();
+        repo.setPrgList(prgList);
     }
 
 }

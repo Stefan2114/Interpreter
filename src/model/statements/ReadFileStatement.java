@@ -15,7 +15,7 @@ import model.values.StringValue;
 import java.io.BufferedReader;
 import java.io.IOException;
 
-
+///////////////////////////////////////////////////////////////////////////////////////////
 public class ReadFileStatement implements IStatement {
 
 
@@ -28,18 +28,34 @@ public class ReadFileStatement implements IStatement {
     }
 
 
+//
+
+
+
     @Override
-    public PrgState execute(PrgState prgState) throws StatementException, KeyNotFoundException, ExpressionException {
+    public PrgState execute(PrgState prgState) throws StatementException {
 
         MyIMap<String, IValue> symTable = prgState.getSymTable();
         if (!symTable.contains(this.variableName))
             throw new StatementException("Variable: " + this.variableName + " was not found in the symTable");
 
+
+        //now all adts throw runtime exception
         IValue variableValue = symTable.getValue(this.variableName);
+
+
         if (!variableValue.getType().equals(new IntType()))
             throw new StatementException("The variable: " + variableValue.toString() + " is not of IntType");
 
-        IValue expressionValue = this.expression.evaluate(symTable, prgState.getHeap());
+
+        IValue expressionValue;
+        try{
+            expressionValue = this.expression.evaluate(symTable, prgState.getHeap());
+        }
+        catch(ExpressionException e){
+            throw new StatementException("The expression: " + this.expression.toString() + " threw the exception: " + e.getMessage());
+        }
+
         if (!expressionValue.getType().equals(new StringType()))
             throw new StatementException("The result of the expression: " + this.expression.toString() + " is not a StringType");
 
@@ -58,11 +74,11 @@ public class ReadFileStatement implements IStatement {
             int parser = Integer.parseInt(line);
 
             symTable.insert(this.variableName, new IntValue(parser));
-            return prgState;
 
         } catch (IOException e) {
             throw new StatementException("Problem at reading from the file: " + fileName.toString());
         }
+        return null;
 
     }
 

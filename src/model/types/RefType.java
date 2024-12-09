@@ -3,7 +3,7 @@ package model.types;
 import model.values.IValue;
 import model.values.RefValue;
 
-///////////////////////////////////////////////////////////////////
+
 public class RefType implements IType{
 
 
@@ -23,7 +23,6 @@ public class RefType implements IType{
     }
 
 
-/////////////////////////////////////////////////////////////here inner is null
     @Override
     public IValue getDefaultValue() {
         return new RefValue(0,this.inner);

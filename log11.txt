@@ -1,0 +1,816 @@
+PrgState with id: 11
+ExecStack:
+int v;
+Ref int a;
+v = 10;
+new(a, 22);
+thread(wH(a, 30);
+v = 32;
+print(v);
+print(rH(a)););
+print(v);
+print(rH(a));
+
+SymTable:
+
+Out:
+
+FileTable:
+
+Heap:
+
+
+PrgState with id: 11
+ExecStack:
+int v;
+Ref int a;
+v = 10;
+new(a, 22);
+thread(wH(a, 30);
+v = 32;
+print(v);
+print(rH(a)););
+print(v);
+print(rH(a));
+
+SymTable:
+
+Out:
+
+FileTable:
+
+Heap:
+
+
+PrgState with id: 11
+ExecStack:
+int v;
+Ref int a;
+v = 10;
+new(a, 22);
+thread(wH(a, 30);
+v = 32;
+print(v);
+print(rH(a)););
+print(v);
+print(rH(a));
+
+SymTable:
+
+Out:
+
+FileTable:
+
+Heap:
+
+
+PrgState with id: 11
+ExecStack:
+Ref int a;
+v = 10;
+new(a, 22);
+thread(wH(a, 30);
+v = 32;
+print(v);
+print(rH(a)););
+print(v);
+print(rH(a));
+
+SymTable:
+v -> 0
+
+Out:
+
+FileTable:
+
+Heap:
+
+
+PrgState with id: 11
+ExecStack:
+Ref int a;
+v = 10;
+new(a, 22);
+thread(wH(a, 30);
+v = 32;
+print(v);
+print(rH(a)););
+print(v);
+print(rH(a));
+
+SymTable:
+v -> 0
+
+Out:
+
+FileTable:
+
+Heap:
+
+
+PrgState with id: 11
+ExecStack:
+Ref int a;
+v = 10;
+new(a, 22);
+thread(wH(a, 30);
+v = 32;
+print(v);
+print(rH(a)););
+print(v);
+print(rH(a));
+
+SymTable:
+v -> 0
+
+Out:
+
+FileTable:
+
+Heap:
+
+
+PrgState with id: 11
+ExecStack:
+Ref int a;
+v = 10;
+new(a, 22);
+thread(wH(a, 30);
+v = 32;
+print(v);
+print(rH(a)););
+print(v);
+print(rH(a));
+
+SymTable:
+v -> 0
+
+Out:
+
+FileTable:
+
+Heap:
+
+
+PrgState with id: 11
+ExecStack:
+v = 10;
+new(a, 22);
+thread(wH(a, 30);
+v = 32;
+print(v);
+print(rH(a)););
+print(v);
+print(rH(a));
+
+SymTable:
+a -> (0,int)
+v -> 0
+
+Out:
+
+FileTable:
+
+Heap:
+
+
+PrgState with id: 11
+ExecStack:
+v = 10;
+new(a, 22);
+thread(wH(a, 30);
+v = 32;
+print(v);
+print(rH(a)););
+print(v);
+print(rH(a));
+
+SymTable:
+a -> (0,int)
+v -> 0
+
+Out:
+
+FileTable:
+
+Heap:
+
+
+PrgState with id: 11
+ExecStack:
+v = 10;
+new(a, 22);
+thread(wH(a, 30);
+v = 32;
+print(v);
+print(rH(a)););
+print(v);
+print(rH(a));
+
+SymTable:
+a -> (0,int)
+v -> 0
+
+Out:
+
+FileTable:
+
+Heap:
+
+
+PrgState with id: 11
+ExecStack:
+v = 10;
+new(a, 22);
+thread(wH(a, 30);
+v = 32;
+print(v);
+print(rH(a)););
+print(v);
+print(rH(a));
+
+SymTable:
+a -> (0,int)
+v -> 0
+
+Out:
+
+FileTable:
+
+Heap:
+
+
+PrgState with id: 11
+ExecStack:
+new(a, 22);
+thread(wH(a, 30);
+v = 32;
+print(v);
+print(rH(a)););
+print(v);
+print(rH(a));
+
+SymTable:
+a -> (0,int)
+v -> 10
+
+Out:
+
+FileTable:
+
+Heap:
+
+
+PrgState with id: 11
+ExecStack:
+new(a, 22);
+thread(wH(a, 30);
+v = 32;
+print(v);
+print(rH(a)););
+print(v);
+print(rH(a));
+
+SymTable:
+a -> (0,int)
+v -> 10
+
+Out:
+
+FileTable:
+
+Heap:
+
+
+PrgState with id: 11
+ExecStack:
+new(a, 22);
+thread(wH(a, 30);
+v = 32;
+print(v);
+print(rH(a)););
+print(v);
+print(rH(a));
+
+SymTable:
+a -> (0,int)
+v -> 10
+
+Out:
+
+FileTable:
+
+Heap:
+
+
+PrgState with id: 11
+ExecStack:
+new(a, 22);
+thread(wH(a, 30);
+v = 32;
+print(v);
+print(rH(a)););
+print(v);
+print(rH(a));
+
+SymTable:
+a -> (0,int)
+v -> 10
+
+Out:
+
+FileTable:
+
+Heap:
+
+
+PrgState with id: 11
+ExecStack:
+thread(wH(a, 30);
+v = 32;
+print(v);
+print(rH(a)););
+print(v);
+print(rH(a));
+
+SymTable:
+a -> (1,int)
+v -> 10
+
+Out:
+
+FileTable:
+
+Heap:
+1 -> 22
+
+
+PrgState with id: 11
+ExecStack:
+thread(wH(a, 30);
+v = 32;
+print(v);
+print(rH(a)););
+print(v);
+print(rH(a));
+
+SymTable:
+a -> (1,int)
+v -> 10
+
+Out:
+
+FileTable:
+
+Heap:
+1 -> 22
+
+
+PrgState with id: 11
+ExecStack:
+thread(wH(a, 30);
+v = 32;
+print(v);
+print(rH(a)););
+print(v);
+print(rH(a));
+
+SymTable:
+a -> (1,int)
+v -> 10
+
+Out:
+
+FileTable:
+
+Heap:
+1 -> 22
+
+
+PrgState with id: 11
+ExecStack:
+thread(wH(a, 30);
+v = 32;
+print(v);
+print(rH(a)););
+print(v);
+print(rH(a));
+
+SymTable:
+a -> (1,int)
+v -> 10
+
+Out:
+
+FileTable:
+
+Heap:
+1 -> 22
+
+
+PrgState with id: 11
+ExecStack:
+print(v);
+print(rH(a));
+
+SymTable:
+a -> (1,int)
+v -> 10
+
+Out:
+
+FileTable:
+
+Heap:
+1 -> 22
+
+
+PrgState with id: 12
+ExecStack:
+wH(a, 30);
+v = 32;
+print(v);
+print(rH(a));
+
+SymTable:
+a -> (1,int)
+v -> 10
+
+Out:
+
+FileTable:
+
+Heap:
+1 -> 22
+
+
+PrgState with id: 11
+ExecStack:
+print(v);
+print(rH(a));
+
+SymTable:
+a -> (1,int)
+v -> 10
+
+Out:
+
+FileTable:
+
+Heap:
+1 -> 22
+
+
+PrgState with id: 12
+ExecStack:
+wH(a, 30);
+v = 32;
+print(v);
+print(rH(a));
+
+SymTable:
+a -> (1,int)
+v -> 10
+
+Out:
+
+FileTable:
+
+Heap:
+1 -> 22
+
+
+PrgState with id: 11
+ExecStack:
+print(v);
+print(rH(a));
+
+SymTable:
+a -> (1,int)
+v -> 10
+
+Out:
+
+FileTable:
+
+Heap:
+1 -> 22
+
+
+PrgState with id: 12
+ExecStack:
+wH(a, 30);
+v = 32;
+print(v);
+print(rH(a));
+
+SymTable:
+a -> (1,int)
+v -> 10
+
+Out:
+
+FileTable:
+
+Heap:
+1 -> 22
+
+
+PrgState with id: 11
+ExecStack:
+print(v);
+print(rH(a));
+
+SymTable:
+a -> (1,int)
+v -> 10
+
+Out:
+
+FileTable:
+
+Heap:
+1 -> 22
+
+
+PrgState with id: 12
+ExecStack:
+wH(a, 30);
+v = 32;
+print(v);
+print(rH(a));
+
+SymTable:
+a -> (1,int)
+v -> 10
+
+Out:
+
+FileTable:
+
+Heap:
+1 -> 22
+
+
+PrgState with id: 11
+ExecStack:
+print(rH(a));
+
+SymTable:
+a -> (1,int)
+v -> 10
+
+Out:
+10
+
+FileTable:
+
+Heap:
+1 -> 30
+
+
+PrgState with id: 12
+ExecStack:
+v = 32;
+print(v);
+print(rH(a));
+
+SymTable:
+a -> (1,int)
+v -> 10
+
+Out:
+10
+
+FileTable:
+
+Heap:
+1 -> 30
+
+
+PrgState with id: 11
+ExecStack:
+print(rH(a));
+
+SymTable:
+a -> (1,int)
+v -> 10
+
+Out:
+10
+
+FileTable:
+
+Heap:
+1 -> 30
+
+
+PrgState with id: 12
+ExecStack:
+v = 32;
+print(v);
+print(rH(a));
+
+SymTable:
+a -> (1,int)
+v -> 10
+
+Out:
+10
+
+FileTable:
+
+Heap:
+1 -> 30
+
+
+PrgState with id: 11
+ExecStack:
+
+SymTable:
+a -> (1,int)
+v -> 10
+
+Out:
+10
+30
+
+FileTable:
+
+Heap:
+1 -> 30
+
+
+PrgState with id: 12
+ExecStack:
+v = 32;
+print(v);
+print(rH(a));
+
+SymTable:
+a -> (1,int)
+v -> 10
+
+Out:
+10
+30
+
+FileTable:
+
+Heap:
+1 -> 30
+
+
+PrgState with id: 12
+ExecStack:
+v = 32;
+print(v);
+print(rH(a));
+
+SymTable:
+a -> (1,int)
+v -> 10
+
+Out:
+10
+30
+
+FileTable:
+
+Heap:
+1 -> 30
+
+
+PrgState with id: 12
+ExecStack:
+print(v);
+print(rH(a));
+
+SymTable:
+a -> (1,int)
+v -> 32
+
+Out:
+10
+30
+
+FileTable:
+
+Heap:
+1 -> 30
+
+
+PrgState with id: 12
+ExecStack:
+print(v);
+print(rH(a));
+
+SymTable:
+a -> (1,int)
+v -> 32
+
+Out:
+10
+30
+
+FileTable:
+
+Heap:
+1 -> 30
+
+
+PrgState with id: 12
+ExecStack:
+print(v);
+print(rH(a));
+
+SymTable:
+a -> (1,int)
+v -> 32
+
+Out:
+10
+30
+
+FileTable:
+
+Heap:
+1 -> 30
+
+
+PrgState with id: 12
+ExecStack:
+print(v);
+print(rH(a));
+
+SymTable:
+a -> (1,int)
+v -> 32
+
+Out:
+10
+30
+
+FileTable:
+
+Heap:
+1 -> 30
+
+
+PrgState with id: 12
+ExecStack:
+print(rH(a));
+
+SymTable:
+a -> (1,int)
+v -> 32
+
+Out:
+10
+30
+32
+
+FileTable:
+
+Heap:
+1 -> 30
+
+
+PrgState with id: 12
+ExecStack:
+print(rH(a));
+
+SymTable:
+a -> (1,int)
+v -> 32
+
+Out:
+10
+30
+32
+
+FileTable:
+
+Heap:
+1 -> 30
+
+
+PrgState with id: 12
+ExecStack:
+
+SymTable:
+a -> (1,int)
+v -> 32
+
+Out:
+10
+30
+32
+30
+
+FileTable:
+
+Heap:
+1 -> 30
+
+

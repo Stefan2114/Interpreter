@@ -22,7 +22,7 @@ public class HeapAllocStatement implements IStatement {
     }
 
     @Override
-    public PrgState execute(PrgState prgState) throws StatementException, KeyNotFoundException, ExpressionException {
+    public PrgState execute(PrgState prgState) throws StatementException, KeyNotFoundException {
 
         MyIMap<String, IValue> symTable = prgState.getSymTable();
         if (!symTable.contains(this.variableName))
@@ -34,7 +34,13 @@ public class HeapAllocStatement implements IStatement {
 
         RefValue refValue = (RefValue) variableValue;
 
-        IValue expressionValue = this.expression.evaluate(symTable, prgState.getHeap());
+        IValue expressionValue;
+        try{
+            expressionValue = this.expression.evaluate(symTable, prgState.getHeap());
+        }
+        catch(ExpressionException e){
+            throw new StatementException("The expression: " + this.expression.toString() + " threw the exception: " + e.getMessage());
+        }
 
         if (!(expressionValue.getType().equals(refValue.getLocationType())))
             throw new StatementException("Expression: " + expressionValue.toString() + " type is not the same as the variable: " + refValue.toString() + " type");
@@ -42,7 +48,7 @@ public class HeapAllocStatement implements IStatement {
 
         int address = prgState.getHeap().allocate(expressionValue);
         symTable.insert(this.variableName, new RefValue(address, expressionValue.getType()));
-        return prgState;
+        return null;
 
     }
 

@@ -19,7 +19,7 @@ public class ValueExpression implements IExpression {
 
 ///////////////////////////////////////deepcopy
     @Override
-    public IValue evaluate(MyIMap<String, IValue> symTable, IHeap heap) throws ExpressionException {
+    public IValue evaluate(MyIMap<String, IValue> symTable, IHeap heap) {
         return this.value.deepCopy();
 
     }

@@ -17,7 +17,7 @@ public class VariableExpression implements IExpression {
 
 
     @Override
-    public IValue evaluate(MyIMap<String, IValue> symTable, IHeap heap) throws ExpressionException, KeyNotFoundException {
+    public IValue evaluate(MyIMap<String, IValue> symTable, IHeap heap) throws ExpressionException {
         /////////////////////////////////////////////////////// should be deepcopy?
         if(!(symTable.contains(this.variableName)))
             throw new ExpressionException("Variable: " + this.variableName + "was not found in the symTable");

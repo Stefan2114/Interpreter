@@ -22,7 +22,7 @@ public class LogicalExpression implements IExpression {
 
 
     @Override
-    public IValue evaluate(MyIMap<String, IValue> symTable, IHeap heap) throws ExpressionException, KeyNotFoundException {
+    public IValue evaluate(MyIMap<String, IValue> symTable, IHeap heap) throws ExpressionException {
 
         IValue value1 = this.leftExpression.evaluate(symTable, heap);
         IValue value2 = this.rightExpression.evaluate(symTable, heap);
