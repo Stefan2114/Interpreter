@@ -48,6 +48,19 @@ public class MyMap<K, V> implements MyIMap<K, V> {
 
 
     @Override
+    public void setContent(Map<K,V> map) {
+        this.map = map;
+    }
+
+    @Override
+    public MyIMap<K, V> deepCopy() {
+        MyIMap<K,V> newMap = new MyMap<>();
+        newMap.setContent(new HashMap<K,V>(this.map));
+        return newMap;
+    }
+
+
+    @Override
     public String toString() {
         StringBuilder str = new StringBuilder();
         for (K key : this.map.keySet()) {

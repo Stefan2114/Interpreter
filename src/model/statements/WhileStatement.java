@@ -25,9 +25,16 @@ public class WhileStatement implements IStatement{
 
     //////////////////////////////////////////////////////should i push a deepCopy of the statements?
     @Override
-    public PrgState execute(PrgState prgState) throws StatementException, KeyNotFoundException, ExpressionException {
+    public PrgState execute(PrgState prgState) throws StatementException {
 
-        IValue expressionValue = this.expression.evaluate(prgState.getSymTable(),prgState.getHeap());
+        IValue expressionValue;
+        try{
+            expressionValue = this.expression.evaluate(prgState.getSymTable(),prgState.getHeap());
+        }
+        catch(ExpressionException e) {
+            throw new StatementException("The expression: " + this.expression.toString() + " threw the exception: " + e.getMessage());
+        }
+
         if(!(expressionValue.getType().equals(new BoolType())))
             throw new StatementException("The value of expression: " + this.expression.toString() + " must be of BoolType");
 
@@ -36,7 +43,7 @@ public class WhileStatement implements IStatement{
             prgState.getExecStack().push(this.statement.deepCopy());
         }
 
-        return prgState;
+        return null;
     }
 
     @Override

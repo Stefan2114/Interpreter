@@ -16,10 +16,10 @@ public class CompStatement implements IStatement {
 
 
     @Override
-    public PrgState execute(PrgState prgState) throws StatementException, KeyNotFoundException {
+    public PrgState execute(PrgState prgState) throws StatementException {
         prgState.getExecStack().push(this.statement2);
         prgState.getExecStack().push(this.statement1);
-        return prgState;
+        return null;
     }
 
     @Override

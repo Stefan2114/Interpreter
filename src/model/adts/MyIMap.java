@@ -16,4 +16,7 @@ public interface MyIMap<K, V> {
 
     Map<K,V> getContent();
 
+    public void setContent(Map<K,V> map);
+
+    public MyIMap<K,V> deepCopy();
 }

@@ -23,9 +23,16 @@ public class OpenRFileStatement implements IStatement {
     }
 
     @Override
-    public PrgState execute(PrgState prgState) throws StatementException, KeyNotFoundException, ExpressionException {
+    public PrgState execute(PrgState prgState) throws StatementException {
 
-        IValue expressionValue = this.expression.evaluate(prgState.getSymTable(), prgState.getHeap());
+        IValue expressionValue;
+        try{
+            expressionValue = this.expression.evaluate(prgState.getSymTable(), prgState.getHeap());
+        }
+        catch(ExpressionException e) {
+            throw new StatementException("The expression: " + this.expression.toString() + " threw the exception: " + e.getMessage());
+        }
+
         if (!expressionValue.getType().equals(new StringType()))
             throw new StatementException("The result of the expression: " + this.expression.toString() + " is not a StringType");
 
@@ -36,11 +43,10 @@ public class OpenRFileStatement implements IStatement {
         try {
             BufferedReader reader = new BufferedReader(new FileReader(fileName.getValue()));
             prgState.getFileTable().insert(fileName, reader);
-            return prgState;
         } catch (IOException e) {
             throw new StatementException("Problem at opening the file: " + fileName.toString());
         }
-
+        return null;
     }
 
     @Override

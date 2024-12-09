@@ -18,12 +18,12 @@ public class VarDeclStatement implements IStatement {
 
 
     @Override
-    public PrgState execute(PrgState prgState) throws StatementException, KeyNotFoundException {
+    public PrgState execute(PrgState prgState) throws StatementException {
 
         if (prgState.getSymTable().contains(this.variableName))
             throw new StatementException("A variable with the same name: " + this.variableName + " already exists");
         prgState.getSymTable().insert(this.variableName, this.type.getDefaultValue());
-        return prgState;
+        return null;
     }
 
 

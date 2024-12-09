@@ -21,8 +21,16 @@ public class CloseRFileStatement implements IStatement {
 
 
     @Override
-    public PrgState execute(PrgState prgState) throws StatementException, KeyNotFoundException, ExpressionException {
-        IValue expressionValue = this.expression.evaluate(prgState.getSymTable(), prgState.getHeap());
+    public PrgState execute(PrgState prgState) throws StatementException, KeyNotFoundException {
+
+        IValue expressionValue;
+        try{
+            expressionValue = this.expression.evaluate(prgState.getSymTable(), prgState.getHeap());
+        }
+        catch(ExpressionException e){
+            throw new StatementException("The expression: " + this.expression.toString() + " threw the exception: " + e.getMessage());
+        }
+
         if (!expressionValue.getType().equals(new StringType()))
             throw new StatementException("The result of the expression: " + this.expression.toString() + " is not a StringType");
 
@@ -33,11 +41,10 @@ public class CloseRFileStatement implements IStatement {
         try {
             prgState.getFileTable().getValue(fileName).close();
             prgState.getFileTable().remove(fileName);
-            return prgState;
         } catch (IOException e) {
             throw new StatementException("Problem at closing the file: " + fileName.toString());
         }
-
+        return null;
 
     }
 

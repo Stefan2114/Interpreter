@@ -1,6 +1,7 @@
 package repo;
 
 import exceptions.RepoException;
+import model.adts.IHeap;
 import model.adts.MyIList;
 import model.states.PrgState;
 
@@ -11,52 +12,55 @@ import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Repository implements IRepository {
+public class Repository implements IRepository, AutoCloseable {
 
     private List<PrgState> prgStateList;
-    private int currentStatePosition;
     private String logFilePath;
     private PrintWriter logFile;
+    private IHeap heap;
 
-    public Repository(PrgState prgstate, String logFilePath) throws RepoException {
+    public Repository(PrgState prgState, String logFilePath) throws RepoException {
         this.prgStateList = new ArrayList<>();
-        this.prgStateList.add(prgstate);
-        this.currentStatePosition = 0;
-        this.logFilePath = logFilePath;
-
-        try {
-            PrintWriter pr = new PrintWriter(new BufferedWriter(new FileWriter(logFilePath)));
-            pr.println("");
-            pr.close();
-        } catch (IOException e) {
-            throw new RepoException("File couldn't be created");
-
-        }
-    }
-
-    @Override
-    public void addPrgState(PrgState prgState) {
         this.prgStateList.add(prgState);
-        this.currentStatePosition++;
+        this.logFilePath = logFilePath;
+        this.heap = prgState.getHeap();
+        initLogFile();
     }
 
-    @Override
-    public PrgState getCurrentPrgState() {
-
-        return this.prgStateList.get(this.currentStatePosition);
-    }
-
-    @Override
-    public void logPrgStateExec() throws RepoException {
+    private void initLogFile() throws RepoException {
         try {
-
+            new FileWriter(this.logFilePath).close();
             this.logFile = new PrintWriter(new BufferedWriter(new FileWriter(logFilePath, true)));
-            logFile.println(this.getCurrentPrgState().toString());
-            logFile.close();
         } catch (IOException e) {
-            throw new RepoException("File couldn't be created");
-
+            throw new RepoException("File: " + this.logFilePath + " couldn't be created or edited");
         }
     }
 
+
+
+    @Override
+    public void logPrgStateExec(PrgState prgState) {
+        logFile.println(prgState.toString());
+        logFile.flush();
+    }
+
+    @Override
+    public List<PrgState> getPrgList() {
+        return this.prgStateList;
+    }
+
+    @Override
+    public void setPrgList(List<PrgState> newList) {
+        this.prgStateList = newList;
+    }
+
+    public IHeap getHeap() {
+        return heap;
+    }
+
+    @Override
+    public void close() {
+        if(this.logFile != null)
+            this.logFile.close();
+    }
 }

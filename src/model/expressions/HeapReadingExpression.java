@@ -19,7 +19,7 @@ public class HeapReadingExpression implements IExpression {
 
 
     @Override
-    public IValue evaluate(MyIMap<String, IValue> symTable, IHeap heap) throws ExpressionException, KeyNotFoundException {
+    public IValue evaluate(MyIMap<String, IValue> symTable, IHeap heap) throws ExpressionException {
 
         IValue value = this.expression.evaluate(symTable, heap);
         if (!(value.getType() instanceof RefType))

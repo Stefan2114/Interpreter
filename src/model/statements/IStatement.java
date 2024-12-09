@@ -6,7 +6,7 @@ import exceptions.StatementException;
 import model.states.PrgState;
 
 public interface IStatement {
-    PrgState execute(PrgState prgState) throws StatementException, KeyNotFoundException, ExpressionException;
+    PrgState execute(PrgState prgState) throws StatementException;
 
     IStatement deepCopy();
 }

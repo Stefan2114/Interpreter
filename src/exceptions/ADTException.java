@@ -1,6 +1,6 @@
 package exceptions;
 
-public class ADTException extends Exception {
+public class ADTException extends RuntimeException {
     public ADTException(String msg) {
         super(msg);
     }

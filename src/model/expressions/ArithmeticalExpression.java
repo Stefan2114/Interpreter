@@ -1,6 +1,7 @@
 package model.expressions;
 
 import exceptions.ExpressionException;
+import exceptions.ExpressionRuntimeException;
 import exceptions.KeyNotFoundException;
 import model.adts.IHeap;
 import model.adts.MyIMap;
@@ -22,7 +23,7 @@ public class ArithmeticalExpression implements IExpression {
     }
 
     @Override
-    public IValue evaluate(MyIMap<String, IValue> symTable, IHeap heap) throws ExpressionException, KeyNotFoundException {
+    public IValue evaluate(MyIMap<String, IValue> symTable, IHeap heap) throws ExpressionException {
 
         IValue value1 = this.leftExpression.evaluate(symTable, heap);
         IValue value2 = this.rightExpression.evaluate(symTable, heap);
@@ -48,7 +49,7 @@ public class ArithmeticalExpression implements IExpression {
             }
             case DIVIDE -> {
                 if (intValue2 == 0)
-                    throw new ExpressionException("Division by 0 (" + toString() + ")");
+                    throw new ExpressionRuntimeException("Division by 0 (" + toString() + ")");
                 return new IntValue(intValue1 / intValue2);
             }
             default -> {

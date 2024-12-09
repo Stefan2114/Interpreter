@@ -16,10 +16,18 @@ public class PrintStatement implements IStatement {
     }
 
     @Override
-    public PrgState execute(PrgState prgState) throws StatementException, ExpressionException, KeyNotFoundException {
-        IValue expressionValue = this.expression.evaluate(prgState.getSymTable(), prgState.getHeap());
+    public PrgState execute(PrgState prgState) throws StatementException {
+
+        IValue expressionValue;
+        try{
+            expressionValue = this.expression.evaluate(prgState.getSymTable(), prgState.getHeap());
+        }
+        catch(ExpressionException e) {
+            throw new StatementException("The expression: " + this.expression.toString() + " threw the exception: " + e.getMessage());
+        }
+
         prgState.getOutputList().add(expressionValue.toString());
-        return prgState;
+        return null;
     }
 
 

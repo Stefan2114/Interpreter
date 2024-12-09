@@ -21,7 +21,7 @@ public class HeapWritingStatement implements IStatement{
 
 
     @Override
-    public PrgState execute(PrgState prgState) throws StatementException, KeyNotFoundException, ExpressionException {
+    public PrgState execute(PrgState prgState) throws StatementException, KeyNotFoundException {
 
         if(!(prgState.getSymTable().contains(this.variableName)))
             throw new StatementException(("The variable: " + this.variableName + " was not found in the symTable"));
@@ -34,13 +34,20 @@ public class HeapWritingStatement implements IStatement{
         if(!(prgState.getHeap().contains(address)))
             throw new StatementException("The variable: " + variableValue.toString() + "  was not found on the heap");
 
-        IValue expressionValue = this.expression.evaluate(prgState.getSymTable(), prgState.getHeap());
+
+        IValue expressionValue;
+        try{
+            expressionValue = this.expression.evaluate(prgState.getSymTable(), prgState.getHeap());
+        }
+        catch(ExpressionException e){
+            throw new StatementException("The expression: " + this.expression.toString() + " threw the exception: " + e.getMessage());
+        }
 
         if(!(((RefValue)variableValue).getLocationType().equals(expressionValue.getType())))
             throw new StatementException("The expression: " + expressionValue.toString() + " doesn't have the same type as the one stored at the address of the RefValue: " + variableValue.toString());
 
         prgState.getHeap().insert(address, expressionValue);
-        return prgState;
+        return null;
     }
 
     @Override

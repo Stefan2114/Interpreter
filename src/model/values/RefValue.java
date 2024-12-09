@@ -49,6 +49,6 @@ public class RefValue implements IValue {
     //////////////////////////////////////////////////////////////////////////////////////////
     @Override
     public int hashCode() {
-        return 0;
+        return Integer.hashCode(this.address);
     }
 }
