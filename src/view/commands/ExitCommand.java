@@ -3,7 +3,7 @@ package view.commands;
 
 public class ExitCommand extends Command {
 
-    public ExitCommand(String key, String description) {
+    public ExitCommand(int key, String description) {
         super(key, description);
     }
 

@@ -1,20 +1,18 @@
 package view;
 
-import model.adts.MyIMap;
-import model.adts.MyMap;
 import view.commands.Command;
 
-import java.util.HashMap;
+import java.util.TreeMap;
 import java.util.Scanner;
 
 import java.util.Map;
 
 public class TextMenu {
 
-    private Map<String, Command> commands;
+    private Map<Integer, Command> commands;
 
     public TextMenu() {
-        this.commands = new HashMap<>();
+        this.commands = new TreeMap<>();
 
     }
 
@@ -34,13 +32,19 @@ public class TextMenu {
         while (true) {
             printMenu();
             System.out.print("Input your option: ");
-            String key = scanner.nextLine();
-            if (!this.commands.containsKey(key))
-                System.out.println("Invalid option");
-            else {
-                Command command = this.commands.get(key);
-                command.execute();
+            String input = scanner.nextLine();
+            try{
+                int key = Integer.parseInt(input);
+                if (!this.commands.containsKey(key))
+                    System.out.println("Invalid option");
+                else {
+                    Command command = this.commands.get(key);
+                    command.execute();
+                }
+            }catch(NumberFormatException e){
+                System.out.println("Invalid option: must be a number");
             }
+
         }
     }
 

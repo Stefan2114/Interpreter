@@ -1,49 +1,52 @@
 package model.statements;
 
-import exceptions.ExpressionException;
-import exceptions.KeyNotFoundException;
-import exceptions.StatementException;
+import exceptions.*;
+import model.adts.MyIMap;
+import model.adts.MyMap;
 import model.expressions.IExpression;
 import model.states.PrgState;
 import model.types.BoolType;
+import model.types.IType;
 import model.values.BoolValue;
 import model.values.IValue;
 
 /////////////////////////////////////////////////////////////////////////
 
-public class WhileStatement implements IStatement{
+public class WhileStatement implements IStatement {
 
     private IExpression expression;
     private IStatement statement;
 
-    public WhileStatement(IExpression expression, IStatement statement){
+    public WhileStatement(IExpression expression, IStatement statement) {
         this.expression = expression;
         this.statement = statement;
     }
 
 
-
-    //////////////////////////////////////////////////////should i push a deepCopy of the statements?
     @Override
     public PrgState execute(PrgState prgState) throws StatementException {
 
-        IValue expressionValue;
-        try{
-            expressionValue = this.expression.evaluate(prgState.getSymTable(),prgState.getHeap());
-        }
-        catch(ExpressionException e) {
-            throw new StatementException("The expression: " + this.expression.toString() + " threw the exception: " + e.getMessage());
-        }
-
-        if(!(expressionValue.getType().equals(new BoolType())))
-            throw new StatementException("The value of expression: " + this.expression.toString() + " must be of BoolType");
-
-        if(((BoolValue)expressionValue).getValue()){
+        IValue expressionValue = this.expression.evaluate(prgState.getSymTable(), prgState.getHeap());
+        if (((BoolValue) expressionValue).getValue()) {
             prgState.getExecStack().push(deepCopy());
             prgState.getExecStack().push(this.statement.deepCopy());
         }
-
         return null;
+    }
+
+    @Override
+    public MyIMap<String, IType> typeCheck(MyIMap<String, IType> typeEnv) throws TypeCheckException {
+        IType expressionType;
+        try{
+            expressionType = this.expression.typeCheck(typeEnv);
+        }catch(TypeCheckExpressionException e){
+            throw new TypeCheckException("Expression exception: " + this.expression.toString() + " threw the exception: " + e.getMessage());
+        }
+        if(!(expressionType.equals(new BoolType())))
+            throw new TypeCheckException("Statement exception: the expression: " + this.expression.toString() + " is not of type BoolType");
+
+        this.statement.typeCheck(new MyMap<String, IType>(typeEnv));
+        return typeEnv;
     }
 
     @Override
@@ -53,7 +56,7 @@ public class WhileStatement implements IStatement{
 
 
     @Override
-    public String toString(){
+    public String toString() {
         return "while(" + this.expression.toString() + ")\n{\n" + this.statement.toString() + "}";
     }
 }

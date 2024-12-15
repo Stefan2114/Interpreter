@@ -1,8 +1,6 @@
 package controller;
 
 import exceptions.*;
-import model.adts.*;
-import model.statements.*;
 import model.states.PrgState;
 import model.values.*;
 import repo.IRepository;
@@ -89,7 +87,7 @@ public class Controller implements IController {
     }
 
 
-    private void oneStepForAllPrg(List<PrgState> prgList) throws ControllerRuntimeException, InterruptedException {
+    private void oneStepForAllPrg(List<PrgState> prgList) throws InterruptedException {
 
         prgList.forEach(prg -> this.repo.logPrgStateExec(prg) );
 
@@ -103,9 +101,9 @@ public class Controller implements IController {
                     try {
                         return future.get();
                     } catch (ExecutionException e) {
-                        throw new ControllerRuntimeException(e.getCause());
+                        throw new ControllerException(e.getCause());
                     }catch (InterruptedException e) {
-                        throw new ControllerRuntimeException(e);
+                        throw new ControllerException(e);
                     }
 
                 })
@@ -119,7 +117,9 @@ public class Controller implements IController {
     }
 
 
-    public void allSteps() throws InterruptedException {
+    public void allSteps() throws InterruptedException, TypeCheckException {
+
+        this.repo.initPrgState();
         this.executor = Executors.newFixedThreadPool(2);
         List<PrgState> prgList = removeCompletedPrg(this.repo.getPrgList());
         while(prgList.size() > 0){

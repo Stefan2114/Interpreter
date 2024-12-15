@@ -1,10 +1,10 @@
 package model.statements;
 
-import exceptions.ExpressionException;
-import exceptions.KeyNotFoundException;
-import exceptions.StatementException;
+import exceptions.*;
+import model.adts.MyIMap;
 import model.expressions.IExpression;
 import model.states.PrgState;
+import model.types.IType;
 import model.values.IValue;
 
 
@@ -21,24 +21,33 @@ public class AssignStatement implements IStatement {
 
 
     @Override
-    public PrgState execute(PrgState prgState) throws StatementException {
+    public PrgState execute(PrgState prgState) {
 
-        if (!prgState.getSymTable().contains(this.variableName))
-            throw new StatementException("Variable: " + this.variableName + "was not found in the symTable");
 
         IValue prevValue = prgState.getSymTable().getValue(this.variableName);
-        IValue newValue;
-        try{
-            newValue = this.expression.evaluate(prgState.getSymTable(), prgState.getHeap());
-        }catch(ExpressionException e){
-            throw new StatementException("The expression: " + this.expression.toString() + " threw the exception: " + e.getMessage());
-        }
-
-        if (!prevValue.getType().equals(newValue.getType()))
-            throw new StatementException("Value type does not match (" + prevValue.toString() + " != " + newValue.toString() + ")");
-
+        IValue newValue = this.expression.evaluate(prgState.getSymTable(), prgState.getHeap());;
         prgState.getSymTable().insert(this.variableName, newValue);
         return null;
+    }
+
+    @Override
+    public MyIMap<String, IType> typeCheck(MyIMap<String, IType> typeEnv) throws TypeCheckException {
+        if(!(typeEnv.contains(this.variableName)))
+            throw new TypeCheckException("Statement exceptions: the variable: " + this.variableName + " is not in the typeEnv");
+        IType variableType = typeEnv.getValue(this.variableName);
+        IType expressionType;
+        ////// if expression returns null instead of throwing an exception i wouldn't need a try and catch
+        try{
+            expressionType = this.expression.typeCheck(typeEnv);
+        } catch (TypeCheckExpressionException e) {
+            throw new TypeCheckException("Expression exception: " + this.expression.toString() + " threw the exception: " + e.getMessage());
+
+        }
+        if(!(variableType.equals(expressionType)))
+            throw new TypeCheckException("Statement exceptions: the variable " + this.variableName + " doesn't match the type of the expression " + this.expression.toString());
+
+
+        return typeEnv;
     }
 
     @Override

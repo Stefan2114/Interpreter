@@ -1,12 +1,14 @@
 package model.expressions;
 
-import exceptions.ExpressionException;
-import exceptions.KeyNotFoundException;
+import exceptions.TypeCheckExpressionException;
 import model.adts.IHeap;
 import model.adts.MyIMap;
 import model.types.BoolType;
+import model.types.IType;
 import model.values.IValue;
 import model.values.BoolValue;
+
+import java.util.Objects;
 
 public class LogicalExpression implements IExpression {
 
@@ -22,31 +24,37 @@ public class LogicalExpression implements IExpression {
 
 
     @Override
-    public IValue evaluate(MyIMap<String, IValue> symTable, IHeap heap) throws ExpressionException {
+    public IValue evaluate(MyIMap<String, IValue> symTable, IHeap heap) {
 
         IValue value1 = this.leftExpression.evaluate(symTable, heap);
         IValue value2 = this.rightExpression.evaluate(symTable, heap);
 
-        if (!value1.getType().equals(new BoolType()))
-            throw new ExpressionException("First value: " + this.leftExpression.toString() + " must be boolean");
-        if (!value2.getType().equals(new BoolType()))
-            throw new ExpressionException("Second value: " + this.rightExpression.toString() + " must be boolean");
-
         boolean boolValue1 = ((BoolValue) value1).getValue();
         boolean boolValue2 = ((BoolValue) value2).getValue();
 
-        switch (this.operator) {
-            case AND -> {
-                return new BoolValue(boolValue1 && boolValue2);
-            }
-            case OR -> {
-                return new BoolValue(boolValue1 || boolValue2);
-            }
-            default -> {
-                throw new ExpressionException("Invalid operator: " + this.operator);
-            }
+        if (this.operator == LogicalOperator.AND) {
+            return new BoolValue(boolValue1 && boolValue2);
         }
 
+        return new BoolValue(boolValue1 || boolValue2);
+    }
+
+
+    @Override
+    public IType typeCheck(MyIMap<String, IType> typeEnv) throws TypeCheckExpressionException {
+
+        if(!(this.operator instanceof LogicalOperator))
+            throw new TypeCheckExpressionException("The operator: " + this.operator + " from expression: " + this.leftExpression.toString() + " is not a valid operator for a logic operation");
+
+        IType type1 = this.leftExpression.typeCheck(typeEnv);
+        if(!(type1.equals(new BoolType())))
+            throw new TypeCheckExpressionException("First value: " + this.leftExpression.toString() + " is not of type BoolType");
+
+        IType type2 = this.rightExpression.typeCheck(typeEnv);
+        if(!(type2.equals(new BoolType())))
+            throw new TypeCheckExpressionException("Second value: " + this.rightExpression.toString() + " is not of type BoolType");
+
+        return new BoolType();
 
     }
 

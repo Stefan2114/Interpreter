@@ -1,16 +1,17 @@
 package view.commands;
 
 public abstract class Command {
-    private String key, description;
+    private int key;
+    private String description;
 
-    public Command(String key, String description) {
+    public Command(int key, String description) {
         this.key = key;
         this.description = description;
     }
 
     public abstract void execute();
 
-    public String getKey() {
+    public int getKey() {
         return key;
     }
 

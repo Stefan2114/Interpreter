@@ -1,6 +1,5 @@
 package model.expressions;
 
-import exceptions.ExpressionException;
 import model.adts.IHeap;
 import model.adts.MyIMap;
 import model.types.IType;
@@ -17,11 +16,16 @@ public class ValueExpression implements IExpression {
         this.value = value;
     }
 
-///////////////////////////////////////deepcopy
+    ///////////////////////////////////////deepcopy
     @Override
     public IValue evaluate(MyIMap<String, IValue> symTable, IHeap heap) {
         return this.value.deepCopy();
 
+    }
+
+    @Override
+    public IType typeCheck(MyIMap<String, IType> typeEnv) {
+        return this.value.getType();
     }
 
     //////////////////////////////////// deepcopy

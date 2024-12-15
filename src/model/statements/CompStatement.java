@@ -1,8 +1,10 @@
 package model.statements;
 
-import exceptions.KeyNotFoundException;
-import exceptions.StatementException;
+
+import exceptions.TypeCheckException;
+import model.adts.MyIMap;
 import model.states.PrgState;
+import model.types.IType;
 
 public class CompStatement implements IStatement {
 
@@ -16,10 +18,20 @@ public class CompStatement implements IStatement {
 
 
     @Override
-    public PrgState execute(PrgState prgState) throws StatementException {
+    public PrgState execute(PrgState prgState) {
         prgState.getExecStack().push(this.statement2);
         prgState.getExecStack().push(this.statement1);
         return null;
+    }
+
+    @Override
+    public MyIMap<String, IType> typeCheck(MyIMap<String, IType> typeEnv) throws TypeCheckException {
+
+
+        MyIMap<String, IType> typeEnv1 = this.statement1.typeCheck(typeEnv);
+        MyIMap<String, IType> typeEnv2 = this.statement2.typeCheck(typeEnv1);
+        return typeEnv2;
+
     }
 
     @Override

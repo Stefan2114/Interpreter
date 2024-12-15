@@ -1,7 +1,7 @@
 package model.adts;
 
 import java.util.List;
-import java.util.ArrayList;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 
 public class MyList<T> implements MyIList<T> {
@@ -9,17 +9,12 @@ public class MyList<T> implements MyIList<T> {
     private List<T> list;
 
     public MyList() {
-        this.list = new ArrayList<>();
+        this.list = new CopyOnWriteArrayList<>();
     }
 
     @Override
     public void add(T elem) {
         this.list.add(elem);
-    }
-
-    @Override
-    public List<T> getAll() {
-        return this.list;
     }
 
 

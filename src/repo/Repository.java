@@ -1,9 +1,12 @@
 package repo;
 
 import exceptions.RepoException;
-import model.adts.IHeap;
-import model.adts.MyIList;
+import exceptions.TypeCheckException;
+import model.adts.*;
+import model.statements.IStatement;
 import model.states.PrgState;
+import model.types.IType;
+import model.values.IValue;
 
 import java.io.BufferedWriter;
 import java.io.FileWriter;
@@ -18,12 +21,14 @@ public class Repository implements IRepository, AutoCloseable {
     private String logFilePath;
     private PrintWriter logFile;
     private IHeap heap;
+    private IStatement initStatement;
 
-    public Repository(PrgState prgState, String logFilePath) throws RepoException {
-        this.prgStateList = new ArrayList<>();
-        this.prgStateList.add(prgState);
+    public Repository(IStatement initStatement, String logFilePath) throws RepoException {
+
+        this.initStatement = initStatement;
         this.logFilePath = logFilePath;
-        this.heap = prgState.getHeap();
+        this.heap = new Heap();
+        this.prgStateList = new ArrayList<>();
         initLogFile();
     }
 
@@ -36,6 +41,15 @@ public class Repository implements IRepository, AutoCloseable {
         }
     }
 
+
+    @Override
+    public void initPrgState() throws TypeCheckException {
+
+        initStatement.typeCheck(new MyMap<String, IType>());
+
+        PrgState prgState = new PrgState(initStatement, new MyStack<IStatement>(), new MyMap<String, IValue>(), new MyList<String>(), new FileTable(), this.heap);
+        this.prgStateList.add(prgState);
+    }
 
 
     @Override
@@ -60,7 +74,7 @@ public class Repository implements IRepository, AutoCloseable {
 
     @Override
     public void close() {
-        if(this.logFile != null)
+        if (this.logFile != null)
             this.logFile.close();
     }
 }

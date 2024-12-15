@@ -30,9 +30,8 @@ public class Main {
             IStatement st1 = new CompStatement(new VarDeclStatement("v", new IntType()),
                     new CompStatement(new AssignStatement("v",
                             new ValueExpression(new IntValue(2))), new PrintStatement(new VariableExpression("v"))));
-            PrgState prg1 = new PrgState(st1,new MyStack<IStatement>(), new MyMap<String, IValue>(), new MyList<String>(), new FileTable(), new Heap());
 
-            IRepository repo1 = new Repository(prg1, "log1.txt");
+            IRepository repo1 = new Repository(st1, "log1.txt");
             IController controller1 = new Controller(repo1);
 
 
@@ -43,9 +42,8 @@ public class Main {
                             new PrintStatement(new VariableExpression("b"))))
                     ));
 
-            PrgState prg2 = new PrgState(st2, new MyStack<IStatement>(), new MyMap<String, IValue>(), new MyList<String>(), new FileTable(), new Heap());
 
-            IRepository repo2 = new Repository(prg2, "log2.txt");
+            IRepository repo2 = new Repository(st2, "log2.txt");
             IController controller2 = new Controller(repo2);
 
 
@@ -54,9 +52,8 @@ public class Main {
             CompStatement st33 = new CompStatement(new AssignStatement("a", new ValueExpression(new BoolValue(true))), st34);
             CompStatement st32 = new CompStatement(new VarDeclStatement("v", new IntType()), st33);
             IStatement st3 = new CompStatement(new VarDeclStatement("a", new BoolType()), st32);
-            PrgState prg3 = new PrgState(st3,new MyStack<IStatement>(), new MyMap<String, IValue>(), new MyList<String>(), new FileTable(), new Heap());
 
-            IRepository repo3 = new Repository(prg3, "log3.txt");
+            IRepository repo3 = new Repository(st3, "log3.txt");
             IController controller3 = new Controller(repo3);
 
 
@@ -71,9 +68,8 @@ public class Main {
 
             CompStatement st42 = new CompStatement(new AssignStatement("varf", new ValueExpression(new StringValue("test.in"))), st43);
             IStatement st4 = new CompStatement(new VarDeclStatement("varf", new StringType()), st42);
-            PrgState prg4 = new PrgState(st4, new MyStack<IStatement>(), new MyMap<String, IValue>(), new MyList<String>(), new FileTable(), new Heap());
 
-            IRepository repo4 = new Repository(prg4, "log4.txt");
+            IRepository repo4 = new Repository(st4, "log4.txt");
             IController controller4 = new Controller(repo4);
 
 
@@ -84,9 +80,8 @@ public class Main {
 
             CompStatement st52 = new CompStatement(new HeapAllocStatement("v", new ValueExpression(new IntValue(20))), st53);
             IStatement st5 = new CompStatement(new VarDeclStatement("v", new RefType(new IntType())), st52);
-            PrgState prg5 = new PrgState(st5, new MyStack<IStatement>(), new MyMap<String, IValue>(), new MyList<String>(), new FileTable(), new Heap());
 
-            IRepository repo5 = new Repository(prg5, "log5.txt");
+            IRepository repo5 = new Repository(st5, "log5.txt");
             IController controller5 = new Controller(repo5);
 
 
@@ -98,9 +93,8 @@ public class Main {
             CompStatement st63 = new CompStatement(new VarDeclStatement("a",new RefType(new RefType(new IntType()))), st64);
             CompStatement st62 = new CompStatement(new HeapAllocStatement("v", new ValueExpression(new IntValue(20))), st63);
             IStatement st6 = new CompStatement(new VarDeclStatement("v", new RefType(new IntType())), st62);
-            PrgState prg6 = new PrgState(st6, new MyStack<IStatement>(), new MyMap<String, IValue>(), new MyList<String>(), new FileTable(), new Heap());
 
-            IRepository repo6 = new Repository(prg6, "log6.txt");
+            IRepository repo6 = new Repository(st6, "log6.txt");
             IController controller6 = new Controller(repo6);
 
             PrintStatement st75 = new PrintStatement(new ArithmeticalExpression(new HeapReadingExpression(new VariableExpression("v")), new ValueExpression(new IntValue(5)), ArithmeticalOperator.ADD));
@@ -108,9 +102,8 @@ public class Main {
             CompStatement st73 = new CompStatement(new PrintStatement(new HeapReadingExpression(new VariableExpression("v"))), st74);
             CompStatement st72 = new CompStatement(new HeapAllocStatement("v", new ValueExpression(new IntValue(20))), st73);
             IStatement st7 = new CompStatement(new VarDeclStatement("v", new RefType(new IntType())), st72);
-            PrgState prg7 = new PrgState(st7,new MyStack<IStatement>(), new MyMap<String, IValue>(), new MyList<String>(), new FileTable(), new Heap());
 
-            IRepository repo7 = new Repository(prg7, "log7.txt");
+            IRepository repo7 = new Repository(st7, "log7.txt");
             IController controller7 = new Controller(repo7);
 
 
@@ -121,9 +114,8 @@ public class Main {
             CompStatement st83 = new CompStatement(new VarDeclStatement("a",new RefType(new RefType(new IntType()))), st84);
             CompStatement st82 = new CompStatement(new HeapAllocStatement("v", new ValueExpression(new IntValue(20))), st83);
             IStatement st8 = new CompStatement(new VarDeclStatement("v", new RefType(new IntType())), st82);
-            PrgState prg8 = new PrgState(st8,new MyStack<IStatement>(), new MyMap<String, IValue>(), new MyList<String>(), new FileTable(), new Heap());
 
-            IRepository repo8 = new Repository(prg8, "log8.txt");
+            IRepository repo8 = new Repository(st8, "log8.txt");
             IController controller8 = new Controller(repo8);
 
 
@@ -131,9 +123,8 @@ public class Main {
             CompStatement st93 = new CompStatement(new HeapAllocStatement("v", new ValueExpression(new IntValue(30))), st94);
             CompStatement st92 = new CompStatement(new HeapAllocStatement("v", new ValueExpression(new IntValue(20))), st93);
             IStatement st9 = new CompStatement(new VarDeclStatement("v", new RefType(new IntType())), st92);
-            PrgState prg9 = new PrgState(st9, new MyStack<IStatement>(), new MyMap<String, IValue>(), new MyList<String>(), new FileTable(), new Heap());
 
-            IRepository repo9 = new Repository(prg9, "log9.txt");
+            IRepository repo9 = new Repository(st9, "log9.txt");
             IController controller9 = new Controller(repo9);
 
 
@@ -154,9 +145,8 @@ public class Main {
             CompStatement st103 = new CompStatement(new WhileStatement(whileExpression , whileBodyStatement), st104);
             CompStatement st102 = new CompStatement(new AssignStatement("v", new ValueExpression(new IntValue(4))), st103);
             IStatement st10 = new CompStatement(new VarDeclStatement("v", new IntType()), st102);
-            PrgState prg10 = new PrgState(st10, new MyStack<IStatement>(), new MyMap<String, IValue>(), new MyList<String>(), new FileTable(), new Heap());
 
-            IRepository repo10 = new Repository(prg10, "log10.txt");
+            IRepository repo10 = new Repository(st10, "log10.txt");
             IController controller10 = new Controller(repo10);
 
 
@@ -174,25 +164,44 @@ public class Main {
             CompStatement st113 = new CompStatement(new AssignStatement("v", new ValueExpression(new IntValue(10))), st114);
             CompStatement st112 = new CompStatement(new VarDeclStatement("a", new RefType(new IntType())), st113);
             IStatement st11 = new CompStatement(new VarDeclStatement("v", new IntType()), st112);
-            PrgState prg11 = new PrgState(st11, new MyStack<IStatement>(), new MyMap<String, IValue>(), new MyList<String>(), new FileTable(), new Heap());
 
-            IRepository repo11 = new Repository(prg11, "log11.txt");
+            IRepository repo11 = new Repository(st11, "log11.txt");
             IController controller11 = new Controller(repo11);
 
 
+
+            PrintStatement st123 = new PrintStatement(new VariableExpression("v"));
+            CompStatement st122 = new CompStatement(new VarDeclStatement("v", new IntType()), st123);
+            IStatement st12 = new CompStatement(new VarDeclStatement("v", new IntType()), st122);
+
+            IRepository repo12 = new Repository(st12, "log12.txt");
+            IController controller12 = new Controller(repo12);
+
+
+            PrintStatement st133 = new PrintStatement(new VariableExpression("v"));
+            CompStatement st132 = new CompStatement(new AssignStatement("v", new ValueExpression(new StringValue("10"))), st133);
+            IStatement st13 = new CompStatement(new VarDeclStatement("v", new IntType()), st132);
+
+            IRepository repo13 = new Repository(st13, "log13.txt");
+            IController controller13 = new Controller(repo13);
+
+
             TextMenu menu = new TextMenu();
-            menu.addCommand(new ExitCommand("0", "exit"));
-            menu.addCommand(new RunExempleCommand("1", st1.toString(), controller1));
-            menu.addCommand(new RunExempleCommand("2", st2.toString(), controller2));
-            menu.addCommand(new RunExempleCommand("3", st3.toString(), controller3));
-            menu.addCommand(new RunExempleCommand("4", st4.toString(), controller4));
-            menu.addCommand(new RunExempleCommand("5", st5.toString(), controller5));
-            menu.addCommand(new RunExempleCommand("6", st6.toString(), controller6));
-            menu.addCommand(new RunExempleCommand("7", st7.toString(), controller7));
-            menu.addCommand(new RunExempleCommand("8", st8.toString(), controller8));
-            menu.addCommand(new RunExempleCommand("9", st9.toString(), controller9));
-            menu.addCommand(new RunExempleCommand("10", st10.toString(), controller10));
-            menu.addCommand(new RunExempleCommand("11", st11.toString(), controller11));
+            menu.addCommand(new ExitCommand(0, "exit"));
+            menu.addCommand(new RunExempleCommand(1, st1.toString(), controller1));
+            menu.addCommand(new RunExempleCommand(2, st2.toString(), controller2));
+            menu.addCommand(new RunExempleCommand(3, st3.toString(), controller3));
+            menu.addCommand(new RunExempleCommand(4, st4.toString(), controller4));
+            menu.addCommand(new RunExempleCommand(5, st5.toString(), controller5));
+            menu.addCommand(new RunExempleCommand(6, st6.toString(), controller6));
+            menu.addCommand(new RunExempleCommand(7, st7.toString(), controller7));
+            menu.addCommand(new RunExempleCommand(8, st8.toString(), controller8));
+            menu.addCommand(new RunExempleCommand(9, st9.toString(), controller9));
+            menu.addCommand(new RunExempleCommand(10, st10.toString(), controller10));
+            menu.addCommand(new RunExempleCommand(11, st11.toString(), controller11));
+            menu.addCommand(new RunExempleCommand(12, st12.toString(), controller12));
+            menu.addCommand(new RunExempleCommand(13, st13.toString(), controller13));
+
 
 
 

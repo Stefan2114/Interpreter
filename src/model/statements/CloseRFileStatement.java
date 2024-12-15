@@ -1,10 +1,10 @@
 package model.statements;
 
-import exceptions.ExpressionException;
-import exceptions.KeyNotFoundException;
-import exceptions.StatementException;
+import exceptions.*;
+import model.adts.MyIMap;
 import model.expressions.IExpression;
 import model.states.PrgState;
+import model.types.IType;
 import model.types.StringType;
 import model.values.IValue;
 import model.values.StringValue;
@@ -21,18 +21,9 @@ public class CloseRFileStatement implements IStatement {
 
 
     @Override
-    public PrgState execute(PrgState prgState) throws StatementException, KeyNotFoundException {
+    public PrgState execute(PrgState prgState) {
 
-        IValue expressionValue;
-        try{
-            expressionValue = this.expression.evaluate(prgState.getSymTable(), prgState.getHeap());
-        }
-        catch(ExpressionException e){
-            throw new StatementException("The expression: " + this.expression.toString() + " threw the exception: " + e.getMessage());
-        }
-
-        if (!expressionValue.getType().equals(new StringType()))
-            throw new StatementException("The result of the expression: " + this.expression.toString() + " is not a StringType");
+        IValue expressionValue = this.expression.evaluate(prgState.getSymTable(), prgState.getHeap());
 
         StringValue fileName = (StringValue) expressionValue;
         if (!prgState.getFileTable().contains(fileName))
@@ -46,6 +37,19 @@ public class CloseRFileStatement implements IStatement {
         }
         return null;
 
+    }
+
+    @Override
+    public MyIMap<String, IType> typeCheck(MyIMap<String, IType> typeEnv) throws TypeCheckException {
+        IType expressionType;
+        try{
+            expressionType = this.expression.typeCheck(typeEnv);
+        }catch(TypeCheckExpressionException e){
+            throw new TypeCheckException("Expression exception: " + this.expression.toString() + " threw the exception: " + e.getMessage());
+        }
+        if(!(expressionType.equals(new StringType())))
+            throw new TypeCheckException("Statement exception: the expression: " + this.expression.toString() + "is not of type StringType");
+        return typeEnv;
     }
 
     @Override
