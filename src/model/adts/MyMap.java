@@ -2,7 +2,6 @@ package model.adts;
 
 import java.util.Map;
 import java.util.HashMap;
-import java.util.Set;
 
 import exceptions.KeyNotFoundException;
 
@@ -12,6 +11,10 @@ public class MyMap<K, V> implements MyIMap<K, V> {
 
     public MyMap() {
         map = new HashMap<K, V>();
+    }
+
+    public MyMap(MyIMap<K, V> oldMap) {
+        this.map = new HashMap<>(oldMap.getContent());
     }
 
     @Override
@@ -44,19 +47,6 @@ public class MyMap<K, V> implements MyIMap<K, V> {
     @Override
     public Map<K, V> getContent() {
         return this.map;
-    }
-
-
-    @Override
-    public void setContent(Map<K,V> map) {
-        this.map = map;
-    }
-
-    @Override
-    public MyIMap<K, V> deepCopy() {
-        MyIMap<K,V> newMap = new MyMap<>();
-        newMap.setContent(new HashMap<K,V>(this.map));
-        return newMap;
     }
 
 

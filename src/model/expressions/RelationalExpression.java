@@ -1,9 +1,10 @@
 package model.expressions;
 
-import exceptions.ExpressionException;
-import exceptions.KeyNotFoundException;
+import exceptions.TypeCheckExpressionException;
 import model.adts.IHeap;
 import model.adts.MyIMap;
+import model.types.BoolType;
+import model.types.IType;
 import model.types.IntType;
 import model.values.BoolValue;
 import model.values.IValue;
@@ -22,14 +23,10 @@ public class RelationalExpression implements IExpression {
     }
 
     @Override
-    public IValue evaluate(MyIMap<String, IValue> symTable, IHeap heap) throws ExpressionException {
+    public IValue evaluate(MyIMap<String, IValue> symTable, IHeap heap) {
 
         IValue value1 = this.leftExpression.evaluate(symTable, heap);
         IValue value2 = this.rightExpression.evaluate(symTable, heap);
-        if (!value1.getType().equals(new IntType()))
-            throw new ExpressionException("First value: " + this.leftExpression.toString() + " must be int");
-        if (!value2.getType().equals(new IntType()))
-            throw new ExpressionException("Second value: " + this.rightExpression.toString() + " must be int");
 
         int intValue1 = ((IntValue) value1).getValue();
         int intValue2 = ((IntValue) value2).getValue();
@@ -50,13 +47,29 @@ public class RelationalExpression implements IExpression {
             case GreaterOrEqual -> {
                 return new BoolValue(intValue1 >= intValue2);
             }
-            case Different -> {
+            default -> {
                 return new BoolValue(intValue1 != intValue2);
             }
-            default -> {
-                throw new ExpressionException("Invalid operator: " + this.operator);
-            }
         }
+    }
+
+
+    @Override
+    public IType typeCheck(MyIMap<String, IType> typeEnv) throws TypeCheckExpressionException {
+
+        if(!(this.operator instanceof RelationalOperator))
+            throw new TypeCheckExpressionException("The operator: " + this.operator + " from expression: " + this.leftExpression.toString() + " is not a valid operator for a relation operation");
+
+        IType type1 = this.leftExpression.typeCheck(typeEnv);
+        if(!(type1.equals(new IntType())))
+            throw new TypeCheckExpressionException("First value: " + this.leftExpression.toString() + " is not of type IntType");
+
+        IType type2 = this.rightExpression.typeCheck(typeEnv);
+        if(!(type2.equals(new IntType())))
+            throw new TypeCheckExpressionException("Second value: " + this.rightExpression.toString() + " is not of type IntType");
+
+        return new BoolType();
+
     }
 
     @Override

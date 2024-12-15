@@ -1,9 +1,8 @@
 package repo;
 
-import exceptions.RepoException;
+import exceptions.TypeCheckException;
 import model.adts.IHeap;
 import model.states.PrgState;
-import model.adts.MyIList;
 
 import java.util.List;
 
@@ -15,4 +14,5 @@ public interface IRepository {
     List<PrgState> getPrgList();
     void setPrgList(List<PrgState> newList);
     IHeap getHeap();
+    public void initPrgState() throws TypeCheckException;
 }

@@ -1,12 +1,12 @@
 package model.statements;
 
-import com.sun.jdi.BooleanType;
-import exceptions.ExpressionException;
-import exceptions.KeyNotFoundException;
-import exceptions.StatementException;
+import exceptions.*;
+import model.adts.MyIMap;
+import model.adts.MyMap;
 import model.expressions.IExpression;
 import model.states.PrgState;
 import model.types.BoolType;
+import model.types.IType;
 import model.values.BoolValue;
 import model.values.IValue;
 
@@ -27,19 +27,7 @@ public class IfStatement implements IStatement {
     @Override
     public PrgState execute(PrgState prgState) throws StatementException {
 
-        IValue expressionValue;
-        try{
-            expressionValue = this.expression.evaluate(prgState.getSymTable(), prgState.getHeap());
-        }
-        catch(ExpressionException e) {
-            throw new StatementException("The expression: " + this.expression.toString() + " threw the exception: " + e.getMessage());
-        }
-
-
-        if (!expressionValue.getType().equals(new BoolType())) {
-            throw new StatementException("Expression: " + this.expression.toString() + " is not boolean");
-        }
-
+        IValue expressionValue = this.expression.evaluate(prgState.getSymTable(), prgState.getHeap());
         /////////////////////////////////////////////////////should i push a deepCopy of the statement?
         if (((BoolValue) expressionValue).getValue()) {
             prgState.getExecStack().push(this.thanStatement.deepCopy());
@@ -49,6 +37,26 @@ public class IfStatement implements IStatement {
 
         return null;
 
+    }
+
+
+
+    ////////////////////////////////////////// how can i make this look better?
+    @Override
+    public MyIMap<String, IType> typeCheck(MyIMap<String, IType> typeEnv) throws TypeCheckException {
+        IType expressionType;
+        try{
+            expressionType = this.expression.typeCheck(typeEnv);
+        }catch(TypeCheckExpressionException e){
+            throw new TypeCheckException("Expression exception: " + this.expression.toString() + " threw the exception: " + e.getMessage());
+        }
+        if(!(expressionType.equals(new BoolType())))
+            throw new TypeCheckException("Statement exception: the expression: " + this.expression.toString() + " is not of type BoolType");
+
+        this.thanStatement.typeCheck(new MyMap<String, IType>(typeEnv));
+        this.elseStatement.typeCheck(new MyMap<String, IType>(typeEnv));
+
+        return typeEnv;
     }
 
 

@@ -1,9 +1,9 @@
 package model.expressions;
 
-import exceptions.ExpressionException;
-import exceptions.KeyNotFoundException;
+import exceptions.TypeCheckExpressionException;
 import model.adts.IHeap;
 import model.adts.MyIMap;
+import model.types.IType;
 import model.values.IValue;
 
 ////////////////////////////////////////////////////////////////////////////////////
@@ -17,11 +17,17 @@ public class VariableExpression implements IExpression {
 
 
     @Override
-    public IValue evaluate(MyIMap<String, IValue> symTable, IHeap heap) throws ExpressionException {
+    public IValue evaluate(MyIMap<String, IValue> symTable, IHeap heap) {
         /////////////////////////////////////////////////////// should be deepcopy?
-        if(!(symTable.contains(this.variableName)))
-            throw new ExpressionException("Variable: " + this.variableName + "was not found in the symTable");
         return symTable.getValue(this.variableName).deepCopy();
+    }
+
+    @Override
+    public IType typeCheck(MyIMap<String, IType> typeEnv) throws TypeCheckExpressionException {
+        /////////////////////////////////////////////////////// could I just replace the thrown exception with a return null???
+        if(!(typeEnv.contains(this.variableName)))
+            throw new TypeCheckExpressionException(this.variableName + " was not found in the typeEnv");
+        return typeEnv.getValue(this.variableName);
     }
 
     @Override

@@ -4,17 +4,17 @@ import exceptions.KeyNotFoundException;
 import model.values.StringValue;
 
 import java.io.BufferedReader;
-import java.util.HashMap;
+import java.util.concurrent.ConcurrentHashMap;
 import java.util.Map;
-import java.util.Set;
 
-public class FileTable implements IFileTable{
+
+public class FileTable implements IFileTable {
 
     private Map<StringValue, BufferedReader> map;
 
 
-    public FileTable(){
-        this.map = new HashMap<>();
+    public FileTable() {
+        this.map = new ConcurrentHashMap<>();
     }
 
     @Override
@@ -24,7 +24,7 @@ public class FileTable implements IFileTable{
 
     @Override
     public void remove(StringValue key) throws KeyNotFoundException {
-        if(!this.map.containsKey(key))
+        if (!this.map.containsKey(key))
             throw new KeyNotFoundException();
 
         this.map.remove(key);
@@ -33,7 +33,7 @@ public class FileTable implements IFileTable{
     @Override
     public BufferedReader getValue(StringValue key) throws KeyNotFoundException {
 
-        if(!this.map.containsKey(key))
+        if (!this.map.containsKey(key))
             throw new KeyNotFoundException();
         return this.map.get(key);
     }
@@ -45,9 +45,9 @@ public class FileTable implements IFileTable{
 
 
     @Override
-    public String toString(){
-        StringBuilder  str = new StringBuilder();
-        for(StringValue key : this.map.keySet())
+    public String toString() {
+        StringBuilder str = new StringBuilder();
+        for (StringValue key : this.map.keySet())
             str.append(key.toString()).append(" -> ").append(this.map.get(key)).append('\n');
         return str.toString();
 

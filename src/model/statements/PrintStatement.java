@@ -1,10 +1,10 @@
 package model.statements;
 
-import exceptions.ExpressionException;
-import exceptions.KeyNotFoundException;
-import exceptions.StatementException;
+import exceptions.*;
+import model.adts.MyIMap;
 import model.expressions.IExpression;
 import model.states.PrgState;
+import model.types.IType;
 import model.values.IValue;
 
 public class PrintStatement implements IStatement {
@@ -16,18 +16,23 @@ public class PrintStatement implements IStatement {
     }
 
     @Override
-    public PrgState execute(PrgState prgState) throws StatementException {
+    public PrgState execute(PrgState prgState) {
 
-        IValue expressionValue;
-        try{
-            expressionValue = this.expression.evaluate(prgState.getSymTable(), prgState.getHeap());
-        }
-        catch(ExpressionException e) {
-            throw new StatementException("The expression: " + this.expression.toString() + " threw the exception: " + e.getMessage());
-        }
-
+        IValue expressionValue = this.expression.evaluate(prgState.getSymTable(), prgState.getHeap());
         prgState.getOutputList().add(expressionValue.toString());
         return null;
+    }
+
+    @Override
+    public MyIMap<String, IType> typeCheck(MyIMap<String, IType> typeEnv) throws TypeCheckException {
+
+        try {
+            this.expression.typeCheck(typeEnv);
+        }catch (TypeCheckExpressionException e) {
+            throw new TypeCheckException("Expression exception: " + this.expression.toString() + "threw: " + e.getMessage());
+        }
+
+        return typeEnv;
     }
 
 

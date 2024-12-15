@@ -5,5 +5,5 @@ import model.adts.MyIList;
 
 public interface IController {
 
-    void allSteps() throws ControllerRuntimeException, InterruptedException;
+    void allSteps() throws InterruptedException, TypeCheckException;
 }

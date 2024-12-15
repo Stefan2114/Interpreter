@@ -14,9 +14,6 @@ public interface MyIMap<K, V> {
 
     boolean contains(K key);
 
-    Map<K,V> getContent();
+    Map<K, V> getContent();
 
-    public void setContent(Map<K,V> map);
-
-    public MyIMap<K,V> deepCopy();
 }

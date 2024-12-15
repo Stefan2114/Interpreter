@@ -19,7 +19,7 @@ public class PrgState {
     private int id;
     private static int lastIndex = 0;
 
-    private synchronized int getNewIndex(){
+    private synchronized int getNewIndex() {
         lastIndex++;
         return lastIndex;
     }
@@ -32,7 +32,6 @@ public class PrgState {
         this.execStack.push(this.initialState);
         this.fileTable = fileTable;
         this.heap = heap;
-        for(int i = 0; i< 10000; i++);
         this.id = getNewIndex();
 
     }
@@ -78,9 +77,9 @@ public class PrgState {
     }
 
 
-    public PrgState oneStep() throws PrgStateException, StatementException {
+    public PrgState oneStep() {
 
-        if (this.getExecStack().isEmpty()) throw new PrgStateException("PrgState: " + this.id + " stack is empty");
+        if (this.getExecStack().isEmpty()) return null;
         IStatement statement = this.getExecStack().pop();
         return statement.execute(this);
 

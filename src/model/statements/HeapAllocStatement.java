@@ -1,12 +1,11 @@
 package model.statements;
 
 
-import exceptions.ExpressionException;
-import exceptions.KeyNotFoundException;
-import exceptions.StatementException;
+import exceptions.*;
 import model.adts.MyIMap;
 import model.expressions.IExpression;
 import model.states.PrgState;
+import model.types.IType;
 import model.types.RefType;
 import model.values.IValue;
 import model.values.RefValue;
@@ -22,34 +21,33 @@ public class HeapAllocStatement implements IStatement {
     }
 
     @Override
-    public PrgState execute(PrgState prgState) throws StatementException, KeyNotFoundException {
+    public PrgState execute(PrgState prgState){
 
         MyIMap<String, IValue> symTable = prgState.getSymTable();
-        if (!symTable.contains(this.variableName))
-            throw new StatementException("The variable: " + this.variableName + " is not in the symTable");
-
-        IValue variableValue = symTable.getValue(this.variableName);
-        if (!(variableValue.getType() instanceof RefType))
-            throw new StatementException("Variable: " + variableValue.toString() + " must be of type RefType");
-
-        RefValue refValue = (RefValue) variableValue;
-
-        IValue expressionValue;
-        try{
-            expressionValue = this.expression.evaluate(symTable, prgState.getHeap());
-        }
-        catch(ExpressionException e){
-            throw new StatementException("The expression: " + this.expression.toString() + " threw the exception: " + e.getMessage());
-        }
-
-        if (!(expressionValue.getType().equals(refValue.getLocationType())))
-            throw new StatementException("Expression: " + expressionValue.toString() + " type is not the same as the variable: " + refValue.toString() + " type");
-
-
+        IValue expressionValue = this.expression.evaluate(symTable, prgState.getHeap());
         int address = prgState.getHeap().allocate(expressionValue);
         symTable.insert(this.variableName, new RefValue(address, expressionValue.getType()));
         return null;
 
+    }
+
+    @Override
+    public MyIMap<String, IType> typeCheck(MyIMap<String, IType> typeEnv) throws TypeCheckException {
+        if(!(typeEnv.contains(this.variableName)))
+            throw new TypeCheckException("Statement exception: the variable: " + this.variableName + " is not in the typeEnv");
+
+        IType variableType = typeEnv.getValue(this.variableName);
+        IType expressionType;
+        try{
+            expressionType = this.expression.typeCheck(typeEnv);
+        }catch(TypeCheckExpressionException e){
+            throw new TypeCheckException("Expression exception: " + this.expression.toString() + " threw the exception: " + e.getMessage());
+        }
+
+        if(!(variableType.equals(new RefType(expressionType))))
+            throw new TypeCheckException("Statement exception: the variable: " + this.variableName + "and the expression: " + this.expression.toString() + " don't have the same type");
+
+        return typeEnv;
     }
 
     @Override
@@ -60,6 +58,6 @@ public class HeapAllocStatement implements IStatement {
 
     @Override
     public String toString() {
-        return "new("+this.variableName + ", " + this.expression.toString() + ");";
+        return "new(" + this.variableName + ", " + this.expression.toString() + ");";
     }
 }

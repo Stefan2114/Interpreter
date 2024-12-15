@@ -3,26 +3,33 @@ package model.adts;
 import exceptions.KeyNotFoundException;
 import model.values.IValue;
 
-import java.util.HashMap;
+import java.util.concurrent.ConcurrentHashMap;
 import java.util.Map;
-import java.util.Set;
+
 
 public class Heap implements IHeap {
 
     private Map<Integer, IValue> map;
+    private int currentPos;
 
     public Heap() {
-        this.map = new HashMap<>();
+        this.map = new ConcurrentHashMap<>();
+        this.currentPos = 0;
+    }
+
+    private synchronized int getNewPos(){
+        this.currentPos++;
+        return currentPos;
     }
 
 
     @Override
     public int allocate(IValue value) {
-        int i = 1;
-        while (this.map.containsKey(i))
-            i++;
-        this.map.put(i, value);
-        return i;
+        int pos = getNewPos();
+
+        //could be a problem at resize if is not a concurrentHashMap although I have getNewPos synchronized
+        this.map.put(pos, value);
+        return pos;
     }
 
     @Override

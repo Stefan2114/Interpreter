@@ -1,7 +1,7 @@
 package model.statements;
 
-import exceptions.KeyNotFoundException;
-import exceptions.StatementException;
+import exceptions.TypeCheckException;
+import model.adts.MyIMap;
 import model.states.PrgState;
 import model.types.IType;
 
@@ -18,12 +18,17 @@ public class VarDeclStatement implements IStatement {
 
 
     @Override
-    public PrgState execute(PrgState prgState) throws StatementException {
-
-        if (prgState.getSymTable().contains(this.variableName))
-            throw new StatementException("A variable with the same name: " + this.variableName + " already exists");
+    public PrgState execute(PrgState prgState) {
         prgState.getSymTable().insert(this.variableName, this.type.getDefaultValue());
         return null;
+    }
+
+    @Override
+    public MyIMap<String, IType> typeCheck(MyIMap<String, IType> typeEnv) throws TypeCheckException {
+        if(typeEnv.contains(this.variableName))
+            throw new TypeCheckException("Statement exception: a variable with the same name: " + this.variableName + " already exists");
+        typeEnv.insert(this.variableName, this.type);
+        return typeEnv;
     }
 
 

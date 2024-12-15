@@ -1,10 +1,11 @@
 package model.expressions;
 
 import exceptions.ExpressionException;
-import exceptions.KeyNotFoundException;
+
+import exceptions.TypeCheckExpressionException;
 import model.adts.IHeap;
 import model.adts.MyIMap;
-import model.states.PrgState;
+import model.types.IType;
 import model.types.RefType;
 import model.values.IValue;
 import model.values.RefValue;
@@ -19,11 +20,9 @@ public class HeapReadingExpression implements IExpression {
 
 
     @Override
-    public IValue evaluate(MyIMap<String, IValue> symTable, IHeap heap) throws ExpressionException {
+    public IValue evaluate(MyIMap<String, IValue> symTable, IHeap heap) {
 
         IValue value = this.expression.evaluate(symTable, heap);
-        if (!(value.getType() instanceof RefType))
-            throw new ExpressionException("The expression " + this.expression.toString() + " result is not of type RefType");
         int address = ((RefValue) value).getAddress();
         if (!heap.contains(address))
             throw new ExpressionException("Variable " + value.toString() + " not found in the heap");
@@ -31,6 +30,14 @@ public class HeapReadingExpression implements IExpression {
         IValue returnValue = heap.getValue(address);
         return returnValue;
 
+    }
+
+    @Override
+    public IType typeCheck(MyIMap<String, IType> typeEnv) throws TypeCheckExpressionException {
+        IType type = this.expression.typeCheck(typeEnv);
+        if (!(type instanceof RefType))
+            throw new TypeCheckExpressionException("The type of " + this.expression.toString() + " is not a RefType");
+        return ((RefType) type).getInner();
     }
 
     @Override
