@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.layout.VBox?>
+
+<VBox spacing="10.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.interpreter.MainWindowController">
+   <children>
+      <HBox alignment="CENTER" prefHeight="600.0" prefWidth="700.0">
+         <children>
+            <VBox alignment="CENTER" spacing="5.0">
+               <children>
+                  <HBox alignment="CENTER" prefHeight="78.0" prefWidth="150.0">
+                     <children>
+                        <Label alignment="CENTER_RIGHT" contentDisplay="CENTER" text="Program states: " />
+                        <TextField fx:id="nrPrgsTextField" disable="true" editable="false" minWidth="20.0" prefWidth="50.0" />
+                     </children>
+                  </HBox>
+                  <ListView fx:id="prgStatesListVIew" onMouseClicked="#onProgramClicked" />
+                  <Separator prefWidth="200.0" />
+                  <Label alignment="CENTER" contentDisplay="CENTER" text="Symbol Table" />
+                  <TableView fx:id="symTableView">
+                     <columns>
+                        <TableColumn fx:id="symVariablesNameColumn" prefWidth="110.0" text="Variable Name" />
+                        <TableColumn fx:id="symValuesColumn" maxWidth="1.7976931348623157E308" prefWidth="181.60002899169922" text="value" />
+                     </columns>
+                  </TableView>
+                  <Separator prefWidth="200.0" />
+                  <Label text="Execution Stack" />
+                  <ListView fx:id="execStackListView" />
+               </children>
+               <padding>
+                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+               </padding>
+            </VBox>
+            <VBox alignment="CENTER" spacing="5.0">
+               <children>
+                  <Region prefHeight="242.0" prefWidth="200.0" />
+                  <Label alignment="CENTER" contentDisplay="CENTER" text="File Table" />
+                  <ListView fx:id="fileListView" />
+                  <Separator prefWidth="200.0" />
+                  <Label alignment="CENTER" contentDisplay="CENTER" text="Output" />
+                  <ListView fx:id="outputListVIew" />
+                  <Separator prefWidth="200.0" />
+                  <Label text="Heap Table" />
+                  <TableView fx:id="heapTableView">
+                     <columns>
+                        <TableColumn fx:id="heapAddressesColumn" prefWidth="75.0" text="address" />
+                        <TableColumn fx:id="heapValuesColumn" maxWidth="1.7976931348623157E308" prefWidth="210.0" text="value" />
+                     </columns>
+                  </TableView>
+               </children>
+               <padding>
+                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+               </padding>
+            </VBox>
+         </children>
+      </HBox>
+      <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="100.0">
+         <children>
+            <Button alignment="CENTER" mnemonicParsing="false" onAction="#onOneStepButtonClick" text="Run One Step" />
+            <Button alignment="CENTER" mnemonicParsing="false" onAction="#onAllStepsButtonClick" text="Run All Steps" />
+         </children>
+      </HBox>
+   </children>
+   <opaqueInsets>
+      <Insets />
+   </opaqueInsets>
+   <padding>
+      <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+   </padding>
+</VBox>
