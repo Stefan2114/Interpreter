@@ -1,9 +1,20 @@
 package gui.interpreter;
 
-import controller.Controller;
-import controller.IController;
-
-import exceptions.TypeCheckException;
+import gui.interpreter.controller.Controller;
+import gui.interpreter.controller.IController;
+import gui.interpreter.exceptions.RepoException;
+import gui.interpreter.exceptions.TypeCheckException;
+import gui.interpreter.model.expressions.*;
+import gui.interpreter.model.statements.*;
+import gui.interpreter.model.types.BoolType;
+import gui.interpreter.model.types.IntType;
+import gui.interpreter.model.types.RefType;
+import gui.interpreter.model.types.StringType;
+import gui.interpreter.model.values.BoolValue;
+import gui.interpreter.model.values.IntValue;
+import gui.interpreter.model.values.StringValue;
+import gui.interpreter.repo.IRepository;
+import gui.interpreter.repo.Repository;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -12,21 +23,8 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.stage.Stage;
-import model.expressions.*;
-import model.statements.*;
-
-
 import javafx.fxml.FXML;
 import javafx.scene.control.ListView;
-import model.types.BoolType;
-import model.types.IntType;
-import model.types.RefType;
-import model.types.StringType;
-import model.values.BoolValue;
-import model.values.IntValue;
-import model.values.StringValue;
-import repo.IRepository;
-import repo.Repository;
 
 import java.io.IOException;
 
@@ -56,7 +54,7 @@ public class SelectProgramController {
                 stage.setScene(scene);
                 stage.show();
 
-            } catch (IOException | NullPointerException | TypeCheckException e) {
+            } catch (IOException | NullPointerException | TypeCheckException | RepoException e) {
                 e.printStackTrace();
                 // Create and configure the error alert
                 Alert alert = new Alert(Alert.AlertType.ERROR);
@@ -68,10 +66,8 @@ public class SelectProgramController {
                 alert.showAndWait();
             }
 
-
         }
     }
-
 
     @FXML
     private void initialize() {
@@ -233,6 +229,57 @@ public class SelectProgramController {
         IController controller13 = new Controller(repo13);
 
 
+
+        IStatement st1420 = new UnlockStatement("q");
+        IStatement st1419 = new CompStatement(new PrintStatement(new HeapReadingExpression(new VariableExpression("v2"))), st1420);
+        IStatement st1418 = new CompStatement(new LockStatement("q"), st1419);
+
+        IStatement st1417 = new CompStatement(new UnlockStatement("x"), st1418);
+        IStatement st1416 = new CompStatement(new PrintStatement(new HeapReadingExpression(new VariableExpression("v1"))), st1417);
+        IStatement st1415 = new CompStatement(new LockStatement("x"), st1416);
+
+        IStatement st1414 = new CompStatement(new NopeStatement(), st1415);
+        IStatement st1413 = new CompStatement(new NopeStatement(), st1414);
+        IStatement st1412 = new CompStatement(new NopeStatement(), st1413);
+        IStatement st1411 = new CompStatement(new NopeStatement(), st1412);
+        
+        CompStatement st1410 = new CompStatement(new ThreadCreationStatement(
+            new CompStatement(new ThreadCreationStatement(new CompStatement(new LockStatement("q"),
+            new CompStatement(new HeapWritingStatement("v2", 
+            new ArithmeticalExpression(new HeapReadingExpression(new VariableExpression("v2")), 
+            new ValueExpression(new IntValue(5)), ArithmeticalOperator.ADD)), new UnlockStatement("q")))),
+             new CompStatement(new LockStatement("q"),
+             new CompStatement(new HeapWritingStatement("v2", 
+             new ArithmeticalExpression(new HeapReadingExpression(new VariableExpression("v2")), 
+             new ValueExpression(new IntValue(10)), ArithmeticalOperator.MULTIPLY)), new UnlockStatement("q"))))
+        ), st1411);
+
+        
+        IStatement st149 = new CompStatement(new NewLockStatement("q"), st1410);
+        CompStatement st148 = new CompStatement(new ThreadCreationStatement(
+            new CompStatement(new ThreadCreationStatement(new CompStatement(new LockStatement("x"),
+            new CompStatement(new HeapWritingStatement("v1", 
+            new ArithmeticalExpression(new HeapReadingExpression(new VariableExpression("v1")), 
+            new ValueExpression(new IntValue(1)), ArithmeticalOperator.SUBTRACT)), new UnlockStatement("x")))),
+             new CompStatement(new LockStatement("x"),
+             new CompStatement(new HeapWritingStatement("v1", 
+             new ArithmeticalExpression(new HeapReadingExpression(new VariableExpression("v1")), 
+             new ValueExpression(new IntValue(10)), ArithmeticalOperator.MULTIPLY)), new UnlockStatement("x"))))
+        ), st149);
+        IStatement st147 = new CompStatement(new NewLockStatement("x"), st148);
+        IStatement st146 = new CompStatement(new HeapAllocStatement("v2", new ValueExpression(new IntValue(30))), st147);
+        IStatement st145 = new CompStatement(new HeapAllocStatement("v1", new ValueExpression(new IntValue(20))), st146);
+        IStatement st144 = new CompStatement(new VarDeclStatement("q", new IntType()), st145);
+        IStatement st143 = new CompStatement(new VarDeclStatement("x", new IntType()), st144);
+        IStatement st142 = new CompStatement(new VarDeclStatement("v2", new RefType(new IntType())), st143);
+        IStatement st14 = new CompStatement(new VarDeclStatement("v1", new RefType(new IntType())), st142);
+
+        IRepository repo14 = new Repository(st14, "log14.txt");
+        IController controller14 = new Controller(repo14);
+
+
+
+
         ObservableList<Command> commands = FXCollections.observableArrayList();
         commands.add(new Command(st1.toString(), controller1));
         commands.add(new Command(st2.toString(), controller2));
@@ -247,6 +294,9 @@ public class SelectProgramController {
         commands.add(new Command(st11.toString(), controller11));
         commands.add(new Command(st12.toString(), controller12));
         commands.add(new Command(st13.toString(), controller13));
+        commands.add(new Command(st14.toString(), controller14));
+
+
 
 
         return commands;

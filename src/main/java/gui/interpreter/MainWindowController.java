@@ -1,6 +1,7 @@
 package gui.interpreter;
 
-import controller.IController;
+import gui.interpreter.controller.IController;
+import gui.interpreter.model.values.IValue;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.event.ActionEvent;
@@ -8,7 +9,6 @@ import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
 import javafx.util.Pair;
-import model.values.IValue;
 
 
 public class MainWindowController {
@@ -20,10 +20,10 @@ public class MainWindowController {
     private TextField nrPrgsTextField;
 
     @FXML
-    private ListView<Integer> prgStatesListVIew;
+    private ListView<Integer> prgStatesListView;
 
     @FXML
-    private ListView<String> outputListVIew;
+    private ListView<String> outputListView;
 
     @FXML
     private ListView<String> execStackListView;
@@ -38,6 +38,10 @@ public class MainWindowController {
     private TableView<Pair<Integer, IValue>> heapTableView;
 
     @FXML
+    private TableView<Pair<Integer, Integer>> lockTableView;
+
+
+    @FXML
     private TableColumn<Pair<String, IValue>, String> symVariablesNameColumn;
 
     @FXML
@@ -49,6 +53,12 @@ public class MainWindowController {
     @FXML
     private TableColumn<Pair<Integer, IValue>, String> heapValuesColumn;
 
+    @FXML
+    private TableColumn<Pair<Integer, Integer>, Integer> lockIndexesColumn;
+
+    @FXML
+    private TableColumn<Pair<Integer, Integer>, Integer> lockPrgStatesColumn;
+
 
     @FXML
     private void initialize() {
@@ -57,6 +67,8 @@ public class MainWindowController {
         this.symValuesColumn.setCellValueFactory(p -> new SimpleStringProperty(p.getValue().getValue().toString()));
         this.heapAddressesColumn.setCellValueFactory(p -> new SimpleObjectProperty<>(p.getValue().getKey()));
         this.heapValuesColumn.setCellValueFactory(p -> new SimpleStringProperty(p.getValue().getValue().toString()));
+        this.lockIndexesColumn.setCellValueFactory(p -> new SimpleObjectProperty<>(p.getValue().getKey()));
+        this.lockPrgStatesColumn.setCellValueFactory(p -> new SimpleObjectProperty<>(p.getValue().getValue()));
 
 
     }
@@ -64,7 +76,7 @@ public class MainWindowController {
     @FXML
     private void onProgramClicked(MouseEvent event) {
 
-        Integer id = this.prgStatesListVIew.getSelectionModel().getSelectedItem();
+        Integer id = this.prgStatesListView.getSelectionModel().getSelectedItem();
         if(id != null)
             setPrgContent(id);
     }
@@ -113,33 +125,33 @@ public class MainWindowController {
 
         this.nrPrgsTextField.setText(this.prgController.nrOfPrgStates().toString());
 
-        this.prgStatesListVIew.getItems().clear();
-        this.prgController.getPrgStatesID().forEach(id -> this.prgStatesListVIew.getItems().add(id));
+        this.prgStatesListView.getItems().clear();
+        this.prgController.getPrgStatesID().forEach(id -> this.prgStatesListView.getItems().add(id));
 
         this.heapTableView.getItems().clear();
-        this.prgController.getHeap().getContent().forEach((addr, value) ->
+        this.prgController.getHeap().forEach((addr, value) ->
                 this.heapTableView.getItems().add(new Pair<>(addr, value)));
 
         this.fileListView.getItems().clear();
-        this.prgController.getFileTable().getKeys().forEach(key -> this.fileListView.getItems().add(key.getValue()));
+        this.prgController.getFileTableKeys().forEach(key -> this.fileListView.getItems().add(key.getValue()));
 
-        this.outputListVIew.getItems().clear();
-        this.prgController.getOutputList().getContent().forEach(value -> this.outputListVIew.getItems().add(value));
-        if(this.prgController.getOutputList() != null)
-            System.out.println(prgController.getOutputList().getContent().size());
+        this.outputListView.getItems().clear();
+        this.prgController.getOutputList().forEach(value -> this.outputListView.getItems().add(value));
+
+        this.lockTableView.getItems().clear();
+        this.prgController.getLockTable().forEach((key,value) -> this.lockTableView.getItems().add(new Pair<>(key, value)));
 
     }
 
     private void setPrgContent(Integer id) {
 
         this.execStackListView.getItems().clear();
-        this.prgController.getExeStackFromPrgState(id).getContent().
+        this.prgController.getExeStackFromPrgState(id).
                 forEach(value -> this.execStackListView.getItems().add(value.toString()));
 
         this.symTableView.getItems().clear();
-        this.prgController.getSymTableFromPrgState(id).getContent().forEach((key, value) ->
+        this.prgController.getSymTableFromPrgState(id).forEach((key, value) ->
                 this.symTableView.getItems().add(new Pair<>(key, value)));
-
 
     }
 
@@ -147,9 +159,9 @@ public class MainWindowController {
     private void refresh(){
         setSharedContent();
 
-        if (this.prgStatesListVIew.getItems().size() > 0) {
+        if (this.prgStatesListView.getItems().size() > 0) {
 
-            Integer id = this.prgStatesListVIew.getItems().getFirst();
+            Integer id = this.prgStatesListView.getItems().getFirst();
             setPrgContent(id);
         }else{
             this.execStackListView.getItems().clear();

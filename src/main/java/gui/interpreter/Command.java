@@ -1,8 +1,8 @@
 package gui.interpreter;
 
-import controller.IController;
-import exceptions.ControllerException;
-import exceptions.TypeCheckException;
+import gui.interpreter.controller.IController;
+import gui.interpreter.exceptions.ControllerException;
+import gui.interpreter.exceptions.TypeCheckException;
 
 public class Command {
 

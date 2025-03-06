@@ -9,22 +9,22 @@
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.Region?>
 <?import javafx.scene.layout.VBox?>
 
 <VBox spacing="10.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.interpreter.MainWindowController">
    <children>
+      <HBox alignment="CENTER">
+         <children>
+            <Label alignment="CENTER_RIGHT" contentDisplay="CENTER" text="Program states: " />
+            <TextField fx:id="nrPrgsTextField" disable="true" editable="false" minWidth="20.0" prefWidth="50.0" />
+         </children>
+      </HBox>
       <HBox alignment="CENTER" prefHeight="600.0" prefWidth="700.0">
          <children>
             <VBox alignment="CENTER" spacing="5.0">
                <children>
-                  <HBox alignment="CENTER" prefHeight="78.0" prefWidth="150.0">
-                     <children>
-                        <Label alignment="CENTER_RIGHT" contentDisplay="CENTER" text="Program states: " />
-                        <TextField fx:id="nrPrgsTextField" disable="true" editable="false" minWidth="20.0" prefWidth="50.0" />
-                     </children>
-                  </HBox>
-                  <ListView fx:id="prgStatesListVIew" onMouseClicked="#onProgramClicked" />
+                  <Label text="List of programs" />
+                  <ListView fx:id="prgStatesListView" onMouseClicked="#onProgramClicked" />
                   <Separator prefWidth="200.0" />
                   <Label alignment="CENTER" contentDisplay="CENTER" text="Symbol Table" />
                   <TableView fx:id="symTableView">
@@ -43,18 +43,25 @@
             </VBox>
             <VBox alignment="CENTER" spacing="5.0">
                <children>
-                  <Region prefHeight="242.0" prefWidth="200.0" />
                   <Label alignment="CENTER" contentDisplay="CENTER" text="File Table" />
                   <ListView fx:id="fileListView" />
                   <Separator prefWidth="200.0" />
                   <Label alignment="CENTER" contentDisplay="CENTER" text="Output" />
-                  <ListView fx:id="outputListVIew" />
+                  <ListView fx:id="outputListView" />
                   <Separator prefWidth="200.0" />
                   <Label text="Heap Table" />
                   <TableView fx:id="heapTableView">
                      <columns>
                         <TableColumn fx:id="heapAddressesColumn" prefWidth="75.0" text="address" />
                         <TableColumn fx:id="heapValuesColumn" maxWidth="1.7976931348623157E308" prefWidth="210.0" text="value" />
+                     </columns>
+                  </TableView>
+                  <Separator layoutX="15.0" layoutY="409.0" prefWidth="200.0" />
+                  <Label layoutX="128.0" layoutY="412.0" text="Lock Table" />
+                  <TableView fx:id="lockTableView" layoutX="15.0" layoutY="419.0">
+                     <columns>
+                        <TableColumn fx:id="lockIndexesColumn" prefWidth="75.0" text="indexes" />
+                        <TableColumn fx:id="lockPrgStatesColumn" maxWidth="1.7976931348623157E308" prefWidth="210.0" text="Programs" />
                      </columns>
                   </TableView>
                </children>

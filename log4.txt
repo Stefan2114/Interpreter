@@ -1,0 +1,713 @@
+PrgState with id: 1
+ExecStack:
+string varf;
+varf = "test.in";
+openRFile("test.in");
+int varc;
+readFile(varf, varc);
+print(varc);
+readFile(varf, varc);
+print(varc);
+closeRFile(varf);
+
+SymTable:
+
+Out:
+
+FileTable:
+
+Heap:
+
+LockTable:
+
+
+PrgState with id: 1
+ExecStack:
+string varf;
+varf = "test.in";
+openRFile("test.in");
+int varc;
+readFile(varf, varc);
+print(varc);
+readFile(varf, varc);
+print(varc);
+closeRFile(varf);
+
+SymTable:
+
+Out:
+
+FileTable:
+
+Heap:
+
+LockTable:
+
+
+PrgState with id: 1
+ExecStack:
+string varf;
+varf = "test.in";
+openRFile("test.in");
+int varc;
+readFile(varf, varc);
+print(varc);
+readFile(varf, varc);
+print(varc);
+closeRFile(varf);
+
+SymTable:
+
+Out:
+
+FileTable:
+
+Heap:
+
+LockTable:
+
+
+PrgState with id: 1
+ExecStack:
+varf = "test.in";
+openRFile("test.in");
+int varc;
+readFile(varf, varc);
+print(varc);
+readFile(varf, varc);
+print(varc);
+closeRFile(varf);
+
+SymTable:
+varf -> ""
+
+Out:
+
+FileTable:
+
+Heap:
+
+LockTable:
+
+
+PrgState with id: 1
+ExecStack:
+varf = "test.in";
+openRFile("test.in");
+int varc;
+readFile(varf, varc);
+print(varc);
+readFile(varf, varc);
+print(varc);
+closeRFile(varf);
+
+SymTable:
+varf -> ""
+
+Out:
+
+FileTable:
+
+Heap:
+
+LockTable:
+
+
+PrgState with id: 1
+ExecStack:
+varf = "test.in";
+openRFile("test.in");
+int varc;
+readFile(varf, varc);
+print(varc);
+readFile(varf, varc);
+print(varc);
+closeRFile(varf);
+
+SymTable:
+varf -> ""
+
+Out:
+
+FileTable:
+
+Heap:
+
+LockTable:
+
+
+PrgState with id: 1
+ExecStack:
+varf = "test.in";
+openRFile("test.in");
+int varc;
+readFile(varf, varc);
+print(varc);
+readFile(varf, varc);
+print(varc);
+closeRFile(varf);
+
+SymTable:
+varf -> ""
+
+Out:
+
+FileTable:
+
+Heap:
+
+LockTable:
+
+
+PrgState with id: 1
+ExecStack:
+openRFile("test.in");
+int varc;
+readFile(varf, varc);
+print(varc);
+readFile(varf, varc);
+print(varc);
+closeRFile(varf);
+
+SymTable:
+varf -> "test.in"
+
+Out:
+
+FileTable:
+
+Heap:
+
+LockTable:
+
+
+PrgState with id: 1
+ExecStack:
+openRFile("test.in");
+int varc;
+readFile(varf, varc);
+print(varc);
+readFile(varf, varc);
+print(varc);
+closeRFile(varf);
+
+SymTable:
+varf -> "test.in"
+
+Out:
+
+FileTable:
+
+Heap:
+
+LockTable:
+
+
+PrgState with id: 1
+ExecStack:
+openRFile("test.in");
+int varc;
+readFile(varf, varc);
+print(varc);
+readFile(varf, varc);
+print(varc);
+closeRFile(varf);
+
+SymTable:
+varf -> "test.in"
+
+Out:
+
+FileTable:
+
+Heap:
+
+LockTable:
+
+
+PrgState with id: 1
+ExecStack:
+openRFile("test.in");
+int varc;
+readFile(varf, varc);
+print(varc);
+readFile(varf, varc);
+print(varc);
+closeRFile(varf);
+
+SymTable:
+varf -> "test.in"
+
+Out:
+
+FileTable:
+
+Heap:
+
+LockTable:
+
+
+PrgState with id: 1
+ExecStack:
+int varc;
+readFile(varf, varc);
+print(varc);
+readFile(varf, varc);
+print(varc);
+closeRFile(varf);
+
+SymTable:
+varf -> "test.in"
+
+Out:
+
+FileTable:
+"test.in" -> java.io.BufferedReader@6784f790
+
+Heap:
+
+LockTable:
+
+
+PrgState with id: 1
+ExecStack:
+int varc;
+readFile(varf, varc);
+print(varc);
+readFile(varf, varc);
+print(varc);
+closeRFile(varf);
+
+SymTable:
+varf -> "test.in"
+
+Out:
+
+FileTable:
+"test.in" -> java.io.BufferedReader@6784f790
+
+Heap:
+
+LockTable:
+
+
+PrgState with id: 1
+ExecStack:
+int varc;
+readFile(varf, varc);
+print(varc);
+readFile(varf, varc);
+print(varc);
+closeRFile(varf);
+
+SymTable:
+varf -> "test.in"
+
+Out:
+
+FileTable:
+"test.in" -> java.io.BufferedReader@6784f790
+
+Heap:
+
+LockTable:
+
+
+PrgState with id: 1
+ExecStack:
+int varc;
+readFile(varf, varc);
+print(varc);
+readFile(varf, varc);
+print(varc);
+closeRFile(varf);
+
+SymTable:
+varf -> "test.in"
+
+Out:
+
+FileTable:
+"test.in" -> java.io.BufferedReader@6784f790
+
+Heap:
+
+LockTable:
+
+
+PrgState with id: 1
+ExecStack:
+readFile(varf, varc);
+print(varc);
+readFile(varf, varc);
+print(varc);
+closeRFile(varf);
+
+SymTable:
+varf -> "test.in"
+varc -> 0
+
+Out:
+
+FileTable:
+"test.in" -> java.io.BufferedReader@6784f790
+
+Heap:
+
+LockTable:
+
+
+PrgState with id: 1
+ExecStack:
+readFile(varf, varc);
+print(varc);
+readFile(varf, varc);
+print(varc);
+closeRFile(varf);
+
+SymTable:
+varf -> "test.in"
+varc -> 0
+
+Out:
+
+FileTable:
+"test.in" -> java.io.BufferedReader@6784f790
+
+Heap:
+
+LockTable:
+
+
+PrgState with id: 1
+ExecStack:
+readFile(varf, varc);
+print(varc);
+readFile(varf, varc);
+print(varc);
+closeRFile(varf);
+
+SymTable:
+varf -> "test.in"
+varc -> 0
+
+Out:
+
+FileTable:
+"test.in" -> java.io.BufferedReader@6784f790
+
+Heap:
+
+LockTable:
+
+
+PrgState with id: 1
+ExecStack:
+readFile(varf, varc);
+print(varc);
+readFile(varf, varc);
+print(varc);
+closeRFile(varf);
+
+SymTable:
+varf -> "test.in"
+varc -> 0
+
+Out:
+
+FileTable:
+"test.in" -> java.io.BufferedReader@6784f790
+
+Heap:
+
+LockTable:
+
+
+PrgState with id: 1
+ExecStack:
+print(varc);
+readFile(varf, varc);
+print(varc);
+closeRFile(varf);
+
+SymTable:
+varf -> "test.in"
+varc -> 15
+
+Out:
+
+FileTable:
+"test.in" -> java.io.BufferedReader@6784f790
+
+Heap:
+
+LockTable:
+
+
+PrgState with id: 1
+ExecStack:
+print(varc);
+readFile(varf, varc);
+print(varc);
+closeRFile(varf);
+
+SymTable:
+varf -> "test.in"
+varc -> 15
+
+Out:
+
+FileTable:
+"test.in" -> java.io.BufferedReader@6784f790
+
+Heap:
+
+LockTable:
+
+
+PrgState with id: 1
+ExecStack:
+print(varc);
+readFile(varf, varc);
+print(varc);
+closeRFile(varf);
+
+SymTable:
+varf -> "test.in"
+varc -> 15
+
+Out:
+
+FileTable:
+"test.in" -> java.io.BufferedReader@6784f790
+
+Heap:
+
+LockTable:
+
+
+PrgState with id: 1
+ExecStack:
+print(varc);
+readFile(varf, varc);
+print(varc);
+closeRFile(varf);
+
+SymTable:
+varf -> "test.in"
+varc -> 15
+
+Out:
+
+FileTable:
+"test.in" -> java.io.BufferedReader@6784f790
+
+Heap:
+
+LockTable:
+
+
+PrgState with id: 1
+ExecStack:
+readFile(varf, varc);
+print(varc);
+closeRFile(varf);
+
+SymTable:
+varf -> "test.in"
+varc -> 15
+
+Out:
+15
+
+FileTable:
+"test.in" -> java.io.BufferedReader@6784f790
+
+Heap:
+
+LockTable:
+
+
+PrgState with id: 1
+ExecStack:
+readFile(varf, varc);
+print(varc);
+closeRFile(varf);
+
+SymTable:
+varf -> "test.in"
+varc -> 15
+
+Out:
+15
+
+FileTable:
+"test.in" -> java.io.BufferedReader@6784f790
+
+Heap:
+
+LockTable:
+
+
+PrgState with id: 1
+ExecStack:
+readFile(varf, varc);
+print(varc);
+closeRFile(varf);
+
+SymTable:
+varf -> "test.in"
+varc -> 15
+
+Out:
+15
+
+FileTable:
+"test.in" -> java.io.BufferedReader@6784f790
+
+Heap:
+
+LockTable:
+
+
+PrgState with id: 1
+ExecStack:
+readFile(varf, varc);
+print(varc);
+closeRFile(varf);
+
+SymTable:
+varf -> "test.in"
+varc -> 15
+
+Out:
+15
+
+FileTable:
+"test.in" -> java.io.BufferedReader@6784f790
+
+Heap:
+
+LockTable:
+
+
+PrgState with id: 1
+ExecStack:
+print(varc);
+closeRFile(varf);
+
+SymTable:
+varf -> "test.in"
+varc -> 10
+
+Out:
+15
+
+FileTable:
+"test.in" -> java.io.BufferedReader@6784f790
+
+Heap:
+
+LockTable:
+
+
+PrgState with id: 1
+ExecStack:
+print(varc);
+closeRFile(varf);
+
+SymTable:
+varf -> "test.in"
+varc -> 10
+
+Out:
+15
+
+FileTable:
+"test.in" -> java.io.BufferedReader@6784f790
+
+Heap:
+
+LockTable:
+
+
+PrgState with id: 1
+ExecStack:
+print(varc);
+closeRFile(varf);
+
+SymTable:
+varf -> "test.in"
+varc -> 10
+
+Out:
+15
+
+FileTable:
+"test.in" -> java.io.BufferedReader@6784f790
+
+Heap:
+
+LockTable:
+
+
+PrgState with id: 1
+ExecStack:
+print(varc);
+closeRFile(varf);
+
+SymTable:
+varf -> "test.in"
+varc -> 10
+
+Out:
+15
+
+FileTable:
+"test.in" -> java.io.BufferedReader@6784f790
+
+Heap:
+
+LockTable:
+
+
+PrgState with id: 1
+ExecStack:
+closeRFile(varf);
+
+SymTable:
+varf -> "test.in"
+varc -> 10
+
+Out:
+15
+10
+
+FileTable:
+"test.in" -> java.io.BufferedReader@6784f790
+
+Heap:
+
+LockTable:
+
+
+PrgState with id: 1
+ExecStack:
+closeRFile(varf);
+
+SymTable:
+varf -> "test.in"
+varc -> 10
+
+Out:
+15
+10
+
+FileTable:
+"test.in" -> java.io.BufferedReader@6784f790
+
+Heap:
+
+LockTable:
+
+
