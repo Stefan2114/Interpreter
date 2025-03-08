@@ -1,6 +1,5 @@
 package gui.interpreter.model.statements;
 
-
 import gui.interpreter.exceptions.*;
 import gui.interpreter.model.adts.MyIMap;
 import gui.interpreter.model.expressions.IExpression;
@@ -21,7 +20,7 @@ public class HeapAllocStatement implements IStatement {
     }
 
     @Override
-    public PrgState execute(PrgState prgState){
+    public PrgState execute(PrgState prgState) {
 
         MyIMap<String, IValue> symTable = prgState.getSymTable();
         IValue expressionValue = this.expression.evaluate(symTable, prgState.getHeap());
@@ -33,19 +32,22 @@ public class HeapAllocStatement implements IStatement {
 
     @Override
     public MyIMap<String, IType> typeCheck(MyIMap<String, IType> typeEnv) throws TypeCheckException {
-        if(!(typeEnv.contains(this.variableName)))
-            throw new TypeCheckException("Statement exception: the variable: " + this.variableName + " is not in the typeEnv");
+        if (!(typeEnv.contains(this.variableName)))
+            throw new TypeCheckException(
+                    "Statement exception: the variable: " + this.variableName + " is not in the typeEnv");
 
         IType variableType = typeEnv.getValue(this.variableName);
         IType expressionType;
-        try{
+        try {
             expressionType = this.expression.typeCheck(typeEnv);
-        }catch(TypeCheckExpressionException e){
-            throw new TypeCheckException("Expression exception: " + this.expression.toString() + " threw the exception: " + e.getMessage());
+        } catch (TypeCheckExpressionException e) {
+            throw new TypeCheckException(
+                    "Expression exception: " + this.expression.toString() + " threw the exception: " + e.getMessage());
         }
 
-        if(!(variableType.equals(new RefType(expressionType))))
-            throw new TypeCheckException("Statement exception: the variable: " + this.variableName + "and the expression: " + this.expression.toString() + " don't have the same type");
+        if (!(variableType.equals(new RefType(expressionType))))
+            throw new TypeCheckException("Statement exception: the variable: " + this.variableName
+                    + "and the expression: " + this.expression.toString() + " don't have the same type");
 
         return typeEnv;
     }
@@ -54,7 +56,6 @@ public class HeapAllocStatement implements IStatement {
     public IStatement deepCopy() {
         return new HeapAllocStatement(new String(this.variableName), this.expression.deepCopy());
     }
-
 
     @Override
     public String toString() {

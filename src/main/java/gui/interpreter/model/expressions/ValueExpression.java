@@ -5,9 +5,6 @@ import gui.interpreter.model.adts.MyIMap;
 import gui.interpreter.model.types.IType;
 import gui.interpreter.model.values.IValue;
 
-
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
 public class ValueExpression implements IExpression {
 
     private IValue value;
@@ -16,7 +13,6 @@ public class ValueExpression implements IExpression {
         this.value = value;
     }
 
-    ///////////////////////////////////////deepcopy
     @Override
     public IValue evaluate(MyIMap<String, IValue> symTable, IHeap heap) {
         return this.value.deepCopy();
@@ -28,12 +24,10 @@ public class ValueExpression implements IExpression {
         return this.value.getType();
     }
 
-    //////////////////////////////////// deepcopy
     @Override
     public IExpression deepCopy() {
         return new ValueExpression(this.value.deepCopy());
     }
-
 
     @Override
     public String toString() {

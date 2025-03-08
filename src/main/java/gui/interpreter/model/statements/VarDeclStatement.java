@@ -7,7 +7,6 @@ import gui.interpreter.model.types.IType;
 
 public class VarDeclStatement implements IStatement {
 
-
     private String variableName;
     private IType type;
 
@@ -15,7 +14,6 @@ public class VarDeclStatement implements IStatement {
         this.variableName = variableName;
         this.type = type;
     }
-
 
     @Override
     public PrgState execute(PrgState prgState) {
@@ -25,12 +23,12 @@ public class VarDeclStatement implements IStatement {
 
     @Override
     public MyIMap<String, IType> typeCheck(MyIMap<String, IType> typeEnv) throws TypeCheckException {
-        if(typeEnv.contains(this.variableName))
-            throw new TypeCheckException("Statement exception: a variable with the same name: " + this.variableName + " already exists");
+        if (typeEnv.contains(this.variableName))
+            throw new TypeCheckException(
+                    "Statement exception: a variable with the same name: " + this.variableName + " already exists");
         typeEnv.insert(this.variableName, this.type);
         return typeEnv;
     }
-
 
     @Override
     public IStatement deepCopy() {

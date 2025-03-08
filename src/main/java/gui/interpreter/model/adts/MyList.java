@@ -3,7 +3,6 @@ package gui.interpreter.model.adts;
 import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
 
-
 public class MyList<T> implements MyIList<T> {
 
     private List<T> list;
@@ -21,7 +20,6 @@ public class MyList<T> implements MyIList<T> {
     public List<T> getContent() {
         return this.list;
     }
-
 
     @Override
     public String toString() {

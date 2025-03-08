@@ -6,7 +6,6 @@ import gui.interpreter.exceptions.KeyNotFoundException;
 
 import java.util.HashMap;
 
-
 public class MyMap<K, V> implements MyIMap<K, V> {
     private Map<K, V> map;
 
@@ -49,7 +48,6 @@ public class MyMap<K, V> implements MyIMap<K, V> {
     public Map<K, V> getContent() {
         return this.map;
     }
-
 
     @Override
     public String toString() {

@@ -14,10 +14,7 @@ import gui.interpreter.model.values.StringValue;
 import java.io.BufferedReader;
 import java.io.IOException;
 
-
-///////////////////////////////////////////////////////////////////////////////////////////
 public class ReadFileStatement implements IStatement {
-
 
     private IExpression expression;
     private String variableName;
@@ -26,7 +23,6 @@ public class ReadFileStatement implements IStatement {
         this.expression = expression;
         this.variableName = variableName;
     }
-
 
     @Override
     public PrgState execute(PrgState prgState) throws StatementException {
@@ -58,21 +54,25 @@ public class ReadFileStatement implements IStatement {
     @Override
     public MyIMap<String, IType> typeCheck(MyIMap<String, IType> typeEnv) throws TypeCheckException {
 
-        if(!(typeEnv.contains(this.variableName)))
-            throw new TypeCheckException("Statement exception: the variable: " + this.variableName + " is not in the typeEnv");
+        if (!(typeEnv.contains(this.variableName)))
+            throw new TypeCheckException(
+                    "Statement exception: the variable: " + this.variableName + " is not in the typeEnv");
 
         IType variableType = typeEnv.getValue(this.variableName);
-        if(!(variableType.equals(new IntType())))
-            throw new TypeCheckException("Statement exception: the variable: " + this.variableName + " is not of type IntType");
+        if (!(variableType.equals(new IntType())))
+            throw new TypeCheckException(
+                    "Statement exception: the variable: " + this.variableName + " is not of type IntType");
 
         IType expressionType;
-        try{
+        try {
             expressionType = this.expression.typeCheck(typeEnv);
-        }catch(TypeCheckExpressionException e){
-            throw new TypeCheckException("Expression exception: " + this.expression.toString() + " threw the exception: " + e.getMessage());
+        } catch (TypeCheckExpressionException e) {
+            throw new TypeCheckException(
+                    "Expression exception: " + this.expression.toString() + " threw the exception: " + e.getMessage());
         }
-        if(!(expressionType.equals(new StringType())))
-            throw new TypeCheckException("Statement exception: the expression: " + this.expression.toString() + "is not of type StringType");
+        if (!(expressionType.equals(new StringType())))
+            throw new TypeCheckException(
+                    "Statement exception: the expression: " + this.expression.toString() + "is not of type StringType");
         return typeEnv;
     }
 

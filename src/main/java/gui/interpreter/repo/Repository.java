@@ -47,17 +47,16 @@ public class Repository implements IRepository, AutoCloseable {
         }
     }
 
-
     @Override
     public void initPrgState() throws TypeCheckException, RepoException {
 
         initLogFile();
         initStatement.typeCheck(new MyMap<String, IType>());
 
-        PrgState prgState = new PrgState(initStatement, new MyStack<IStatement>(), new MyMap<String, IValue>(), this.outputList, this.fileTable, this.heap, this.lockTable);
+        PrgState prgState = new PrgState(initStatement, new MyStack<IStatement>(), new MyMap<String, IValue>(),
+                this.outputList, this.fileTable, this.heap, this.lockTable);
         this.prgStateList.add(prgState);
     }
-
 
     @Override
     public void logPrgStateExec(PrgState prgState) {

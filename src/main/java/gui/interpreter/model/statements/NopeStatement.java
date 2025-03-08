@@ -7,7 +7,6 @@ import gui.interpreter.model.types.IType;
 
 public class NopeStatement implements IStatement {
 
-
     @Override
     public PrgState execute(PrgState prgState) {
         return null;
@@ -22,7 +21,6 @@ public class NopeStatement implements IStatement {
     public IStatement deepCopy() {
         return new NopeStatement();
     }
-
 
     @Override
     public String toString() {

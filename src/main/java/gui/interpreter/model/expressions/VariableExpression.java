@@ -6,7 +6,6 @@ import gui.interpreter.model.adts.MyIMap;
 import gui.interpreter.model.types.IType;
 import gui.interpreter.model.values.IValue;
 
-////////////////////////////////////////////////////////////////////////////////////
 public class VariableExpression implements IExpression {
 
     private String variableName;
@@ -15,17 +14,14 @@ public class VariableExpression implements IExpression {
         this.variableName = variableName;
     }
 
-
     @Override
     public IValue evaluate(MyIMap<String, IValue> symTable, IHeap heap) {
-        /////////////////////////////////////////////////////// should be deepcopy?
         return symTable.getValue(this.variableName).deepCopy();
     }
 
     @Override
     public IType typeCheck(MyIMap<String, IType> typeEnv) throws TypeCheckExpressionException {
-        /////////////////////////////////////////////////////// could I just replace the thrown exception with a return null???
-        if(!(typeEnv.contains(this.variableName)))
+        if (!(typeEnv.contains(this.variableName)))
             throw new TypeCheckExpressionException(this.variableName + " was not found in the typeEnv");
         return typeEnv.getValue(this.variableName);
     }

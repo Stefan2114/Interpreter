@@ -16,10 +16,11 @@ public class ThreadCreationStatement implements IStatement {
         this.statement = statement;
     }
 
-
     @Override
     public PrgState execute(PrgState prgState) {
-        return new PrgState(this.statement.deepCopy(), new MyStack<IStatement>(), new MyMap<String, IValue>(prgState.getSymTable()), prgState.getOutputList(), prgState.getFileTable(), prgState.getHeap(), prgState.getLockTable());
+        return new PrgState(this.statement.deepCopy(), new MyStack<IStatement>(),
+                new MyMap<String, IValue>(prgState.getSymTable()), prgState.getOutputList(), prgState.getFileTable(),
+                prgState.getHeap(), prgState.getLockTable());
     }
 
     @Override

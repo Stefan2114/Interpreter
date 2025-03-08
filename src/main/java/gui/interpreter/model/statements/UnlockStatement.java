@@ -1,8 +1,5 @@
 package gui.interpreter.model.statements;
 
-import java.util.concurrent.locks.Lock;
-import java.util.concurrent.locks.ReentrantLock;
-
 import gui.interpreter.exceptions.StatementException;
 import gui.interpreter.exceptions.TypeCheckException;
 import gui.interpreter.model.adts.MyIMap;
@@ -15,7 +12,6 @@ public class UnlockStatement implements IStatement {
 
     private String variableName;
 
-
     public UnlockStatement(String variableName) {
         this.variableName = variableName;
     }
@@ -26,7 +22,6 @@ public class UnlockStatement implements IStatement {
         int key = ((IntValue) prgState.getSymTable().getValue(this.variableName)).getValue();
         if (!(prgState.getLockTable().contains(key)))
             throw new StatementException("The variable: " + this.variableName + " is not a lock");
-
 
         if (prgState.getLockTable().getValue(key) == prgState.getID()) {
             prgState.getLockTable().insert(key, -1);

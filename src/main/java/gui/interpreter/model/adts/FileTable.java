@@ -8,11 +8,9 @@ import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.Map;
 
-
 public class FileTable implements IFileTable {
 
     private Map<StringValue, BufferedReader> map;
-
 
     public FileTable() {
         this.map = new ConcurrentHashMap<>();
@@ -48,7 +46,6 @@ public class FileTable implements IFileTable {
     public Set<StringValue> getKeys() {
         return this.map.keySet();
     }
-
 
     @Override
     public String toString() {

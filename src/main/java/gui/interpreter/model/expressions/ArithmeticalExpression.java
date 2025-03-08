@@ -15,8 +15,8 @@ public class ArithmeticalExpression implements IExpression {
     private IExpression rightExpression;
     private ArithmeticalOperator operator;
 
-
-    public ArithmeticalExpression(IExpression leftExpression, IExpression rightExpression, ArithmeticalOperator operator) {
+    public ArithmeticalExpression(IExpression leftExpression, IExpression rightExpression,
+            ArithmeticalOperator operator) {
         this.leftExpression = leftExpression;
         this.rightExpression = rightExpression;
         this.operator = operator;
@@ -52,16 +52,19 @@ public class ArithmeticalExpression implements IExpression {
     @Override
     public IType typeCheck(MyIMap<String, IType> typeEnv) throws TypeCheckExpressionException {
 
-        if(!(this.operator instanceof ArithmeticalOperator))
-            throw new TypeCheckExpressionException("The operator: " + this.operator + " from expression: " + this.leftExpression.toString() + " is not a valid operator for an arithmetical operation");
+        if (!(this.operator instanceof ArithmeticalOperator))
+            throw new TypeCheckExpressionException("The operator: " + this.operator + " from expression: "
+                    + this.leftExpression.toString() + " is not a valid operator for an arithmetical operation");
 
         IType type1 = this.leftExpression.typeCheck(typeEnv);
-        if(!(type1.equals(new IntType())))
-            throw new TypeCheckExpressionException("First value: " + this.leftExpression.toString() + " is not of type IntType");
+        if (!(type1.equals(new IntType())))
+            throw new TypeCheckExpressionException(
+                    "First value: " + this.leftExpression.toString() + " is not of type IntType");
 
         IType type2 = this.rightExpression.typeCheck(typeEnv);
-        if(!(type2.equals(new IntType())))
-            throw new TypeCheckExpressionException("Second value: " + this.rightExpression.toString() + " is not of type IntType");
+        if (!(type2.equals(new IntType())))
+            throw new TypeCheckExpressionException(
+                    "Second value: " + this.rightExpression.toString() + " is not of type IntType");
 
         return new IntType();
 
@@ -69,9 +72,9 @@ public class ArithmeticalExpression implements IExpression {
 
     @Override
     public IExpression deepCopy() {
-        return new ArithmeticalExpression(this.leftExpression.deepCopy(), this.rightExpression.deepCopy(), this.operator);
+        return new ArithmeticalExpression(this.leftExpression.deepCopy(), this.rightExpression.deepCopy(),
+                this.operator);
     }
-
 
     @Override
     public String toString() {

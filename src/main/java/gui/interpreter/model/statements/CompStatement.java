@@ -1,6 +1,5 @@
 package gui.interpreter.model.statements;
 
-
 import gui.interpreter.exceptions.TypeCheckException;
 import gui.interpreter.model.adts.MyIMap;
 import gui.interpreter.model.states.PrgState;
@@ -16,7 +15,6 @@ public class CompStatement implements IStatement {
         this.statement2 = statement2;
     }
 
-
     @Override
     public PrgState execute(PrgState prgState) {
         prgState.getExecStack().push(this.statement2);
@@ -26,7 +24,6 @@ public class CompStatement implements IStatement {
 
     @Override
     public MyIMap<String, IType> typeCheck(MyIMap<String, IType> typeEnv) throws TypeCheckException {
-
 
         MyIMap<String, IType> typeEnv1 = this.statement1.typeCheck(typeEnv);
         MyIMap<String, IType> typeEnv2 = this.statement2.typeCheck(typeEnv1);

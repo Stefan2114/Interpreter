@@ -6,7 +6,6 @@ import gui.interpreter.model.values.IValue;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.Map;
 
-
 public class Heap implements IHeap {
 
     private Map<Integer, IValue> map;
@@ -17,17 +16,15 @@ public class Heap implements IHeap {
         this.currentPos = 0;
     }
 
-    private synchronized int getNewPos(){
+    private synchronized int getNewPos() {
         this.currentPos++;
         return currentPos;
     }
-
 
     @Override
     public int allocate(IValue value) {
         int pos = getNewPos();
 
-        //could be a problem at resize if is not a concurrentHashMap although I have getNewPos synchronized
         this.map.put(pos, value);
         return pos;
     }
@@ -59,7 +56,6 @@ public class Heap implements IHeap {
     public Map<Integer, IValue> getContent() {
         return this.map;
     }
-
 
     @Override
     public String toString() {

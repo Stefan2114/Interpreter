@@ -11,36 +11,36 @@ import java.util.Set;
 
 public interface IController {
 
-    //runs the intiere program
+    // runs the intiere program
     void allSteps() throws InterruptedException;
 
-    //initialize the program state and checks if the files are compileable
+    // initialize the program state and checks if the files are compileable
     void initProgramState() throws TypeCheckException, RepoException;
 
-    //runs one step for all current states
+    // runs one step for all current states
     void oneStepForAllPrg() throws InterruptedException;
 
-    //returns the nr of current prgStates of the program
+    // returns the nr of current prgStates of the program
     Integer nrOfPrgStates();
 
-    //returns the list of the prgStates
+    // returns the list of the prgStates
     List<Integer> getPrgStatesID();
 
-    //returns the heap that is shared by all prgStates
+    // returns the heap that is shared by all prgStates
     Map<Integer, IValue> getHeap();
 
-    //returns the keys from the file table that is shared
+    // returns the keys from the file table that is shared
     Set<StringValue> getFileTableKeys();
 
-    //returns the output list 
+    // returns the output list
     List<String> getOutputList();
 
-    //returns the symTable of the coresponding prgState with the given id
+    // returns the symTable of the coresponding prgState with the given id
     Map<String, IValue> getSymTableFromPrgState(Integer id);
 
-    //returns the lock table that is shared by the prgStates
+    // returns the lock table that is shared by the prgStates
     Map<Integer, Integer> getLockTable();
 
-    //returns the exeStack of the coresponding prgState with the given id
+    // returns the exeStack of the coresponding prgState with the given id
     List<IStatement> getExeStackFromPrgState(Integer id);
 }

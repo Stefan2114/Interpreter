@@ -28,13 +28,13 @@ public class PrintStatement implements IStatement {
 
         try {
             this.expression.typeCheck(typeEnv);
-        }catch (TypeCheckExpressionException e) {
-            throw new TypeCheckException("Expression exception: " + this.expression.toString() + "threw: " + e.getMessage());
+        } catch (TypeCheckExpressionException e) {
+            throw new TypeCheckException(
+                    "Expression exception: " + this.expression.toString() + "threw: " + e.getMessage());
         }
 
         return typeEnv;
     }
-
 
     @Override
     public IStatement deepCopy() {

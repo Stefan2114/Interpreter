@@ -3,7 +3,6 @@ package gui.interpreter.model.values;
 import gui.interpreter.model.types.BoolType;
 import gui.interpreter.model.types.IType;
 
-
 public class BoolValue implements IValue {
 
     private boolean value;
@@ -11,7 +10,6 @@ public class BoolValue implements IValue {
     public BoolValue(boolean value) {
         this.value = value;
     }
-
 
     @Override
     public IType getType() {

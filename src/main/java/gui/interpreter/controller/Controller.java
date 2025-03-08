@@ -24,17 +24,14 @@ public class Controller implements IController {
 
     }
 
-
     private List<PrgState> removeCompletedPrg(List<PrgState> inPrgList) {
         return inPrgList.stream()
                 .filter(PrgState::isNotCompleted)
                 .collect(Collectors.toList());
     }
 
-
-    //keeps the addresses from the heap that are still used
+    // keeps the addresses from the heap that are still used
     private void garbageCollector() {
-
 
         Map<Integer, IValue> heap = this.repo.getHeap().getContent();
         List<PrgState> prgList = this.repo.getPrgList();
@@ -47,8 +44,7 @@ public class Controller implements IController {
         this.repo.getHeap().setContent(newHeap);
     }
 
-
-    //returns the addresses from the symTable
+    // returns the addresses from the symTable
     private List<Integer> getAddrFromSymTable(Collection<IValue> symTableValues) {
         return symTableValues.stream()
                 .filter(v -> v instanceof RefValue)
@@ -56,8 +52,7 @@ public class Controller implements IController {
                 .collect(Collectors.toList());
     }
 
-
-    //get the first layer of missed used addresses
+    // get the first layer of missed used addresses
     private Integer getMissingUsedAddress(Set<Integer> usedAddr, Map<Integer, IValue> heap) {
 
         return heap.entrySet().stream()
@@ -70,8 +65,7 @@ public class Controller implements IController {
                 .orElse(null);
     }
 
-
-    //gets all the addresses used 
+    // gets all the addresses used
     private Set<Integer> getAllAddresses(List<PrgState> prgList, Map<Integer, IValue> heapContent) {
 
         Set<Integer> addresses = new HashSet<>();
@@ -95,7 +89,6 @@ public class Controller implements IController {
         return addresses;
     }
 
-
     public void oneStepForAllPrg() throws InterruptedException {
 
         List<PrgState> prgList = this.repo.getPrgList();
@@ -104,7 +97,6 @@ public class Controller implements IController {
         List<Callable<PrgState>> callList = prgList.stream()
                 .map((PrgState p) -> (Callable<PrgState>) (p::oneStep))
                 .toList();
-
 
         List<PrgState> newPrgList = executor.invokeAll(callList).stream()
                 .map(future -> {
@@ -128,7 +120,6 @@ public class Controller implements IController {
 
     }
 
-
     public void allSteps() throws InterruptedException {
 
         List<PrgState> prgList = this.repo.getPrgList();
@@ -138,7 +129,6 @@ public class Controller implements IController {
         }
         this.executor.shutdownNow();
     }
-
 
     public void initProgramState() throws TypeCheckException, RepoException {
         this.repo.initPrgState();
@@ -169,7 +159,6 @@ public class Controller implements IController {
         return this.repo.getOutputList().getContent();
     }
 
-
     @Override
     public Map<String, IValue> getSymTableFromPrgState(Integer id) {
         return this.repo.getPrgList().stream()
@@ -192,6 +181,5 @@ public class Controller implements IController {
                 .findFirst()
                 .orElse(null);
     }
-
 
 }

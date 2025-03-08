@@ -10,8 +10,6 @@ import gui.interpreter.model.types.IType;
 import gui.interpreter.model.values.BoolValue;
 import gui.interpreter.model.values.IValue;
 
-
-///////////////////////////////////////////////////////////////////////////
 public class IfStatement implements IStatement {
     private IExpression expression;
     private IStatement thanStatement;
@@ -28,7 +26,6 @@ public class IfStatement implements IStatement {
     public PrgState execute(PrgState prgState) throws StatementException {
 
         IValue expressionValue = this.expression.evaluate(prgState.getSymTable(), prgState.getHeap());
-        /////////////////////////////////////////////////////should i push a deepCopy of the statement?
         if (((BoolValue) expressionValue).getValue()) {
             prgState.getExecStack().push(this.thanStatement.deepCopy());
         } else {
@@ -39,19 +36,18 @@ public class IfStatement implements IStatement {
 
     }
 
-
-
-    ////////////////////////////////////////// how can i make this look better?
     @Override
     public MyIMap<String, IType> typeCheck(MyIMap<String, IType> typeEnv) throws TypeCheckException {
         IType expressionType;
-        try{
+        try {
             expressionType = this.expression.typeCheck(typeEnv);
-        }catch(TypeCheckExpressionException e){
-            throw new TypeCheckException("Expression exception: " + this.expression.toString() + " threw the exception: " + e.getMessage());
+        } catch (TypeCheckExpressionException e) {
+            throw new TypeCheckException(
+                    "Expression exception: " + this.expression.toString() + " threw the exception: " + e.getMessage());
         }
-        if(!(expressionType.equals(new BoolType())))
-            throw new TypeCheckException("Statement exception: the expression: " + this.expression.toString() + " is not of type BoolType");
+        if (!(expressionType.equals(new BoolType())))
+            throw new TypeCheckException(
+                    "Statement exception: the expression: " + this.expression.toString() + " is not of type BoolType");
 
         this.thanStatement.typeCheck(new MyMap<String, IType>(typeEnv));
         this.elseStatement.typeCheck(new MyMap<String, IType>(typeEnv));
@@ -59,16 +55,16 @@ public class IfStatement implements IStatement {
         return typeEnv;
     }
 
-
     @Override
     public IStatement deepCopy() {
-        return new IfStatement(this.expression.deepCopy(), this.thanStatement.deepCopy(), this.elseStatement.deepCopy());
+        return new IfStatement(this.expression.deepCopy(), this.thanStatement.deepCopy(),
+                this.elseStatement.deepCopy());
     }
-
 
     @Override
     public String toString() {
-        return "if(" + this.expression.toString() + ")\n{" + this.thanStatement.toString() + "}\nelse{" + this.elseStatement.toString() + "}";
+        return "if(" + this.expression.toString() + ")\n{" + this.thanStatement.toString() + "}\nelse{"
+                + this.elseStatement.toString() + "}";
 
     }
 }
