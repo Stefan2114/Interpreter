@@ -15,7 +15,6 @@ public class NewLockStatement implements IStatement {
         this.variableName = variableName;
     }
 
-
     @Override
     public PrgState execute(PrgState prgState) {
 
@@ -28,12 +27,14 @@ public class NewLockStatement implements IStatement {
     @Override
     public MyIMap<String, IType> typeCheck(MyIMap<String, IType> typeEnv) throws TypeCheckException {
         if (!(typeEnv.contains(this.variableName)))
-            throw new TypeCheckException("Statement exception: the variable: " + this.variableName + " is not in the typeEnv");
+            throw new TypeCheckException(
+                    "Statement exception: the variable: " + this.variableName + " is not in the typeEnv");
 
         IType variableType = typeEnv.getValue(this.variableName);
 
         if (!(variableType.equals(new IntType())))
-            throw new TypeCheckException("Statement exception: the variable: " + this.variableName + " doesn't have the type IntType");
+            throw new TypeCheckException(
+                    "Statement exception: the variable: " + this.variableName + " doesn't have the type IntType");
         return typeEnv;
     }
 
@@ -41,7 +42,6 @@ public class NewLockStatement implements IStatement {
     public IStatement deepCopy() {
         return new NewLockStatement(new String(this.variableName));
     }
-
 
     @Override
     public String toString() {

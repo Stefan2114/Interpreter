@@ -11,7 +11,6 @@ import gui.interpreter.model.values.StringValue;
 
 import java.io.*;
 
-
 public class OpenRFileStatement implements IStatement {
 
     private IExpression expression;
@@ -43,13 +42,15 @@ public class OpenRFileStatement implements IStatement {
     public MyIMap<String, IType> typeCheck(MyIMap<String, IType> typeEnv) throws TypeCheckException {
 
         IType expressionType;
-        try{
+        try {
             expressionType = this.expression.typeCheck(typeEnv);
-        }catch(TypeCheckExpressionException e){
-            throw new TypeCheckException("Expression exception: " + this.expression.toString() + " threw the exception: " + e.getMessage());
+        } catch (TypeCheckExpressionException e) {
+            throw new TypeCheckException(
+                    "Expression exception: " + this.expression.toString() + " threw the exception: " + e.getMessage());
         }
-        if(!(expressionType.equals(new StringType())))
-            throw new TypeCheckException("Statement exception: the expression: " + this.expression.toString() + "is not of type StringType");
+        if (!(expressionType.equals(new StringType())))
+            throw new TypeCheckException(
+                    "Statement exception: the expression: " + this.expression.toString() + "is not of type StringType");
         return typeEnv;
     }
 

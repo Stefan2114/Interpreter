@@ -3,13 +3,11 @@ package gui.interpreter.model.types;
 import gui.interpreter.model.values.IValue;
 import gui.interpreter.model.values.RefValue;
 
-
-public class RefType implements IType{
-
-
+public class RefType implements IType {
 
     private IType inner;
-    public RefType (IType inner){
+
+    public RefType(IType inner) {
         this.inner = inner;
     }
 
@@ -22,10 +20,9 @@ public class RefType implements IType{
         return obj instanceof RefType && ((RefType) obj).getInner().equals(this.inner);
     }
 
-
     @Override
     public IValue getDefaultValue() {
-        return new RefValue(0,this.inner);
+        return new RefValue(0, this.inner);
     }
 
     @Override
@@ -33,9 +30,8 @@ public class RefType implements IType{
         return new RefType(this.inner.deepCopy());
     }
 
-
     @Override
-    public String toString(){
+    public String toString() {
         return "Ref " + this.inner.toString();
     }
 }

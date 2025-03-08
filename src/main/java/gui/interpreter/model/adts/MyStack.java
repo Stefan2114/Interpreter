@@ -1,7 +1,6 @@
 package gui.interpreter.model.adts;
 
 import gui.interpreter.exceptions.EmptyStackException;
-import gui.interpreter.model.statements.IStatement;
 
 import java.util.Stack;
 import java.util.ArrayList;
@@ -13,7 +12,6 @@ public class MyStack<T> implements MyIStack<T> {
     public MyStack() {
         this.stack = new Stack<>();
     }
-
 
     @Override
     public void push(T elem) {
@@ -41,7 +39,7 @@ public class MyStack<T> implements MyIStack<T> {
         return str.toString();
     }
 
-    public List<T> getContent(){
+    public List<T> getContent() {
         return new ArrayList<>(this.stack);
     }
 }

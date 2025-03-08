@@ -16,7 +16,6 @@ public class LockStatement implements IStatement {
     private String variableName;
     private static final Lock mutex = new ReentrantLock();
 
-
     public LockStatement(String variableName) {
         this.variableName = variableName;
     }
@@ -27,12 +26,12 @@ public class LockStatement implements IStatement {
         int key = ((IntValue) prgState.getSymTable().getValue(this.variableName)).getValue();
         if (!(prgState.getLockTable().contains(key)))
             throw new StatementException("The variable: " + this.variableName + " is not a lock");
-        
-        mutex.lock();
+
+        mutex.lock();// to make sure no 2 threads enter the if at the same time
         if (prgState.getLockTable().getValue(key) == -1) {
             prgState.getLockTable().insert(key, prgState.getID());
         } else {
-            prgState.getExecStack().push(this);//maybe a deepcopy will fix this
+            prgState.getExecStack().push(this);
         }
         mutex.unlock();
 

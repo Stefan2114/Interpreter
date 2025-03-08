@@ -5,7 +5,7 @@ import gui.interpreter.exceptions.KeyNotFoundException;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
-public class LockTable implements  ILockTable{
+public class LockTable implements ILockTable {
 
     private Map<Integer, Integer> map;
     private int currentPos;
@@ -15,11 +15,10 @@ public class LockTable implements  ILockTable{
         this.currentPos = 0;
     }
 
-    private synchronized int getNewPos(){
+    private synchronized int getNewPos() {
         this.currentPos++;
         return currentPos;
     }
-
 
     @Override
     public int allocate(Integer value) {
@@ -47,12 +46,10 @@ public class LockTable implements  ILockTable{
         this.map.put(key, value);
     }
 
-
     @Override
     public Map<Integer, Integer> getContent() {
         return this.map;
     }
-
 
     @Override
     public String toString() {

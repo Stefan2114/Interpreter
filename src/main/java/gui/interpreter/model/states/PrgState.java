@@ -1,12 +1,8 @@
 package gui.interpreter.model.states;
 
-import gui.interpreter.exceptions.*;
 import gui.interpreter.model.adts.*;
 import gui.interpreter.model.statements.IStatement;
 import gui.interpreter.model.values.IValue;
-import gui.interpreter.model.values.StringValue;
-
-import java.io.BufferedReader;
 
 public class PrgState {
 
@@ -26,7 +22,7 @@ public class PrgState {
     }
 
     public PrgState(IStatement initState, MyIStack<IStatement> execStack, MyIMap<String, IValue> symTable,
-                    MyIList<String> outputList, IFileTable fileTable, IHeap heap, ILockTable lockTable) {
+            MyIList<String> outputList, IFileTable fileTable, IHeap heap, ILockTable lockTable) {
         this.execStack = execStack;
         this.symTable = symTable;
         this.outputList = outputList;
@@ -58,13 +54,14 @@ public class PrgState {
     public IHeap getHeap() {
         return heap;
     }
-    public ILockTable getLockTable() {return this.lockTable;}
 
+    public ILockTable getLockTable() {
+        return this.lockTable;
+    }
 
     public void setSymTable(MyIMap<String, IValue> symTable) {
         this.symTable = symTable;
     }
-
 
     public void setHeap(IHeap heap) {
         this.heap = heap;
@@ -74,14 +71,14 @@ public class PrgState {
         return !(this.getExecStack().isEmpty());
     }
 
-    public Integer getID(){
+    public Integer getID() {
         return this.id;
     }
 
-
     public PrgState oneStep() {
 
-        if (this.getExecStack().isEmpty()) return null;
+        if (this.getExecStack().isEmpty())
+            return null;
         IStatement statement = this.getExecStack().pop();
         return statement.execute(this);
 
@@ -93,7 +90,7 @@ public class PrgState {
                 "\nSymTable:\n" + this.symTable.toString() + "\nOut:\n" + this.outputList.toString() +
                 "\nFileTable:\n" + this.fileTable.toString() + "\nHeap:\n" + this.heap.toString() +
                 "\nLockTable:\n" + this.lockTable.toString()
-                +'\n';
+                + '\n';
     }
 
 }

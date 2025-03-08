@@ -21,11 +21,9 @@ public class StringValue implements IValue {
         return new StringValue(new String(this.value));
     }
 
-
     public String getValue() {
         return this.value;
     }
-
 
     @Override
     public boolean equals(Object other) {
@@ -39,7 +37,6 @@ public class StringValue implements IValue {
     public String toString() {
         return "\"" + this.value + "\"";
     }
-
 
     @Override
     public int hashCode() {

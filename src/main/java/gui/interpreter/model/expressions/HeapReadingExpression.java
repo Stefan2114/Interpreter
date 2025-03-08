@@ -17,7 +17,6 @@ public class HeapReadingExpression implements IExpression {
         this.expression = expression;
     }
 
-
     @Override
     public IValue evaluate(MyIMap<String, IValue> symTable, IHeap heap) {
 
@@ -43,7 +42,6 @@ public class HeapReadingExpression implements IExpression {
     public IExpression deepCopy() {
         return new HeapReadingExpression(this.expression.deepCopy());
     }
-
 
     @Override
     public String toString() {

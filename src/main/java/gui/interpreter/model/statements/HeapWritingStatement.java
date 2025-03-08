@@ -9,8 +9,6 @@ import gui.interpreter.model.types.RefType;
 import gui.interpreter.model.values.IValue;
 import gui.interpreter.model.values.RefValue;
 
-
-/////////////////////////////////////////////////////////////////////////////
 public class HeapWritingStatement implements IStatement {
 
     private String variableName;
@@ -21,16 +19,13 @@ public class HeapWritingStatement implements IStatement {
         this.expression = expression;
     }
 
-
     @Override
     public PrgState execute(PrgState prgState) {
-
 
         IValue variableValue = prgState.getSymTable().getValue(this.variableName);
 
         int address = ((RefValue) variableValue).getAddress();
 
-        //not sure if is necessarily because if it is in the symTable is in the heap because the garbage collector couldn't have deleted
         if (!(prgState.getHeap().contains(address)))
             throw new StatementException("The variable: " + variableValue.toString() + "  was not found on the heap");
 
@@ -41,19 +36,22 @@ public class HeapWritingStatement implements IStatement {
 
     @Override
     public MyIMap<String, IType> typeCheck(MyIMap<String, IType> typeEnv) throws TypeCheckException {
-        if(!(typeEnv.contains(this.variableName)))
-            throw new TypeCheckException("Statement exception: the variable: " + this.variableName + " is not in the typeEnv");
+        if (!(typeEnv.contains(this.variableName)))
+            throw new TypeCheckException(
+                    "Statement exception: the variable: " + this.variableName + " is not in the typeEnv");
 
         IType variableType = typeEnv.getValue(this.variableName);
         IType expressionType;
-        try{
+        try {
             expressionType = this.expression.typeCheck(typeEnv);
-        }catch(TypeCheckExpressionException e){
-            throw new TypeCheckException("Expression exception: " + this.expression.toString() + " threw the exception: " + e.getMessage());
+        } catch (TypeCheckExpressionException e) {
+            throw new TypeCheckException(
+                    "Expression exception: " + this.expression.toString() + " threw the exception: " + e.getMessage());
         }
 
-        if(!(variableType.equals(new RefType(expressionType))))
-            throw new TypeCheckException("Statement exception: the variable: " + this.variableName + "and the expression: " + this.expression.toString() + " don't have the same type");
+        if (!(variableType.equals(new RefType(expressionType))))
+            throw new TypeCheckException("Statement exception: the variable: " + this.variableName
+                    + "and the expression: " + this.expression.toString() + " don't have the same type");
 
         return typeEnv;
     }

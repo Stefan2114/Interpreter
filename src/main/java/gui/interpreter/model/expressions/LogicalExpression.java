@@ -8,8 +8,6 @@ import gui.interpreter.model.types.IType;
 import gui.interpreter.model.values.BoolValue;
 import gui.interpreter.model.values.IValue;
 
-import java.util.Objects;
-
 public class LogicalExpression implements IExpression {
 
     private IExpression leftExpression;
@@ -21,7 +19,6 @@ public class LogicalExpression implements IExpression {
         this.rightExpression = rightExpression;
         this.operator = operator;
     }
-
 
     @Override
     public IValue evaluate(MyIMap<String, IValue> symTable, IHeap heap) {
@@ -39,25 +36,26 @@ public class LogicalExpression implements IExpression {
         return new BoolValue(boolValue1 || boolValue2);
     }
 
-
     @Override
     public IType typeCheck(MyIMap<String, IType> typeEnv) throws TypeCheckExpressionException {
 
-        if(!(this.operator instanceof LogicalOperator))
-            throw new TypeCheckExpressionException("The operator: " + this.operator + " from expression: " + this.leftExpression.toString() + " is not a valid operator for a logic operation");
+        if (!(this.operator instanceof LogicalOperator))
+            throw new TypeCheckExpressionException("The operator: " + this.operator + " from expression: "
+                    + this.leftExpression.toString() + " is not a valid operator for a logic operation");
 
         IType type1 = this.leftExpression.typeCheck(typeEnv);
-        if(!(type1.equals(new BoolType())))
-            throw new TypeCheckExpressionException("First value: " + this.leftExpression.toString() + " is not of type BoolType");
+        if (!(type1.equals(new BoolType())))
+            throw new TypeCheckExpressionException(
+                    "First value: " + this.leftExpression.toString() + " is not of type BoolType");
 
         IType type2 = this.rightExpression.typeCheck(typeEnv);
-        if(!(type2.equals(new BoolType())))
-            throw new TypeCheckExpressionException("Second value: " + this.rightExpression.toString() + " is not of type BoolType");
+        if (!(type2.equals(new BoolType())))
+            throw new TypeCheckExpressionException(
+                    "Second value: " + this.rightExpression.toString() + " is not of type BoolType");
 
         return new BoolType();
 
     }
-
 
     @Override
     public IExpression deepCopy() {

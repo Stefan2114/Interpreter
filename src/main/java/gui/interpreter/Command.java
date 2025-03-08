@@ -1,8 +1,6 @@
 package gui.interpreter;
 
 import gui.interpreter.controller.IController;
-import gui.interpreter.exceptions.ControllerException;
-import gui.interpreter.exceptions.TypeCheckException;
 
 public class Command {
 
@@ -18,19 +16,9 @@ public class Command {
         return this.controller;
     }
 
-//    public void execute() {
-//        try {
-//            this.controller.allSteps();
-//        } catch (ControllerException | InterruptedException | TypeCheckException e) {
-//            System.out.println(e);
-//        }
-//    }
-
     @Override
     public String toString() {
         return this.description;
     }
-
-
 
 }

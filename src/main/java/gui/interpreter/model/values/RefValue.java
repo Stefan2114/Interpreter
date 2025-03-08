@@ -3,8 +3,6 @@ package gui.interpreter.model.values;
 import gui.interpreter.model.types.IType;
 import gui.interpreter.model.types.RefType;
 
-
-///////////////////////////////////////////////////////////////////////
 public class RefValue implements IValue {
 
     int address;
@@ -27,9 +25,9 @@ public class RefValue implements IValue {
     public boolean equals(Object obj) {
         if (!(obj instanceof RefValue))
             return false;
-        return ((RefValue) obj).getAddress() == this.address && ((RefValue) obj).getLocationType().equals(this.locationType);
+        return ((RefValue) obj).getAddress() == this.address
+                && ((RefValue) obj).getLocationType().equals(this.locationType);
     }
-
 
     @Override
     public IType getType() {
@@ -46,7 +44,6 @@ public class RefValue implements IValue {
         return "(" + this.address + "," + this.locationType.toString() + ")";
     }
 
-    //////////////////////////////////////////////////////////////////////////////////////////
     @Override
     public int hashCode() {
         return Integer.hashCode(this.address);
