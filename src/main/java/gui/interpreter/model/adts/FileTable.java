@@ -4,7 +4,6 @@ import gui.interpreter.exceptions.KeyNotFoundException;
 import gui.interpreter.model.values.StringValue;
 
 import java.io.BufferedReader;
-import java.util.List;
 import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.Map;

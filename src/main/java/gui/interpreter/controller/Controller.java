@@ -25,13 +25,14 @@ public class Controller implements IController {
     }
 
 
-    //could be a problem for immutable list
     private List<PrgState> removeCompletedPrg(List<PrgState> inPrgList) {
         return inPrgList.stream()
                 .filter(PrgState::isNotCompleted)
                 .collect(Collectors.toList());
     }
 
+
+    //keeps the addresses from the heap that are still used
     private void garbageCollector() {
 
 
@@ -47,6 +48,7 @@ public class Controller implements IController {
     }
 
 
+    //returns the addresses from the symTable
     private List<Integer> getAddrFromSymTable(Collection<IValue> symTableValues) {
         return symTableValues.stream()
                 .filter(v -> v instanceof RefValue)
@@ -55,6 +57,7 @@ public class Controller implements IController {
     }
 
 
+    //get the first layer of missed used addresses
     private Integer getMissingUsedAddress(Set<Integer> usedAddr, Map<Integer, IValue> heap) {
 
         return heap.entrySet().stream()
@@ -68,6 +71,7 @@ public class Controller implements IController {
     }
 
 
+    //gets all the addresses used 
     private Set<Integer> getAllAddresses(List<PrgState> prgList, Map<Integer, IValue> heapContent) {
 
         Set<Integer> addresses = new HashSet<>();

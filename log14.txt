@@ -3518,11 +3518,12 @@ Heap:
 
 LockTable:
 1 -> -1
-2 -> 5
+2 -> -1
 
 
 PrgState with id: 5
 ExecStack:
+lock( q )
 wH(v2, rH(v2) ADD 5);
 unlock( q )
 
@@ -3542,7 +3543,7 @@ Heap:
 
 LockTable:
 1 -> -1
-2 -> 5
+2 -> -1
 
 
 PrgState with id: 1
@@ -3571,6 +3572,59 @@ Heap:
 
 LockTable:
 1 -> -1
+2 -> -1
+
+
+PrgState with id: 5
+ExecStack:
+lock( q )
+wH(v2, rH(v2) ADD 5);
+unlock( q )
+
+SymTable:
+x -> 1
+q -> 2
+v1 -> (1,int)
+v2 -> (2,int)
+
+Out:
+
+FileTable:
+
+Heap:
+1 -> 199
+2 -> 300
+
+LockTable:
+1 -> -1
+2 -> -1
+
+
+PrgState with id: 1
+ExecStack:
+lock( x )
+print(rH(v1));
+unlock( x )
+lock( q )
+print(rH(v2));
+unlock( q )
+
+SymTable:
+q -> 2
+x -> 1
+v1 -> (1,int)
+v2 -> (2,int)
+
+Out:
+
+FileTable:
+
+Heap:
+1 -> 199
+2 -> 300
+
+LockTable:
+1 -> -1
 2 -> 5
 
 
@@ -3723,7 +3777,7 @@ FileTable:
 
 Heap:
 1 -> 199
-2 -> 305
+2 -> 300
 
 LockTable:
 1 -> -1
@@ -3732,6 +3786,7 @@ LockTable:
 
 PrgState with id: 5
 ExecStack:
+wH(v2, rH(v2) ADD 5);
 unlock( q )
 
 SymTable:
@@ -3746,58 +3801,7 @@ FileTable:
 
 Heap:
 1 -> 199
-2 -> 305
-
-LockTable:
-1 -> -1
-2 -> 5
-
-
-PrgState with id: 1
-ExecStack:
-lock( x )
-print(rH(v1));
-unlock( x )
-lock( q )
-print(rH(v2));
-unlock( q )
-
-SymTable:
-q -> 2
-x -> 1
-v1 -> (1,int)
-v2 -> (2,int)
-
-Out:
-
-FileTable:
-
-Heap:
-1 -> 199
-2 -> 305
-
-LockTable:
-1 -> -1
-2 -> 5
-
-
-PrgState with id: 5
-ExecStack:
-unlock( q )
-
-SymTable:
-x -> 1
-q -> 2
-v1 -> (1,int)
-v2 -> (2,int)
-
-Out:
-
-FileTable:
-
-Heap:
-1 -> 199
-2 -> 305
+2 -> 300
 
 LockTable:
 1 -> -1
@@ -3828,7 +3832,30 @@ Heap:
 
 LockTable:
 1 -> 1
-2 -> -1
+2 -> 5
+
+
+PrgState with id: 5
+ExecStack:
+unlock( q )
+
+SymTable:
+x -> 1
+q -> 2
+v1 -> (1,int)
+v2 -> (2,int)
+
+Out:
+
+FileTable:
+
+Heap:
+1 -> 199
+2 -> 305
+
+LockTable:
+1 -> 1
+2 -> 5
 
 
 PrgState with id: 1
@@ -3855,7 +3882,30 @@ Heap:
 
 LockTable:
 1 -> 1
-2 -> -1
+2 -> 5
+
+
+PrgState with id: 5
+ExecStack:
+unlock( q )
+
+SymTable:
+x -> 1
+q -> 2
+v1 -> (1,int)
+v2 -> (2,int)
+
+Out:
+
+FileTable:
+
+Heap:
+1 -> 199
+2 -> 305
+
+LockTable:
+1 -> 1
+2 -> 5
 
 
 PrgState with id: 1
